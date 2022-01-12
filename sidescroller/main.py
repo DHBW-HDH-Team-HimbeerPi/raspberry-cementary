@@ -7,15 +7,15 @@ def show(ausgabe: list):
     length = len(ausgabe)
     for x in range(length):
         for y in range(length):
-            printed = 0
+            printed = False
             for color in range(3):
                 if(ausgabe[x][y][color] != 0):
                     print("0", end =" ")
                     break
                 else:
-                    if (printed == 0):
+                    if (not printed):
                         print("_", end =" ")
-                        printed = 1
+                        printed = True
         print("")
 
 pixels = 3
