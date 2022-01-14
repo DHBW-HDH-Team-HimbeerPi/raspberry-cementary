@@ -3,7 +3,7 @@ import time
 import random
 import os
 
-from output_framework.output_framework import OutputFramework as oF
+from output_framework.output_framework import OutputFramework 
 
 
 def show(ausgabe: list):
