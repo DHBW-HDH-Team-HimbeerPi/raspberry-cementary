@@ -9,10 +9,11 @@ class Player:
         self.colorG = colorG
         self.colorB = colorB
 
-    def dimensions(self, height):
-        pixelArray = np.full((self.pixels , self.pixels, 3), 0)
-        for i in range(height):
-            pixelArray[i][0][0] = self.colorR
-            pixelArray[i][0][1] = self.colorG
-            pixelArray[i][0][2] = self.colorB
+    def dimensions(self):
+        pixelArray = np.full((self.pixels , self.pixels, 4), 0)
+        for i in range(self.height):
+            pixelArray[self.pixels-i-1][2][0] = self.colorR
+            pixelArray[self.pixels-i-1][2][1] = self.colorG
+            pixelArray[self.pixels-i-1][2][2] = self.colorB
+            pixelArray[self.pixels-i-1][2][3] = 1
         return pixelArray
