@@ -1,7 +1,7 @@
 import numpy as np
 import time
 import random
-import os
+#import os
 
 from output_framework.output_framework import OutputFramework 
 
@@ -69,7 +69,7 @@ pixelArray[3][8][0] = 250
 for u in range (60):
     movewall(pixelArray,walllocation)
     time.sleep(0.1)
-    os.system('cls')
+    #os.system('cls')
     OutputFramework.setWindow(pixelArray)
     #show(pixelArray)
     if (checkalive(pixelArray)==False):
