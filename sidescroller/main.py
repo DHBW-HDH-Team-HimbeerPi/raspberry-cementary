@@ -5,7 +5,7 @@ from devShow import show
 from shiftPixels import shiftPixels
 from addObject import add
 from player import Player
-#from OutputFramework.OutFramework import OutputFramework as of
+from output_framework.output_framework import OutputFramework
 
 PIXELS = 16
 pixelArray = np.full((PIXELS , PIXELS, 4), 0)
@@ -24,9 +24,10 @@ def main():
         #update
         shiftPixels(pixelArray)
         #draw
-        show(pixelArray)
+        #show(pixelArray)
+        OutputFramework.show(pixelArray)
         time.sleep(0.5) 
-        os.system('cls')
+        #os.system('cls')
 
 if __name__ == "__main__":
     main()
