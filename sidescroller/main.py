@@ -16,7 +16,7 @@ def main():
 
     joe = Player(PIXELS)
     add(pixelArray, joe.dimensions())
-    show(pixelArray)
+    #show(pixelArray)
 
     while running:
         #events
