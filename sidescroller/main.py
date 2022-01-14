@@ -14,16 +14,18 @@ pixelArray[10][10][0] = 255
 
 def main():
 
-    joe = Player(PIXELS, 5, 255, 0, 0)
+    joe = Player(PIXELS)
+    add(pixelArray, joe.dimensions())
+    show(pixelArray)
+
     while running:
         #events
             #input
         #update
-        add(pixelArray, joe.dimensions())
         shiftPixels(pixelArray)
         #draw
         show(pixelArray)
-        time.sleep(2) 
+        time.sleep(0.5) 
         os.system('cls')
 
 if __name__ == "__main__":
