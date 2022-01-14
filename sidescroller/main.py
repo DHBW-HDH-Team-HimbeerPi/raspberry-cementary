@@ -25,7 +25,7 @@ def main():
         shiftPixels(pixelArray)
         #draw
         #show(pixelArray)
-        OutputFramework.show(pixelArray)
+        OutputFramework.setWindow(pixelArray)
         time.sleep(0.5) 
         #os.system('cls')
 
