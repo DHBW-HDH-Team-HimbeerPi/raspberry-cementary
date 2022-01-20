@@ -4,7 +4,7 @@ from output_framework.output_framework import OutputFramework
 
 from SnakeController import SnakeController
 
-sc = SnakeController()
+sc = SnakeController(3, 6)
 
 pixelAmount = 16
 pixelArray = np.full((pixelAmount , pixelAmount, 3), 0)
