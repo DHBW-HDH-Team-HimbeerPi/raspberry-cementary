@@ -12,9 +12,9 @@ gameRunning = True
 
 
 def CreateGamefield():
-    for x in pixelAmount-1:
+    for x in range(0, pixelAmount):
         pixelArray[x][0][2] = 255
-    for y in pixelAmount-1:
+    for y in range(0, pixelAmount):
         pixelArray[0][y][2] = 255
     
 
