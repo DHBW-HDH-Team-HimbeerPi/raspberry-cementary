@@ -37,7 +37,7 @@ def main():
     CreateGamefield()
     AppleSpawner()
 
-     OutputFramework.setWindow(pixelArray)
+    OutputFramework.setWindow(pixelArray)
 
     while gameRunning:
         #code
