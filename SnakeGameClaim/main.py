@@ -1,5 +1,7 @@
 import numpy as np
 import random
+
+from pygame import Vector3
 import SnakeController
 
 
@@ -21,10 +23,10 @@ def AppleSpawner():
     applePosX = random.randrange(1, 14)
     applePosY = random.randrange(1, 14)
 
-    while(applePosX >= (SnakeController.posX + minDistance) and applePosX <= (SnakeController.posX + minDistance)):
+    while(applePosX >= (SnakeController.posX + minDistance) and applePosX <= (SnakeController.posX - minDistance)):
         applePosX = random.randrange(1, 14)
 
-    while(applePosY >= (SnakeController.posY + minDistance) and applePosY <= (SnakeController.posY + minDistance)):
+    while(applePosY >= (SnakeController.posY + minDistance) and applePosY <= (SnakeController.posY - minDistance)):
         applePosY = random.randrange(1, 14)
     
     pixelArray[applePosX][applePosY][0] = 255
