@@ -5,6 +5,9 @@ from src.devShow import show
 from src.shiftPixels import shiftPixels
 from src.addObject import add
 from src.player import Player
+from src.spriterReader import readSprite
+
+from unicorn_hat_sim import unicornhathd as uh
 #from output_framework.output_framework import OutputFramework
 
 PIXELS = 16
@@ -18,16 +21,23 @@ def main():
     #show(pixelArray)
     running = True
 
+    amogus = readSprite("amogus.csv")
+    print(amogus)
+    uh.rotation(180)
+
     while running:
         #events
-            #input
+        #input
         #update
         running = shiftPixels(pixelArray)
         #draw
-        show(pixelArray)
+        uh.clear()
+        for i in range(0, PIXELS-1):
+            for j in range(0, PIXELS-1):
+                uh.set_pixel(i, j, pixelArray[i][j][0],  pixelArray[i][j][1],  pixelArray[i][j][2])
+        uh.show()
         #OutputFramework.setWindow(pixelArray)
-        time.sleep(5) 
-        #os.system('cls')
+        time.sleep(0.5) 
 
 if __name__ == "__main__":
     main()
