@@ -2,7 +2,7 @@ import numpy as np
 import random
 from output_framework.output_framework import OutputFramework 
 
-import SnakeController
+from SnakeController import SnakeController
 
 sc = SnakeController()
 
