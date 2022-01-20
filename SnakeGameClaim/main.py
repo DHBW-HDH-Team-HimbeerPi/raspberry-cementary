@@ -4,6 +4,7 @@ from output_framework.output_framework import OutputFramework
 
 import SnakeController
 
+sc = SnakeController()
 
 pixelAmount = 16
 pixelArray = np.full((pixelAmount , pixelAmount, 3), 0)
@@ -23,10 +24,10 @@ def AppleSpawner():
     applePosX = random.randrange(1, 14)
     applePosY = random.randrange(1, 14)
 
-    while(applePosX >= (SnakeController.posX + minDistance) and applePosX <= (SnakeController.posX - minDistance)):
+    while(applePosX >= (sc.posX + minDistance) and applePosX <= (sc.posX - minDistance)):
         applePosX = random.randrange(1, 14)
 
-    while(applePosY >= (SnakeController.posY + minDistance) and applePosY <= (SnakeController.posY - minDistance)):
+    while(applePosY >= (sc.posY + minDistance) and applePosY <= (sc.posY - minDistance)):
         applePosY = random.randrange(1, 14)
     
     pixelArray[applePosX][applePosY][0] = 255
