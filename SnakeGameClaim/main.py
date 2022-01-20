@@ -1,7 +1,7 @@
 import numpy as np
 import random
+from output_framework.output_framework import OutputFramework 
 
-from pygame import Vector3
 import SnakeController
 
 
@@ -36,6 +36,8 @@ def main():
 
     CreateGamefield()
     AppleSpawner()
+
+     OutputFramework.setWindow(pixelArray)
 
     while gameRunning:
         #code
