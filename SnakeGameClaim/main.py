@@ -17,13 +17,15 @@ def CreateGamefield():
     
 
 def AppleSpawner():
-    
+    minDistance = 4;
     applePosX = random.randrange(1, 14)
     applePosY = random.randrange(1, 14)
 
-    while(applePosX != SnakeController.posX and applePosY != SnakeController.posY):
+    while(applePosX >= (SnakeController.posX + minDistance) and applePosX <= (SnakeController.posX + minDistance)):
         applePosX = random.randrange(1, 14)
-        applePosY = random.randrange(1, 14)
+
+    while(applePosY >= (SnakeController.posY + minDistance) and applePosY <= (SnakeController.posY + minDistance)):
+        applePosX = random.randrange(1, 14)
     
     pixelArray[applePosX][applePosY][0] = 255
 
