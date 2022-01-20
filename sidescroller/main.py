@@ -1,7 +1,6 @@
-import os
 import time
+from xml.etree.ElementTree import PI
 import numpy as np
-from src.devShow import show
 from src.shiftPixels import shiftPixels
 from src.addObject import add
 from src.player import Player
@@ -23,7 +22,7 @@ def main():
 
     amogus = readSprite("amogus.csv")
     print(amogus)
-    uh.rotation(180)
+    uh.rotation(270)
 
     while running:
         #events
@@ -32,8 +31,8 @@ def main():
         running = shiftPixels(pixelArray)
         #draw
         uh.clear()
-        for i in range(0, PIXELS-1):
-            for j in range(0, PIXELS-1):
+        for i in range(0, PIXELS):
+            for j in range(0, PIXELS):
                 uh.set_pixel(i, j, pixelArray[i][j][0],  pixelArray[i][j][1],  pixelArray[i][j][2])
         uh.show()
         #OutputFramework.setWindow(pixelArray)
