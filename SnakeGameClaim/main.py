@@ -36,11 +36,11 @@ def DisplaySimulation():
             unicorn.set_pixel(i, j, pixelArray[i][j][0],  pixelArray[i][j][1],  pixelArray[i][j][2])
     unicorn.show()
 
-def DisplayApple():
+def DisplayApple(i):
     applePosXY = apple.AppleSpawner(sc)
     pixelArray[applePosXY[0]][applePosXY[1]][0] = 255
 
-    if (applePosXY[2] != 0 or applePosXY[3] != 0):
+    if ((applePosXY[2] != 0 or applePosXY[3] != 0) and i == 1):
         pixelArray[applePosXY[2]][applePosXY[3]][0] = 0
 
 
@@ -48,7 +48,7 @@ def main():
 
     gameRunning = True
     CreateGamefield()
-    DisplayApple()
+    DisplayApple(0)
 
     
     try:
@@ -64,7 +64,7 @@ def main():
         sc.MoveSnake(1)
 
         if (sc.posX == apple.posX and sc.posY == apple.posY):
-            DisplayApple()
+            DisplayApple(1)
 
         try:
             OutputFramework.setWindow(pixelArray)
