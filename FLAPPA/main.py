@@ -41,7 +41,7 @@ def checkalive(pixelArray):
 
 def playermovement(velocity):
     print("Test")
-    pixelArray[3][walllocation[4]][0] = 0
+    pixelArray[3][round(walllocation[4])][0] = 0
     walllocation[4]+=velocity*0.5
     if (walllocation[4] > 15 ):
         walllocation[4] =15
