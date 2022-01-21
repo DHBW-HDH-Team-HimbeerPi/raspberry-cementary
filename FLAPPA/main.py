@@ -40,6 +40,7 @@ def checkalive(pixelArray):
 
 
 def playermovement(velocity):
+    print("Test")
     pixelArray[3][subposition][0] = 0
     subposition+=velocity*0.5
     if (subposition > 15 ):
@@ -95,8 +96,8 @@ def movepixelleft(ausgabe,x,y):
 
 
 ctrl = IMUController(TriggerMode.CALL_CHECK)
-ctrl.register_trigger(playermovement, {'velocity' : 0.4 }, ctrl.mov_y, 2, ThresholdType.HIGHER)
-ctrl.register_trigger(playermovement, {'velocity' : 0.6 }, ctrl.mov_y, 3, ThresholdType.HIGHER)
+ctrl.register_trigger(playermovement, {'velocity' : 1 }, ctrl.mov_y, 0.3, ThresholdType.HIGHER)
+ctrl.register_trigger(playermovement, {'velocity' : 2 }, ctrl.mov_y, 0.4, ThresholdType.HIGHER)
 pixelArray = np.full((16 , 16, 3), 0)
 walllocation = [16,28,40,0]
 pixelArray[3][8][0] = 250
