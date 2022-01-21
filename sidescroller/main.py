@@ -15,9 +15,9 @@ pixelArray[10][10][0] = 255
 def main():
 
     joe = Player()
-    print(joe.dimensions())
-    #add(pixelArray, joe.dimensions())
+    add(pixelArray, joe.dimensions())
     
+    print(pixelArray)
     #show(pixelArray)
     running = True
     uh.rotation(270)

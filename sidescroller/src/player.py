@@ -5,13 +5,12 @@ from .spriteReader import readSprite
 class Player:
 
     def __init__(self):
-
         self.amogus = readSprite("amogus.csv")
         self.colorR = rand.randrange(100, 255)
         self.colorG = rand.randrange(100, 255)
         self.colorB = rand.randrange(100, 255)
 
-    def setPixel(self, pixelArray, x, y):
+    def setPixelColor(self, pixelArray, x, y):
         pixelArray[x][y][0] = self.colorR
         pixelArray[x][y][1] = self.colorG
         pixelArray[x][y][2] = self.colorB
@@ -21,6 +20,7 @@ class Player:
         pixelArray = np.full((16 , 16, 4), 0)
         for i in range(0, len(pixelArray)):
             for j in range(0, len(pixelArray[0])):
-                self.setPixel(pixelArray, i, j)
-                pixelArray[i][j] = self.amogus[i][j]
+                if(int(self.amogus[i][j]) != 0):
+                    pixelArray[i][j] = int(self.amogus[i][j])
+                    self.setPixelColor(pixelArray, i, j)
         return pixelArray
