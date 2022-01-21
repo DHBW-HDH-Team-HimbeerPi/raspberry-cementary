@@ -47,7 +47,7 @@ def playermovement(velocity):
         walllocation[4] =15
     if (walllocation[4] < 0 ):
         walllocation[4] = 0
-    pixelArray[3][walllocation[4]][0] = 250
+    pixelArray[3][math.round(walllocation[4])][0] = 250
 
 
 def movewall(pixelArray,wallocation):
