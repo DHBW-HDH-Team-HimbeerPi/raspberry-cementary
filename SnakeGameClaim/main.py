@@ -42,8 +42,7 @@ def main():
     CreateGamefield()
     pixelArray[apple.AppleSpawner(sc)[0]][apple.AppleSpawner(sc)[1]][0] = 255
 
-    #OutputFramework.setWindow(pixelArray)
-    unicorn.rotation(180)
+    #unicorn.rotation(180)
 
     while sc.SnakeIsAlive():
         pixelArray[sc.posX][sc.posY][1] = 255
@@ -54,7 +53,8 @@ def main():
         if (sc.posX == apple.posX and sc.posY == apple.posY):
             pixelArray[apple.AppleSpawner(sc)[0]][apple.AppleSpawner(sc)[1]][0] = 255
 
-        DisplaySimulation()
+        #DisplaySimulation()
+        OutputFramework.setWindow(pixelArray)
         time.sleep(1)
         
 
