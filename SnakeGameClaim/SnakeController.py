@@ -6,18 +6,18 @@ class SnakeController:
     pixelArray = np.full((pixelAmount , pixelAmount, 3), 0)
     posX = 0
     posY = 0
-    posXOld = 0
-    posYOld = 0
+    posXPrev = 0
+    posYPrev = 0
 
     def __init__(self, posX, posY):
         self.posX = posX
         self.posY = posY
-        self.posXOld = 0
-        self.posYOld = 0
+        self.posXPrev = 0
+        self.posYPrev = 0
 
     def MoveSnake(self, direction: int):
-        self.posYOld = self.posY
-        self.posXOld = self.posX
+        self.posYPrev = self.posY
+        self.posXPrev = self.posX
         
         if (direction == 1):
             self.posY += 1

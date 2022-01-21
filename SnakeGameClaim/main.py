@@ -40,6 +40,9 @@ def DisplayApple():
     applePosXY = apple.AppleSpawner(sc)
     pixelArray[applePosXY[0]][applePosXY[1]][0] = 255
 
+    if (applePosXY[2] != 0 or applePosXY[3] != 0):
+        pixelArray[applePosXY[2]][applePosXY[3]][0] = 0
+
 
 def main():
 
