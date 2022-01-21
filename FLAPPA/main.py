@@ -3,11 +3,11 @@ import time
 import random
 import math
 import os
-#from input_framework.imu_controller import IMUController
-#from input_framework.interface import ThresholdType, TriggerMode
+from input_framework.imu_controller import IMUController
+from input_framework.interface import ThresholdType, TriggerMode
 
 
-#from output_framework.output_framework import OutputFramework 
+from output_framework.output_framework import OutputFramework 
 
 
 def show(ausgabe: list):
@@ -33,12 +33,15 @@ def checkalive(pixelArray):
             return True
     # eigenlich false
     return True
-def playermovement(pixelarray):
-    #ctrl = IMUController(TriggerMode.call_check)
-    #ctrl.register_trigger(soll_ausgefuehrt_werden, {'arg1' : 1, 'arg2' : 2}, input.rot_x, 0.1, ThresholdType.higher)
-    velocity:float = ctrl.rot_x
+
+
+
+
+
+
+def playermovement(velocity):
     pixelArray[3][subposition][0] = 0
-    subposition+=velocity*0.05
+    subposition+=velocity*0.5
     if (subposition > 15 ):
         subposition =15
     if (subposition < 0 ):
@@ -90,20 +93,21 @@ def movepixelleft(ausgabe,x,y):
             ausgabe[x-1][y][color] = ausgabe[x][y][color]   
         ausgabe[x][y][color] = 0;
 
+
+ctrl = IMUController(TriggerMode.CALL_CHECK)
+ctrl.register_trigger(playermovement, {'velocity' : 1.0 }, ctrl.mov_y, 2, ThresholdType.HIGHER)
+ctrl.register_trigger(playermovement, {'velocity' : 2.0 }, ctrl.mov_y, 3, ThresholdType.HIGHER)
 pixelArray = np.full((16 , 16, 3), 0)
 walllocation = [16,28,40,0]
 pixelArray[3][8][0] = 250
-
-      
 for u in range (240):
-    
     playersubposition = 8
     movewall(pixelArray,walllocation)
     time.sleep(0.1/math.log(walllocation[3]+2,15))
-    os.system('cls')
-    playermovement(pixelArray)
-    #OutputFramework.setWindow(pixelArray)
-    show(pixelArray)
+    #os.system('cls')
+    ctrl.check_triggers()
+    OutputFramework.setWindow(pixelArray)
+    #show(pixelArray)
     if (checkalive(pixelArray)==False):
         break
 
