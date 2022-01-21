@@ -14,20 +14,24 @@ class Apple():
         self.posY = 0
 
     def AppleSpawner(self, snakeController):
+        self.posXPrev = self.posX
+        self.posYPrev = self.posY
+        
         minDistance = 3;
         self.posX = random.randrange(1, 14)
         self.posY = random.randrange(1, 14)
 
-        while(self.posX <= (snakeController.posX + minDistance) and self.posX >= (snakeController.posX - minDistance)):
+        while(self.posX <= (snakeController.posX[0] + minDistance) and self.posX >= (snakeController.posX[0] - minDistance)):
             self.posX = random.randrange(1, 14)
 
-        while(self.posY <= (snakeController.posY + minDistance) and self.posY >= (snakeController.posY - minDistance)):
+        while(self.posY <= (snakeController.posY[0] + minDistance) and self.posY >= (snakeController.posY[0] - minDistance)):
             self.posY = random.randrange(1, 14)
-    
-        self.posXPrev = self.posX
-        self.posYPrev = self.posY
 
         self.pixelArray[self.posX][self.posY][0] = 255
+
+        if (self.posXPrev == 0):
+            self.posX = 3
+            self.posY = 10
 
         applePosition = [self.posX, self.posY, self.posXPrev, self.posYPrev]
         return applePosition

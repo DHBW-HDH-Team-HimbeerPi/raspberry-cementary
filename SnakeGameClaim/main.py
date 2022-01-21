@@ -58,13 +58,16 @@ def main():
             
 
     while sc.SnakeIsAlive():
-        pixelArray[sc.posX][sc.posY][1] = 255
         pixelArray[sc.posXPrev][sc.posYPrev][1] = 0
 
-        sc.MoveSnake(1)
-
-        if (sc.posX == apple.posX and sc.posY == apple.posY):
+        if (sc.posX[0] == apple.posX and sc.posY[0] == apple.posY):
+            sc.EatApple()
             DisplayApple(1)
+
+        for i in range(0, len(sc.posX)):
+            pixelArray[sc.posX[i]][sc.posY[i]][1] = 255
+            
+        sc.MoveSnake(1)
 
         try:
             OutputFramework.setWindow(pixelArray)
@@ -78,7 +81,7 @@ def main():
     
 
 if __name__ == "__main__":
-        main()
+    main()
 
 
 
