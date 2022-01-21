@@ -4,8 +4,7 @@ import numpy as np
 from src.shiftPixels import shiftPixels
 from src.addObject import add
 from src.player import Player
-
-from unicorn_hat_sim import unicornhathd as uh
+from src.unicornHead import showUH
 #from output_framework.output_framework import OutputFramework
 
 PIXELS = 16
@@ -20,19 +19,15 @@ def main():
     print(pixelArray)
     #show(pixelArray)
     running = True
-    uh.rotation(270)
+    
 
     while running:
         #events
         #input
         #update
+        showUH(pixelArray, PIXELS)
         running = shiftPixels(pixelArray)
         #draw
-        uh.clear()
-        for i in range(0, PIXELS):
-            for j in range(0, PIXELS):
-                uh.set_pixel(i, j, pixelArray[i][j][0],  pixelArray[i][j][1],  pixelArray[i][j][2])
-        uh.show()
         #OutputFramework.setWindow(pixelArray)
         time.sleep(0.5) 
 
