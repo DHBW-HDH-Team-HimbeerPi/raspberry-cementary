@@ -1,4 +1,5 @@
 import time
+from tokenize import Name
 import numpy as np
 import random
 try:
@@ -35,14 +36,23 @@ def DisplaySimulation():
             unicorn.set_pixel(i, j, pixelArray[i][j][0],  pixelArray[i][j][1],  pixelArray[i][j][2])
     unicorn.show()
 
+def DisplayApple():
+    applePosXY = apple.AppleSpawner(sc)
+    pixelArray[applePosXY[0]][applePosXY[1]][0] = 255
+
 
 def main():
 
     gameRunning = True
     CreateGamefield()
-    pixelArray[apple.AppleSpawner(sc)[0]][apple.AppleSpawner(sc)[1]][0] = 255
+    DisplayApple()
 
-    #unicorn.rotation(180)
+    
+    try:
+        unicorn.rotation(180)
+    except NameError:
+        print("could NOT find unicorn")
+            
 
     while sc.SnakeIsAlive():
         pixelArray[sc.posX][sc.posY][1] = 255
@@ -51,10 +61,13 @@ def main():
         sc.MoveSnake(1)
 
         if (sc.posX == apple.posX and sc.posY == apple.posY):
-            pixelArray[apple.AppleSpawner(sc)[0]][apple.AppleSpawner(sc)[1]][0] = 255
+            DisplayApple()
 
-        #DisplaySimulation()
-        OutputFramework.setWindow(pixelArray)
+        try:
+            OutputFramework.setWindow(pixelArray)
+        except NameError:
+            DisplaySimulation()
+        
         time.sleep(1)
         
 
