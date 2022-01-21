@@ -18,9 +18,9 @@ class Player:
 
     def dimensions(self):
         pixelArray = np.full((16 , 16, 4), 0)
-        for i in range(0, len(pixelArray)):
-            for j in range(0, len(pixelArray[0])):
-                if(int(self.amogus[i][j]) != 0):
-                    pixelArray[i][j] = int(self.amogus[i][j])
-                    self.setPixelColor(pixelArray, i, j)
+        for x in range(0, len(pixelArray)):
+            for y in range(0, len(pixelArray[0])):
+                if(int(self.amogus[x][y]) != 0):
+                    pixelArray[x][y] = int(self.amogus[x][y])
+                    self.setPixelColor(pixelArray, x, y)
         return pixelArray
