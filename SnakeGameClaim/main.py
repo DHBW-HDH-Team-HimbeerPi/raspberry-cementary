@@ -1,48 +1,62 @@
+import time
 import numpy as np
 import random
-from output_framework.output_framework import OutputFramework 
+try:
+    from output_framework.output_framework import OutputFramework 
+    print("outputFramework detected")
+except ImportError:
+    from unicorn_hat_sim import unicornhathd as unicorn
 
 from SnakeController import SnakeController
+from AppleController import Apple
+
 
 sc = SnakeController(3, 6)
-
+apple = Apple()
 pixelAmount = 16
 pixelArray = np.full((pixelAmount , pixelAmount, 3), 0)
 gameRunning = True
-# pixelArray[10][10][1] = 255
-
 
 def CreateGamefield():
     for x in range(0, pixelAmount):
         pixelArray[x][0][2] = 255
     for y in range(0, pixelAmount):
         pixelArray[0][y][2] = 255
+
+    for x in range(0, pixelAmount):
+        pixelArray[x][15][2] = 255
+    for y in range(0, pixelAmount):
+        pixelArray[15][y][2] = 255
     
 
-def AppleSpawner():
-    minDistance = 4;
-    applePosX = random.randrange(1, 14)
-    applePosY = random.randrange(1, 14)
-
-    while(applePosX >= (sc.posX + minDistance) and applePosX <= (sc.posX - minDistance)):
-        applePosX = random.randrange(1, 14)
-
-    while(applePosY >= (sc.posY + minDistance) and applePosY <= (sc.posY - minDistance)):
-        applePosY = random.randrange(1, 14)
-    
-    pixelArray[applePosX][applePosY][0] = 255
+def DisplaySimulation():
+    for i in range(0, 16):
+        for j in range(0, 16):
+            unicorn.set_pixel(i, j, pixelArray[i][j][0],  pixelArray[i][j][1],  pixelArray[i][j][2])
+    unicorn.show()
 
 
 def main():
 
+    gameRunning = True
     CreateGamefield()
-    AppleSpawner()
+    pixelArray[apple.AppleSpawner(sc)[0]][apple.AppleSpawner(sc)[1]][0] = 255
 
-    OutputFramework.setWindow(pixelArray)
+    #OutputFramework.setWindow(pixelArray)
+    unicorn.rotation(180)
 
-    while gameRunning:
-        #code
-        gameRunning = False
+    while sc.SnakeIsAlive():
+        pixelArray[sc.posX][sc.posY][1] = 255
+        pixelArray[sc.posXOld][sc.posYOld][1] = 0
+
+        sc.MoveSnake(1)
+
+        if (sc.posX == apple.posX and sc.posY == apple.posY):
+            pixelArray[apple.AppleSpawner(sc)[0]][apple.AppleSpawner(sc)[1]][0] = 255
+
+        DisplaySimulation()
+        time.sleep(1)
+        
 
     
     
