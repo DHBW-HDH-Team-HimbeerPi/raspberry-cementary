@@ -4,7 +4,6 @@ import numpy as np
 from src.shiftPixels import shiftPixels
 from src.addObject import add
 from src.player import Player
-from src.spriterReader import readSprite
 
 from unicorn_hat_sim import unicornhathd as uh
 #from output_framework.output_framework import OutputFramework
@@ -15,13 +14,12 @@ pixelArray[10][10][0] = 255
 
 def main():
 
-    joe = Player(PIXELS)
-    add(pixelArray, joe.dimensions())
+    joe = Player()
+    print(joe.dimensions())
+    #add(pixelArray, joe.dimensions())
+    
     #show(pixelArray)
     running = True
-
-    amogus = readSprite("amogus.csv")
-    print(amogus)
     uh.rotation(270)
 
     while running:

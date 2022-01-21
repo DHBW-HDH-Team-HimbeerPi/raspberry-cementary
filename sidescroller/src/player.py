@@ -1,11 +1,12 @@
 import numpy as np
 import random as rand
+from .spriteReader import readSprite
 
 class Player:
 
-    
-    def __init__(self, pixels):
-        self.pixels = pixels
+    def __init__(self):
+
+        self.amogus = readSprite("amogus.csv")
         self.colorR = rand.randrange(100, 255)
         self.colorG = rand.randrange(100, 255)
         self.colorB = rand.randrange(100, 255)
@@ -16,22 +17,10 @@ class Player:
         pixelArray[x][y][2] = self.colorB
         pixelArray[x][y][3] = 1
 
-    def setPixelBlue(self, pixelArray, x, y):
-        pixelArray[x][y][0] = 0
-        pixelArray[x][y][1] = 148
-        pixelArray[x][y][2] = 255
-        pixelArray[x][y][3] = 1
-
     def dimensions(self):
-        pixelArray = np.full((self.pixels , self.pixels, 4), 0)
-        self.setPixel(pixelArray, 15, 1)
-        self.setPixel(pixelArray, 14, 1)
-        self.setPixel(pixelArray, 15, 3)
-        self.setPixel(pixelArray, 14, 3)
-        self.setPixel(pixelArray, 13, 1)
-        self.setPixel(pixelArray, 13, 3)
-        self.setPixel(pixelArray, 14, 2)
-        self.setPixel(pixelArray, 12, 2)
-        self.setPixelBlue(pixelArray, 13, 2)
-        
+        pixelArray = np.full((16 , 16, 4), 0)
+        for i in range(0, len(pixelArray)):
+            for j in range(0, len(pixelArray[0])):
+                self.setPixel(pixelArray, i, j)
+                pixelArray[i][j] = self.amogus[i][j]
         return pixelArray
