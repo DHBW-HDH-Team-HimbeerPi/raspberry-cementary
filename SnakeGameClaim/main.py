@@ -59,7 +59,7 @@ def main():
 
     while sc.SnakeIsAlive():
         pixelArray[sc.posX][sc.posY][1] = 255
-        pixelArray[sc.posXOld][sc.posYOld][1] = 0
+        pixelArray[sc.posXPrev][sc.posYPrev][1] = 0
 
         sc.MoveSnake(1)
 
