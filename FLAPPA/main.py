@@ -1,12 +1,13 @@
 import numpy as np
 import time
 import random
-#import os
-from input_framework.imu_controller import IMUController
-from input_framework.interface import ThresholdType, TriggerMode
+import math
+import os
+#from input_framework.imu_controller import IMUController
+#from input_framework.interface import ThresholdType, TriggerMode
 
 
-from output_framework.output_framework import OutputFramework 
+#from output_framework.output_framework import OutputFramework 
 
 
 def show(ausgabe: list):
@@ -30,10 +31,11 @@ def checkalive(pixelArray):
     for y in range (15):
         if(pixelArray[3][y][0]!=0):
             return True
-    return False
+    # eigenlich false
+    return True
 def playermovement(pixelarray):
-    ctrl = IMUController(TriggerMode.call_check)
-    ctrl.register_trigger(soll_ausgefuehrt_werden, {'arg1' : 1, 'arg2' : 2}, input.rot_x, 0.1, ThresholdType.higher)
+    #ctrl = IMUController(TriggerMode.call_check)
+    #ctrl.register_trigger(soll_ausgefuehrt_werden, {'arg1' : 1, 'arg2' : 2}, input.rot_x, 0.1, ThresholdType.higher)
     velocity:float = ctrl.rot_x
     pixelArray[3][subposition][0] = 0
     subposition+=velocity*0.05
@@ -48,7 +50,10 @@ def movewall(pixelArray,wallocation):
     for walls in range (3):
         if (walllocation[walls] == 0):
             walllocation[walls]= 36
+            walllocation[3]=walllocation[3] + 1
+            print(walllocation[3])
             movewallleft(pixelArray,0)
+            
         elif(walllocation[walls] == 16):
             createwall(pixelArray)
             walllocation[walls] =15
@@ -60,11 +65,18 @@ def movewall(pixelArray,wallocation):
 def createwall(pixelArray):
     r = random.randrange(11)
     i=0
+    
+    if walllocation[3]>10:
+        difficulty = 2
+    else:
+        difficulty = 3
+    print (difficulty)
+    print(walllocation[3])
     while i <r :
         pixelArray[15][i][1]=255
         i+=1
     i=15
-    while i>r+3:
+    while i>r+difficulty:
         pixelArray[15][i][1]=255
         i-=1
 def movewallleft(pixelArray,wall):
@@ -79,17 +91,19 @@ def movepixelleft(ausgabe,x,y):
         ausgabe[x][y][color] = 0;
 
 pixelArray = np.full((16 , 16, 3), 0)
-walllocation = [16,28,4]
+walllocation = [16,28,40,0]
 pixelArray[3][8][0] = 250
 
-for u in range (60):
+      
+for u in range (240):
     
     playersubposition = 8
     movewall(pixelArray,walllocation)
-    time.sleep(0.1)
-    #os.system('cls')
+    time.sleep(0.1/math.log(walllocation[3]+2,15))
+    os.system('cls')
     playermovement(pixelArray)
-    OutputFramework.setWindow(pixelArray)
-    #show(pixelArray)
+    #OutputFramework.setWindow(pixelArray)
+    show(pixelArray)
     if (checkalive(pixelArray)==False):
         break
+
