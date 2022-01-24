@@ -91,7 +91,6 @@ def main():
         except NameError:
             DisplaySimulation()
         
-        print(len(sc.posX))
         time.sleep(sleepTime)
         
 
