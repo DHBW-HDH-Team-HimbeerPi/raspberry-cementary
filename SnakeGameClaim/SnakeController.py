@@ -20,17 +20,37 @@ class SnakeController:
         self.posXPrev = self.posX[len(self.posX)-1]
         
         if (direction == 1):
-            for i in range(0, len(self.posY)):
-                self.posY[i] += 1
+            for i in range(len(self.posY)-1, 0, -1):
+                self.posY[i] = self.posY[i-1]
+            
+            for i in range(len(self.posX)-1, 0, -1):
+                self.posX[i] = self.posX[i-1]
+
+            self.posY[0] += 1
         elif (direction == 2):
-            for i in range(0, len(self.posY)):
-                self.posY[i] -= 1
+            for i in range(len(self.posY)-1, 0, -1):
+                self.posY[i] = self.posY[i-1]
+            
+            for i in range(len(self.posX)-1, 0, -1):
+                self.posX[i] = self.posX[i-1]
+
+            self.posY[0] -= 1
         elif (direction == 3):
-            for i in range(0, len(self.posX)):
-                self.posX[i] -= 1
+            for i in range(len(self.posY)-1, 0, -1):
+                self.posY[i] = self.posY[i-1]
+            
+            for i in range(len(self.posX)-1, 0, -1):
+                self.posX[i] = self.posX[i-1]
+
+            self.posX[0] -= 1
         elif (direction == 4):
-            for i in range(0, len(self.posX)):
-                self.posX[i] += 1
+            for i in range(len(self.posY)-1, 0, -1):
+                self.posY[i] = self.posY[i-1]
+            
+            for i in range(len(self.posX)-1, 0, -1):
+                self.posX[i] = self.posX[i-1]
+                
+            self.posX[0] += 1
 
     def SnakeIsAlive(self):
         if ((self.posY[0] >= 15 or self.posY[0] <= 0) or (self.posX[0] >= 15 or self.posX[0] <= 0)):

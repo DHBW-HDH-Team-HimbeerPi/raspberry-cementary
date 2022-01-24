@@ -1,3 +1,4 @@
+from asyncio import sleep
 import time
 from tokenize import Name
 import numpy as np
@@ -17,6 +18,7 @@ apple = Apple()
 pixelAmount = 16
 pixelArray = np.full((pixelAmount , pixelAmount, 3), 0)
 gameRunning = True
+sleepTime = 0.5
 
 def CreateGamefield():
     for x in range(0, pixelAmount):
@@ -28,7 +30,6 @@ def CreateGamefield():
         pixelArray[x][15][2] = 255
     for y in range(0, pixelAmount):
         pixelArray[15][y][2] = 255
-    
 
 def DisplaySimulation():
     for i in range(0, 16):
@@ -43,10 +44,22 @@ def DisplayApple(i):
     if ((applePosXY[2] != 0 or applePosXY[3] != 0) and i == 1):
         pixelArray[applePosXY[2]][applePosXY[3]][0] = 0
 
+def SnakeAutoPilot():
+    if(apple.posY != sc.posY[0]):
+        if (apple.posY > sc.posY[0]):
+            sc.MoveSnake(1)
+        else:
+            sc. MoveSnake(2)
+    elif(apple.posX != sc.posX[0]):
+        if (apple.posX > sc.posX[0]):
+            sc.MoveSnake(4)
+        else:
+            sc.MoveSnake(3)        
 
 def main():
 
     gameRunning = True
+    sleepTime = 0.5
     CreateGamefield()
     DisplayApple(0)
 
@@ -64,17 +77,22 @@ def main():
             sc.EatApple()
             DisplayApple(1)
 
+            if (len(sc.posX) >= 3 and sleepTime > 0.1):
+                sleepTime -= 0.025
+
         for i in range(0, len(sc.posX)):
             pixelArray[sc.posX[i]][sc.posY[i]][1] = 255
             
-        sc.MoveSnake(1)
+        #sc.MoveSnake(4)
+        SnakeAutoPilot()
 
         try:
             OutputFramework.setWindow(pixelArray)
         except NameError:
             DisplaySimulation()
         
-        time.sleep(1)
+        print(len(sc.posX))
+        time.sleep(sleepTime)
         
 
     
