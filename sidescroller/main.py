@@ -7,38 +7,34 @@ from src.unicornHead import showUH
 from src.spriteReader import dimensions
 from src.sprites import Sprites
 #from output_framework.output_framework import OutputFramework
+#from input_framework.imu_controller import IMUController
+#from input_framework.interface import ThresholdType, TriggerMode
 
 PIXELS = 16
 pixelArray = np.full((PIXELS, PIXELS*2, 4), 0)
 pixelArray[10][10][0] = 255
+#ctrl = IMUController(TriggerMode.CALL_CHECK)
+#ctrl.register_trigger(movePlayerRight, {'velocity' : 1 }, ctrl.mov_y, 0.3, ThresholdType.HIGHER)
 
 def main():
 
     joe = Player()
     add(pixelArray, joe.dimensions(), False)
-    add(pixelArray, dimensions(Sprites.map1.value), True)
+    add(pixelArray, dimensions(Sprites.mapStairs.value), True)
+    add(pixelArray, dimensions(Sprites.mapPlatform.value), True)
     #show(pixelArray)
     running = True
     times = 0
 
     while running:
-        if(times == 10):
-            add(pixelArray, dimensions(Sprites.map1.value), True)
-        #events
-        #input
-        #update
+        #events/input:
+        #ctrl.check_triggers()
+        #update:
         showUH(pixelArray, PIXELS)
         running = shiftPixelsY(pixelArray)
-        #draw
+        #draw:
         #OutputFramework.setWindow(pixelArray)
-        times = times+1
-        time.sleep(0.5) 
+        time.sleep(0.25)  #24 fps
 
 if __name__ == "__main__":
     main()
-        
-
-
-
-
-
