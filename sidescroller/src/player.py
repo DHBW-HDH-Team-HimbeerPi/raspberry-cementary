@@ -1,11 +1,12 @@
 import numpy as np
 import random as rand
 from .spriteReader import readSprite
+from .sprites import Sprites
 
 class Player:
 
     def __init__(self):
-        self.amogus = readSprite("amogus.csv")
+        self.amogus = readSprite(Sprites.amogus.value)
         self.colorR = rand.randrange(100, 255)
         self.colorG = rand.randrange(100, 255)
         self.colorB = rand.randrange(100, 255)
