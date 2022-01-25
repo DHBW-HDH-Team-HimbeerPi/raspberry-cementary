@@ -18,15 +18,12 @@ class Apple():
         self.posXPrev = self.posX
         self.posYPrev = self.posY
         
-        minDistance = 3;
-        self.posX = random.randrange(1, 14)
-        self.posY = random.randrange(1, 14)
+        self.posX = random.randrange(1, 15)
+        self.posY = random.randrange(1, 15)
 
-        while((self.posX <= (snakeController.posX[0] + minDistance) and self.posX >= (snakeController.posX[0] - minDistance)) and self.AppleInSnake(snakeController, "X") == False):
-            self.posX = random.randrange(1, 14)
-
-        while((self.posY <= (snakeController.posY[0] + minDistance) and self.posY >= (snakeController.posY[0] - minDistance)) and self.AppleInSnake(snakeController, "Y") == False):
-            self.posY = random.randrange(1, 14)
+        while(self.AppleNotInSnake(snakeController)):
+            self.posX = random.randrange(1, 15)
+            self.posY = random.randrange(1, 15)
 
         self.pixelArray[self.posX][self.posY][0] = 255
 
@@ -38,14 +35,9 @@ class Apple():
         return applePosition
 
 
-    def AppleInSnake(self, sc, direc):
-        if (direc == "X"):
-            for i in range(0, len(sc.posX)):
-                if (sc.posX[i] == self.posX):
-                    return True
-        elif (direc == "Y"):
-            for i in range(0, len(sc.posY)):
-                if (sc.posY[i] == self.posY):
-                    return True
+    def AppleNotInSnake(self, sc):
+        for i in range(0, len(sc.posX)):
+            if (sc.posX[i] == self.posX and sc.posY[i] == self.posY):
+                return True
         
         return False
