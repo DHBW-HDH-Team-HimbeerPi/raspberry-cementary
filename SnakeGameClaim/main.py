@@ -1,9 +1,10 @@
 import time
-from tokenize import Name
 import numpy as np
 import random
 try:
     from output_framework.output_framework import OutputFramework 
+    from input_framework.imu_controller import IMUController
+    from input_framework.interface import ThresholdType, TriggerMode
     print("outputFramework detected")
 except ImportError:
     from unicorn_hat_sim import unicornhathd as unicorn
@@ -57,6 +58,14 @@ def SnakeAutoPilot():
 
 def main():
 
+
+    controller = IMUController(TriggerMode.call_check)
+    controller.register_trigger(sc.MoveSnake, {'direction' : 1}, input.rot_x, 0.3, ThresholdType.higher)
+    controller.register_trigger(sc.MoveSnake, {'direction' : 2}, input.rot_x, 0.3, ThresholdType.lower)
+    controller.register_trigger(sc.MoveSnake, {'direction' : 3}, input.rot_y, 0.3, ThresholdType.higher)
+    controller.register_trigger(sc.MoveSnake, {'direction' : 4}, input.rot_y, 0.3, ThresholdType.lower)
+
+    gameRunning = True
     gameRunning = True
     sleepTime = 0.5
     CreateGamefield()
