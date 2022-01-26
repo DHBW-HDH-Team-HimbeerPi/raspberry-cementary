@@ -57,13 +57,13 @@ def SnakeAutoPilot():
             sc.MoveSnake(3)        
 
 def main():
-
+    rotationTreshhold = 1.5
 
     controller = IMUController(TriggerMode.CALL_CHECK)
-    controller.register_trigger(sc.MoveSnake, {'direction' : 1}, controller.rot_x, 0.3, ThresholdType.HIGHER)
-    controller.register_trigger(sc.MoveSnake, {'direction' : 2}, controller.rot_x, 0.3, ThresholdType.LOWER)
-    controller.register_trigger(sc.MoveSnake, {'direction' : 3}, controller.rot_y, 0.3, ThresholdType.HIGHER)
-    controller.register_trigger(sc.MoveSnake, {'direction' : 4}, controller.rot_y, 0.3, ThresholdType.LOWER)
+    controller.register_trigger(sc.MoveSnake, {'direction' : 1}, controller.rot_x, rotationTreshhold, ThresholdType.HIGHER)
+    controller.register_trigger(sc.MoveSnake, {'direction' : 2}, controller.rot_x, rotationTreshhold, ThresholdType.LOWER)
+    controller.register_trigger(sc.MoveSnake, {'direction' : 3}, controller.rot_y, rotationTreshhold, ThresholdType.HIGHER)
+    controller.register_trigger(sc.MoveSnake, {'direction' : 4}, controller.rot_y, rotationTreshhold, ThresholdType.LOWER)
 
     gameRunning = True
     sleepTime = 0.5
