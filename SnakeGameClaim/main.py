@@ -21,6 +21,8 @@ gameRunning = True
 sleepTime = 0.5
 direction = 1
 
+autopilotOn = True
+
 def CreateGamefield():
     for x in range(0, pixelAmount):
         pixelArray[x][0][2] = 255
@@ -64,11 +66,14 @@ def inputToDirection(direc: int):
 def main():
     rotationTreshold = 0.35
 
-    controller = IMUController(TriggerMode.CALL_CHECK)
-    controller.register_trigger(inputToDirection, {'direc' : 1}, controller.mov_x, rotationTreshold, ThresholdType.HIGHER)
-    controller.register_trigger(inputToDirection, {'direc' : 2}, controller.mov_x, -rotationTreshold, ThresholdType.LOWER)
-    controller.register_trigger(inputToDirection, {'direc' : 3}, controller.mov_y, -rotationTreshold, ThresholdType.LOWER)
-    controller.register_trigger(inputToDirection, {'direc' : 4}, controller.mov_y, rotationTreshold, ThresholdType.HIGHER)
+    try:
+        controller = IMUController(TriggerMode.CALL_CHECK)
+        controller.register_trigger(inputToDirection, {'direc' : 1}, controller.mov_x, rotationTreshold, ThresholdType.HIGHER)
+        controller.register_trigger(inputToDirection, {'direc' : 2}, controller.mov_x, -rotationTreshold, ThresholdType.LOWER)
+        controller.register_trigger(inputToDirection, {'direc' : 3}, controller.mov_y, -rotationTreshold, ThresholdType.LOWER)
+        controller.register_trigger(inputToDirection, {'direc' : 4}, controller.mov_y, rotationTreshold, ThresholdType.HIGHER)
+    except NameError:
+        print("could NOT find controller")
 
     gameRunning = True
     sleepTime = 0.5
@@ -95,9 +100,11 @@ def main():
         for i in range(0, len(sc.posX)):
             pixelArray[sc.posX[i]][sc.posY[i]][1] = 255
             
-        controller.check_triggers()    
-        sc.MoveSnake(direction)
-        #SnakeAutoPilot()
+        if (autopilotOn):
+            SnakeAutoPilot()
+        else:
+            controller.check_triggers()    
+            sc.MoveSnake(direction)
 
         try:
             OutputFramework.setWindow(pixelArray)
