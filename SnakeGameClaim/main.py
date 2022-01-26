@@ -58,6 +58,7 @@ def SnakeAutoPilot():
             sc.MoveSnake(3) 
 
 def inputToDirection(direc: int):
+    global direction
     direction = direc
 
 def main():
