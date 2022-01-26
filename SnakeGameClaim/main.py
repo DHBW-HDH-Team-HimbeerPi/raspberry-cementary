@@ -21,7 +21,7 @@ gameRunning = True
 sleepTime = 0.5
 direction = 1
 
-autopilotOn = True
+autopilotOn = False
 
 def CreateGamefield():
     for x in range(0, pixelAmount):
@@ -74,6 +74,7 @@ def main():
         controller.register_trigger(inputToDirection, {'direc' : 4}, controller.mov_y, rotationTreshold, ThresholdType.HIGHER)
     except NameError:
         print("could NOT find controller")
+        autopilotOn = True
 
     gameRunning = True
     sleepTime = 0.5
@@ -94,8 +95,8 @@ def main():
             sc.EatApple()
             DisplayApple(1)
 
-            if (len(sc.posX) >= 3 and sleepTime > 0.01):
-                sleepTime = 0.01
+            if (len(sc.posX) >= 3 and sleepTime > 0.1):
+                sleepTime -= 0.025
 
         for i in range(0, len(sc.posX)):
             pixelArray[sc.posX[i]][sc.posY[i]][1] = 255
