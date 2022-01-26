@@ -61,9 +61,9 @@ def main():
 
     controller = IMUController(TriggerMode.CALL_CHECK)
     controller.register_trigger(sc.MoveSnake, {'direction' : 1}, controller.rot_x, rotationTreshhold, ThresholdType.HIGHER)
-    controller.register_trigger(sc.MoveSnake, {'direction' : 2}, controller.rot_x, rotationTreshhold, ThresholdType.LOWER)
-    controller.register_trigger(sc.MoveSnake, {'direction' : 3}, controller.rot_y, rotationTreshhold, ThresholdType.HIGHER)
-    controller.register_trigger(sc.MoveSnake, {'direction' : 4}, controller.rot_y, rotationTreshhold, ThresholdType.LOWER)
+    controller.register_trigger(sc.MoveSnake, {'direction' : 2}, controller.rot_x, -rotationTreshhold, ThresholdType.LOWER)
+    controller.register_trigger(sc.MoveSnake, {'direction' : 3}, controller.rot_y, -rotationTreshhold, ThresholdType.LOWER)
+    controller.register_trigger(sc.MoveSnake, {'direction' : 4}, controller.rot_y, rotationTreshhold, ThresholdType.HIGHER)
 
     gameRunning = True
     sleepTime = 0.5
