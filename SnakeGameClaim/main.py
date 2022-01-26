@@ -62,13 +62,13 @@ def inputToDirection(direc: int):
     direction = direc
 
 def main():
-    rotationTreshhold = 50.
+    rotationTreshhold = 5.
 
     controller = IMUController(TriggerMode.CALL_CHECK)
-    controller.register_trigger(inputToDirection, {'direc' : 1}, controller.rot_y, rotationTreshhold, ThresholdType.HIGHER)
-    controller.register_trigger(inputToDirection, {'direc' : 2}, controller.rot_y, -rotationTreshhold, ThresholdType.LOWER)
-    controller.register_trigger(inputToDirection, {'direc' : 3}, controller.rot_x, rotationTreshhold, ThresholdType.HIGHER)
-    controller.register_trigger(inputToDirection, {'direc' : 4}, controller.rot_x, -rotationTreshhold, ThresholdType.LOWER)
+    controller.register_trigger(inputToDirection, {'direc' : 1}, controller.mov_x, -rotationTreshhold, ThresholdType.LOWER)
+    controller.register_trigger(inputToDirection, {'direc' : 2}, controller.mov_x, rotationTreshhold, ThresholdType.HIGHER)
+    controller.register_trigger(inputToDirection, {'direc' : 3}, controller.mov_y, -rotationTreshhold, ThresholdType.LOWER)
+    controller.register_trigger(inputToDirection, {'direc' : 4}, controller.mov_y, rotationTreshhold, ThresholdType.HIGHER)
 
     gameRunning = True
     sleepTime = 0.5
