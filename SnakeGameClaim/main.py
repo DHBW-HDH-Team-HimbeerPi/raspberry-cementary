@@ -62,7 +62,7 @@ def inputToDirection(direc: int):
     direction = direc
 
 def main():
-    rotationTreshhold = 75.
+    rotationTreshhold = 50.
 
     controller = IMUController(TriggerMode.CALL_CHECK)
     controller.register_trigger(inputToDirection, {'direc' : 1}, controller.rot_y, rotationTreshhold, ThresholdType.HIGHER)
