@@ -94,8 +94,8 @@ def main():
             sc.EatApple()
             DisplayApple(1)
 
-            if (len(sc.posX) >= 3 and sleepTime > 0.1):
-                sleepTime -= 0.025
+            if (len(sc.posX) >= 3 and sleepTime > 0.01):
+                sleepTime = 0.01
 
         for i in range(0, len(sc.posX)):
             pixelArray[sc.posX[i]][sc.posY[i]][1] = 255
