@@ -97,7 +97,7 @@ def movepixelleft(ausgabe,x,y):
 
 ctrl = IMUController(TriggerMode.CALL_CHECK)
 ctrl.register_trigger(playermovementv, {'velocity' : 1 }, ctrl.rot_x, 50., ThresholdType.HIGHER)
-ctrl.register_trigger(playermovementv, {'velocity' : -1 }, ctrl.rot_x, -50., ThresholdType.HIGHER)
+ctrl.register_trigger(playermovementv, {'velocity' : -1 }, ctrl.rot_x, -50., ThresholdType.LOWER)
 pixelArray = np.full((16 , 16, 3), 0)
 walllocation = [16,28,40,0,8,0]
 pixelArray[3][8][0] = 250
