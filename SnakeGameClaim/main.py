@@ -19,6 +19,7 @@ pixelAmount = 16
 pixelArray = np.full((pixelAmount , pixelAmount, 3), 0)
 gameRunning = True
 sleepTime = 0.5
+direction = 1
 
 def CreateGamefield():
     for x in range(0, pixelAmount):
@@ -54,16 +55,19 @@ def SnakeAutoPilot():
         if (apple.posX > sc.posX[0]):
             sc.MoveSnake(4)
         else:
-            sc.MoveSnake(3)        
+            sc.MoveSnake(3) 
+
+def inputToDirection(direc: int):
+    direction = direc
 
 def main():
     rotationTreshhold = 75.
 
     controller = IMUController(TriggerMode.CALL_CHECK)
-    controller.register_trigger(sc.MoveSnake, {'direction' : 1}, controller.rot_x, rotationTreshhold, ThresholdType.HIGHER)
-    controller.register_trigger(sc.MoveSnake, {'direction' : 2}, controller.rot_x, -rotationTreshhold, ThresholdType.LOWER)
-    controller.register_trigger(sc.MoveSnake, {'direction' : 3}, controller.rot_y, -rotationTreshhold, ThresholdType.LOWER)
-    controller.register_trigger(sc.MoveSnake, {'direction' : 4}, controller.rot_y, rotationTreshhold, ThresholdType.HIGHER)
+    controller.register_trigger(inputToDirection, {'direc' : 1}, controller.rot_x, rotationTreshhold, ThresholdType.HIGHER)
+    controller.register_trigger(inputToDirection, {'direc' : 2}, controller.rot_x, -rotationTreshhold, ThresholdType.LOWER)
+    controller.register_trigger(inputToDirection, {'direc' : 3}, controller.rot_y, -rotationTreshhold, ThresholdType.LOWER)
+    controller.register_trigger(inputToDirection, {'direc' : 4}, controller.rot_y, rotationTreshhold, ThresholdType.HIGHER)
 
     gameRunning = True
     sleepTime = 0.5
@@ -90,7 +94,7 @@ def main():
         for i in range(0, len(sc.posX)):
             pixelArray[sc.posX[i]][sc.posY[i]][1] = 255
             
-        #sc.MoveSnake(4)
+        sc.MoveSnake(direction)
         #SnakeAutoPilot()
 
         controller.check_triggers()
