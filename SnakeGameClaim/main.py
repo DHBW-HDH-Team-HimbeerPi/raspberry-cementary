@@ -59,13 +59,12 @@ def SnakeAutoPilot():
 def main():
 
 
-    controller = IMUController(TriggerMode.call_check)
-    controller.register_trigger(sc.MoveSnake, {'direction' : 1}, input.rot_x, 0.3, ThresholdType.higher)
-    controller.register_trigger(sc.MoveSnake, {'direction' : 2}, input.rot_x, 0.3, ThresholdType.lower)
-    controller.register_trigger(sc.MoveSnake, {'direction' : 3}, input.rot_y, 0.3, ThresholdType.higher)
-    controller.register_trigger(sc.MoveSnake, {'direction' : 4}, input.rot_y, 0.3, ThresholdType.lower)
+    controller = IMUController(TriggerMode.CALL_CHECK)
+    controller.register_trigger(sc.MoveSnake, {'direction' : 1}, controller.rot_x, 0.3, ThresholdType.HIGHER)
+    controller.register_trigger(sc.MoveSnake, {'direction' : 2}, controller.rot_x, 0.3, ThresholdType.LOWER)
+    controller.register_trigger(sc.MoveSnake, {'direction' : 3}, controller.rot_y, 0.3, ThresholdType.HIGHER)
+    controller.register_trigger(sc.MoveSnake, {'direction' : 4}, controller.rot_y, 0.3, ThresholdType.LOWER)
 
-    gameRunning = True
     gameRunning = True
     sleepTime = 0.5
     CreateGamefield()
@@ -92,7 +91,9 @@ def main():
             pixelArray[sc.posX[i]][sc.posY[i]][1] = 255
             
         #sc.MoveSnake(4)
-        SnakeAutoPilot()
+        #SnakeAutoPilot()
+
+        controller.check_triggers()
 
         try:
             OutputFramework.setWindow(pixelArray)
