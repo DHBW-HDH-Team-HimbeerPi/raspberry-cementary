@@ -57,7 +57,7 @@ def SnakeAutoPilot():
             sc.MoveSnake(3)        
 
 def main():
-    rotationTreshhold = 8
+    rotationTreshhold = 75
 
     controller = IMUController(TriggerMode.CALL_CHECK)
     controller.register_trigger(sc.MoveSnake, {'direction' : 1}, controller.rot_x, rotationTreshhold, ThresholdType.HIGHER)
