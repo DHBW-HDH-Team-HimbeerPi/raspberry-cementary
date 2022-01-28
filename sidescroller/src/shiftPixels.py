@@ -20,7 +20,7 @@ def shiftPlayerDown(pixelArray: list):
     border = False
     for x in range(0, len(pixelArray[0])):
         for y in range(0, len(pixelArray[0])):
-            x16 = 16-x
+            x16 = 15-x
             if (pixelArray[x16][y][3] == 1):
                 if(x16 == 15):
                     border = True
