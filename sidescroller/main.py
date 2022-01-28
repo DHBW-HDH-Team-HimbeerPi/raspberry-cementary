@@ -27,7 +27,7 @@ def main():
     add(pixelArray, dimensions(Sprites.mapPlatform.value), True)
     running = True
     try:
-        rotationTreshold = 0.8
+        rotationTreshold = 0.35
         controller = IMUController(TriggerMode.CALL_CHECK)
         controller.register_trigger(inputToDirection, {'dir' : Directions.up.value, 'pixelArray' : pixelArray}, controller.mov_x, rotationTreshold, ThresholdType.HIGHER)
         controller.register_trigger(inputToDirection, {'dir' : Directions.down.value, 'pixelArray' : pixelArray}, controller.mov_x, -rotationTreshold, ThresholdType.LOWER)
@@ -45,7 +45,7 @@ def main():
         except NameError:
             showUH(pixelArray, PIXELS)
         
-        time.sleep(0.2)  #24 fps
+        time.sleep(1/24)  #24 fps
 
 if __name__ == "__main__":
     main()
