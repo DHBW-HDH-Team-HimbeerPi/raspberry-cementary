@@ -35,7 +35,7 @@ def checkalive(pixelArray):
     return False
 
 
-def playermovement(velocity)
+def playermovementv(velocity):
     walllocation[5]=velocity
 
 
@@ -96,16 +96,18 @@ def movepixelleft(ausgabe,x,y):
 
 
 ctrl = IMUController(TriggerMode.CALL_CHECK)
-ctrl.register_trigger(playermovementv, {'velocity' : 1 }, ctrl.rot_x, 50., ThresholdType.HIGHER)
-ctrl.register_trigger(playermovementv, {'velocity' : -1 }, ctrl.rot_x, -50., ThresholdType.LOWER)
+ctrl.register_trigger(playermovementv, {'velocity' : 1 }, ctrl.rot_x, 0.8, ThresholdType.HIGHER)
+ctrl.register_trigger(playermovementv, {'velocity' : -1 }, ctrl.rot_x, -0.8, ThresholdType.LOWER)
 pixelArray = np.full((16 , 16, 3), 0)
 walllocation = [16,28,40,0,8,0]
 pixelArray[3][8][0] = 250
 for u in range (240):
     
     movewall(pixelArray,walllocation)
+    playermovement()
+    OutputFramework.setWindow(pixelArray)
     time.sleep(0.1/math.log(walllocation[3]+2,15)/2)
-playermovement
+    playermovement()
     time.sleep(0.1/math.log(walllocation[3]+2,15)/2)
     #os.system('cls')
     ctrl.check_triggers()
