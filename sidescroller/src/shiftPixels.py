@@ -38,7 +38,7 @@ def walkRight(pixelArray: list):
     for x in range(len(pixelArray)):
         for y in range(len(pixelArray)):
             y16 = 15-y
-            if (pixelArray[x][y16][3] == 1):
+            if (pixelArray[x][y16][3] >= 1):
                 if(y16 == 15):
                     border = True
                     break
@@ -53,7 +53,7 @@ def walkRight(pixelArray: list):
 def walkLeft(pixelArray: list):
     for x in range(len(pixelArray)):
         for y in range(1, len(pixelArray[0])):
-            if (pixelArray[x][y][3] != 0):
+            if (pixelArray[x][y][3] >= 1):
                 pixelArray[x][y-1] = pixelArray[x][y]
                 pixelArray[x][y][0] = 0  
                 pixelArray[x][y][1] = 0  
