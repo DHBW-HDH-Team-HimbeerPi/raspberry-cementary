@@ -6,9 +6,10 @@ def shiftPixelsY(pixelArray: list):
                 pixelArray[x][y-1] = pixelArray[x][y]
 
 def shiftPlayerUp(pixelArray: list):
-    for x in range(16):
-        for y in range(1, 16):
-            if (pixelArray[x][y][3] == 1):
+    rng = len(pixelArray[0])
+    for x in range(rng):
+        for y in range(1, rng):
+            if (pixelArray[x][y][3] == 1 and x != rng):
                 pixelArray[x-1][y] = pixelArray[x][y]
                 pixelArray[x][y][0] = 0  
                 pixelArray[x][y][1] = 0  
@@ -17,10 +18,11 @@ def shiftPlayerUp(pixelArray: list):
 
 def shiftPlayerDown(pixelArray: list):
     border = False
-    for x in range(0, len(pixelArray[0])):
-        for y in range(0, len(pixelArray[0])):
+    rng = len(pixelArray[0])
+    for x in range(rng):
+        for y in range(rng):
             x16 = 15-x
-            if (pixelArray[x16][y][3] == 1):
+            if (pixelArray[x16][y][3] == 1 and x16 != 15):
                 if(x16 == 15):
                     border = True
                     break
@@ -33,9 +35,10 @@ def shiftPlayerDown(pixelArray: list):
             break
 
 def walkRight(pixelArray: list):
+    rng = len(pixelArray)
     border = False
-    for x in range(len(pixelArray)):
-        for y in range(len(pixelArray)):
+    for x in range(rng):
+        for y in range(rng):
             y16 = 15-y
             if (pixelArray[x][y16][3] == 1):
                 if(y16 == 15):
@@ -50,11 +53,12 @@ def walkRight(pixelArray: list):
             break
 
 def walkLeft(pixelArray: list):
+    rng = len(pixelArray)
     border = False
-    for x in range(len(pixelArray)):
-        for y in range(1, len(pixelArray[0])):
+    for x in range(rng):
+        for y in range(len(pixelArray[0])):
             if (pixelArray[x][y][3] == 1):
-                if((y-1) == 0):
+                if(y == 0):
                     border = True
                     break
                 pixelArray[x][y-1] = pixelArray[x][y]
