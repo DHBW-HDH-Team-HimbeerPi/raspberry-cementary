@@ -55,7 +55,7 @@ def walkLeft(pixelArray: list):
     for x in range(len(pixelArray)):
         for y in range(1, len(pixelArray[0])):
             if (pixelArray[x][y][3] == 1):
-                if(y == 0):
+                if((y-1) == 0):
                     border = True
                     break
                 pixelArray[x][y-1] = pixelArray[x][y]
