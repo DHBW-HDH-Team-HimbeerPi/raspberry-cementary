@@ -7,6 +7,7 @@ from src.spriteReader import dimensions
 from src.sprites import Sprites
 from src.directions import Directions
 from src.sanitizePixelArray import sanatizeArray
+from src.input import inputToDirection
 try:
     from output_framework.output_framework import OutputFramework 
     from input_framework.imu_controller import IMUController
