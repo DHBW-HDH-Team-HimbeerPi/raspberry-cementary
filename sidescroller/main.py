@@ -22,9 +22,7 @@ def main():
     add(pixelArray, joe.dimensions(), False)
     add(pixelArray, dimensions(Sprites.mapStairs.value), True)
     add(pixelArray, dimensions(Sprites.mapPlatform.value), True)
-    #show(pixelArray)
     running = True
-    times = 0
 
     while running:
         #events/input:
@@ -34,7 +32,7 @@ def main():
         running = shiftPixelsY(pixelArray)
         #draw:
         #OutputFramework.setWindow(pixelArray)
-        time.sleep(0.25)  #24 fps
+        time.sleep(0.2)  #24 fps
 
 if __name__ == "__main__":
     main()
