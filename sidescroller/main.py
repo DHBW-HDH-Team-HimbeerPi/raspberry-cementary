@@ -41,9 +41,10 @@ def main():
         #draw:
         try:
             OutputFramework.setWindow(sanatizeArray(pixelArray))
+            controller.check_triggers()
         except NameError:
             showUH(pixelArray, PIXELS)
-        controller.check_triggers()
+        
         time.sleep(0.2)  #24 fps
 
 if __name__ == "__main__":
