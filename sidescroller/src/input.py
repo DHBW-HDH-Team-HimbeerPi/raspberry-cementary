@@ -1,4 +1,4 @@
-from directions import Directions
+from .directions import Directions
 from src.shiftPixels import shiftPlayerDown, shiftPlayerUp, shiftPixelsY
 
 def inputToDirection(dir, pixelArray):
