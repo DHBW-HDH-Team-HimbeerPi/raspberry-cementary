@@ -1,5 +1,5 @@
 from .directions import Directions
-from src.shiftPixels import shiftPlayerDown, shiftPlayerUp, shiftPixelsY
+from src.shiftPixels import shiftPlayerDown, shiftPlayerUp, walkRight, walkLeft
 
 def inputToDirection(dir, pixelArray):
     if(dir == Directions.up.value):
@@ -7,6 +7,6 @@ def inputToDirection(dir, pixelArray):
     elif(dir == Directions.down.value):
         shiftPlayerUp(pixelArray)
     elif(dir == Directions.left.value):
-        shiftPixelsY
+        walkLeft(pixelArray)
     else:
-        print("bruh")
+        walkRight(pixelArray)

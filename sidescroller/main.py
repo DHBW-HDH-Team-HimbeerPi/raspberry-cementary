@@ -1,5 +1,6 @@
 import time
 import numpy as np
+from src.shiftPixels import walkLeft, walkRight, shiftPixelsY
 from src.addObject import add
 from src.player import Player
 from src.unicornHead import showUH
@@ -44,8 +45,7 @@ def main():
             controller.check_triggers()
         except NameError:
             showUH(pixelArray, PIXELS)
-        
-        time.sleep(1/24)  #24 fps
+        time.sleep(1)  #24 fps
 
 if __name__ == "__main__":
     main()
