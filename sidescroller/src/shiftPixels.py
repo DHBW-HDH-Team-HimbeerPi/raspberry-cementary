@@ -7,8 +7,8 @@ def shiftPixelsY(pixelArray: list):
     return True
 
 def shiftPlayerUp(pixelArray: list):
-    for x in range(len(pixelArray[0])):
-        for y in range(1, len(pixelArray[0])):
+    for x in range(16):
+        for y in range(1, 16):
             if (pixelArray[x][y][3] == 1):
                 pixelArray[x-1][y] = pixelArray[x][y]
                 pixelArray[x][y][0] = 0  
