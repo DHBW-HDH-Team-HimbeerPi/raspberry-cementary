@@ -29,10 +29,10 @@ def main():
     try:
         rotationTreshold = 0.8
         controller = IMUController(TriggerMode.CALL_CHECK)
-        controller.register_trigger(inputToDirection, {'dir' : Directions.up.value}, controller.mov_x, rotationTreshold, ThresholdType.HIGHER)
-        controller.register_trigger(inputToDirection, {'dir' : Directions.down.value}, controller.mov_x, -rotationTreshold, ThresholdType.LOWER)
-        controller.register_trigger(inputToDirection, {'dir' : Directions.left.value}, controller.mov_y, -rotationTreshold, ThresholdType.LOWER)
-        controller.register_trigger(inputToDirection, {'dir' : Directions.right.value}, controller.mov_y, rotationTreshold, ThresholdType.HIGHER)
+        controller.register_trigger(inputToDirection, {'dir' : Directions.up.value, 'pixelArray' : pixelArray}, controller.mov_x, rotationTreshold, ThresholdType.HIGHER)
+        controller.register_trigger(inputToDirection, {'dir' : Directions.down.value, 'pixelArray' : pixelArray}, controller.mov_x, -rotationTreshold, ThresholdType.LOWER)
+        controller.register_trigger(inputToDirection, {'dir' : Directions.left.value, 'pixelArray' : pixelArray}, controller.mov_y, -rotationTreshold, ThresholdType.LOWER)
+        controller.register_trigger(inputToDirection, {'dir' : Directions.right.value, 'pixelArray' : pixelArray}, controller.mov_y, rotationTreshold, ThresholdType.HIGHER)
     except NameError:
         print("no controller found!")
 
