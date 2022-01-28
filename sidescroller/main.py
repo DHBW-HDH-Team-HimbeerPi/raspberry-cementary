@@ -9,9 +9,9 @@ from src.directions import Directions
 from src.sanitizePixelArray import sanatizeArray
 from src.input import inputToDirection
 try:
-    from output_framework.output_framework import OutputFramework 
-    from input_framework.imu_controller import IMUController
-    from input_framework.interface import ThresholdType, TriggerMode
+    from output_framework.output_framework import OutputFramework # type: ignore
+    from input_framework.imu_controller import IMUController # type: ignore
+    from input_framework.interface import ThresholdType, TriggerMode # type: ignore
 except ImportError:
     print("no imports found")
 
