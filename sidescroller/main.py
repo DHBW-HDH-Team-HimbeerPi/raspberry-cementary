@@ -6,6 +6,7 @@ from src.unicornHead import showUH
 from src.spriteReader import dimensions
 from src.sprites import Sprites
 from src.directions import Directions
+from src.sanitizePixelArray import sanatizeArray
 try:
     from output_framework.output_framework import OutputFramework 
     from input_framework.imu_controller import IMUController
@@ -37,7 +38,7 @@ def main():
         #update:
         #draw:
         try:
-            OutputFramework.setWindow(pixelArray)
+            OutputFramework.setWindow(sanatizeArray(pixelArray))
         except NameError:
             showUH(pixelArray, PIXELS)
         time.sleep(0.2)  #24 fps
