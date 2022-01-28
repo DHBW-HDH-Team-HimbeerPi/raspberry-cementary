@@ -1,20 +1,21 @@
 import time
 import numpy as np
-from src.shiftPixels import shiftPlayerDown, shiftPlayerUp, shiftPixelsY
 from src.addObject import add
 from src.player import Player
 from src.unicornHead import showUH
 from src.spriteReader import dimensions
 from src.sprites import Sprites
-#from output_framework.output_framework import OutputFramework
-#from input_framework.imu_controller import IMUController
-#from input_framework.interface import ThresholdType, TriggerMode
+from src.directions import Directions
+try:
+    from output_framework.output_framework import OutputFramework 
+    from input_framework.imu_controller import IMUController
+    from input_framework.interface import ThresholdType, TriggerMode
+except ImportError:
+    print("no imports found")
 
 PIXELS = 16
 pixelArray = np.full((PIXELS, PIXELS*2, 4), 0)
 pixelArray[10][10][0] = 255
-#ctrl = IMUController(TriggerMode.CALL_CHECK)
-#ctrl.register_trigger(movePlayerRight, {'velocity' : 1 }, ctrl.mov_y, 0.3, ThresholdType.HIGHER)
 
 def main():
 
@@ -23,15 +24,22 @@ def main():
     add(pixelArray, dimensions(Sprites.mapStairs.value), True)
     add(pixelArray, dimensions(Sprites.mapPlatform.value), True)
     running = True
+    try:
+        controller = IMUController(TriggerMode.CALL_CHECK)
+        controller.register_trigger(inputToDirection, {'dir' : Directions.up.value}, controller.mov_x, rotationTreshold, ThresholdType.HIGHER)
+        controller.register_trigger(inputToDirection, {'dir' : Directions.down.value}, controller.mov_x, -rotationTreshold, ThresholdType.LOWER)
+        controller.register_trigger(inputToDirection, {'dir' : Directions.left.value}, controller.mov_y, -rotationTreshold, ThresholdType.LOWER)
+        controller.register_trigger(inputToDirection, {'dir' : Directions.right.value}, controller.mov_y, rotationTreshold, ThresholdType.HIGHER)
+    except NameError:
+        print("no controller found!")
 
     while running:
-        #events/input:
-        #ctrl.check_triggers()
         #update:
-        showUH(pixelArray, PIXELS)
-        running = shiftPixelsY(pixelArray)
         #draw:
-        #OutputFramework.setWindow(pixelArray)
+        try:
+            OutputFramework.setWindow(pixelArray)
+        except NameError:
+            showUH(pixelArray, PIXELS)
         time.sleep(0.2)  #24 fps
 
 if __name__ == "__main__":
