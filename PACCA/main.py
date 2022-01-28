@@ -112,7 +112,8 @@ def moveplayer(dira):
 
 createLevel()
 show(pixelArray)
-os.system('cls')
+if debug == 1:
+    os.system('cls')
 
 ctrl = IMUController()
 threshold = 0.35
@@ -125,11 +126,11 @@ has_been_triggered = 0
 for x in range(100):
 
     has_been_triggered = 0
-    time.sleep(0.1)
-    moveplayer(random.randrange(4) + 1)
-    time.sleep(0.1)
-    os.system('cls')
+    time.sleep(0.4)
     ctrl.check_triggers()
-    if debug != 1:
+    if debug == 1:
+        moveplayer(random.randrange(4) + 1)
+        os.system('cls')
+        show(pixelArray)
+    else:
         OutputFramework.setWindow(pixelArray)
-    show(pixelArray)
