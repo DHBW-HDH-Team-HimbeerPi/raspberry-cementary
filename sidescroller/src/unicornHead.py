@@ -1,4 +1,7 @@
-from unicorn_hat_sim import unicornhathd as uh
+try:
+    from unicorn_hat_sim import unicornhathd as uh
+except ImportError:
+    print("no uh sim!")
 
 def showUH(pixelArray: list, pixels):
     uh.rotation(270)
