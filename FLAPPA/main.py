@@ -41,13 +41,13 @@ def playermovementv(velocity):
 
 
 def playermovement(velocity):
-    pixelArray[3][round(walllocation[4])][0] = 0
+    pixelArray[3][walllocation[4]][0] = 0
     walllocation[4]+=velocity
     if (walllocation[4] > 15 ):
         walllocation[4] =15
     if (walllocation[4] < 0 ):
         walllocation[4] = 0
-    pixelArray[3][round(walllocation[4])][0] = 250
+    pixelArray[3][walllocation[4]][0] = 250
 
 
 def movewall(pixelArray,wallocation):
@@ -106,10 +106,12 @@ for u in range (240):
     movewall(pixelArray,walllocation)
     OutputFramework.setWindow(pixelArray)
     ctrl.check_triggers()
-    time.sleep(0.1/math.log(walllocation[3]+2,15)/2)
+    time.sleep(0.1/math.log(walllocation[3]+2,15)/8)
+    if (checkalive(pixelArray)==False):
+        break
     OutputFramework.setWindow(pixelArray)
     ctrl.check_triggers()
-    time.sleep(0.1/math.log(walllocation[3]+2,15)/2)
+    time.sleep(0.1/math.log(walllocation[3]+2,15)/8)
     OutputFramework.setWindow(pixelArray)
     #show(pixelArray)
     if (checkalive(pixelArray)==False):
