@@ -1,4 +1,3 @@
-from pygame import PixelArray
 from directions import Directions
 from src.shiftPixels import shiftPlayerDown, shiftPlayerUp, shiftPixelsY
 
