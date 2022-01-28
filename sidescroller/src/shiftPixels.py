@@ -51,14 +51,20 @@ def walkRight(pixelArray: list):
             break
 
 def walkLeft(pixelArray: list):
+    border = False
     for x in range(len(pixelArray)):
         for y in range(1, len(pixelArray[0])):
             if (pixelArray[x][y][3] == 1):
+                if(y == 0):
+                    border = True
+                    break
                 pixelArray[x][y-1] = pixelArray[x][y]
                 pixelArray[x][y][0] = 0  
                 pixelArray[x][y][1] = 0  
                 pixelArray[x][y][2] = 0
-                pixelArray[x][y][3] = 0 
+                pixelArray[x][y][3] = 0
+        if(border):
+            break 
 
 
 
