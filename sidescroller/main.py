@@ -18,7 +18,7 @@ except ImportError:
 
 PIXELS = 16
 pixelArray = np.full((PIXELS, PIXELS*2, 4), 0)
-pixelArray[10][10][0] = 255
+pixelArray[][0][0] = 255
 
 def main():
 
