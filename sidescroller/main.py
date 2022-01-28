@@ -27,6 +27,7 @@ def main():
     add(pixelArray, dimensions(Sprites.mapPlatform.value), True)
     running = True
     try:
+        rotationTreshold = 0.8
         controller = IMUController(TriggerMode.CALL_CHECK)
         controller.register_trigger(inputToDirection, {'dir' : Directions.up.value}, controller.mov_x, rotationTreshold, ThresholdType.HIGHER)
         controller.register_trigger(inputToDirection, {'dir' : Directions.down.value}, controller.mov_x, -rotationTreshold, ThresholdType.LOWER)
