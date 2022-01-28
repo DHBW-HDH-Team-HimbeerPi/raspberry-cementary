@@ -42,7 +42,7 @@ def playermovementv(velocity):
 
 def playermovement():
     pixelArray[3][round(walllocation[4])][0] = 0
-    walllocation[4]+=walllocation[5]*0.5
+    walllocation[4]+=walllocation[5]*0.4
     if (walllocation[4] > 15 ):
         walllocation[4] =15
     if (walllocation[4] < 0 ):
@@ -108,6 +108,10 @@ for u in range (240):
     OutputFramework.setWindow(pixelArray)
     time.sleep(0.1/math.log(walllocation[3]+2,15)/2)
     playermovement()
+    OutputFramework.setWindow(pixelArray)
+    time.sleep(0.1/math.log(walllocation[3]+2,15)/2)
+    playermovement()
+    OutputFramework.setWindow(pixelArray)
     time.sleep(0.1/math.log(walllocation[3]+2,15)/2)
     #os.system('cls')
     ctrl.check_triggers()
