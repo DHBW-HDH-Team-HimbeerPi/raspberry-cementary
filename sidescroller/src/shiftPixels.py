@@ -9,7 +9,7 @@ def shiftPlayerUp(pixelArray: list):
     rng = len(pixelArray)
     for x in range(rng):
         for y in range(1, rng):
-            if (pixelArray[x][y][3] == 1 and x < rng):
+            if (pixelArray[x][y][3] == 1 and x > 0):
                 pixelArray[x-1][y] = pixelArray[x][y]
                 pixelArray[x][y][0] = 0  
                 pixelArray[x][y][1] = 0  
