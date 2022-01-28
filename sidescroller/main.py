@@ -45,7 +45,7 @@ def main():
             controller.check_triggers()
         except NameError:
             showUH(pixelArray, PIXELS)
-        time.sleep(1/48)  #24 fps
+        #time.sleep(1/48)  #24 fps
 
 if __name__ == "__main__":
     main()
