@@ -1,8 +1,14 @@
 import csv
 from pathlib import Path
 import numpy as np
+import time
+import random
+from input_framework.imu_controller import IMUController
+from input_framework.interface import ThresholdType, TriggerMode
 
 
+from output_framework.output_framework import OutputFramework
+import os
 def show(ausgabe: list):
     length = len(ausgabe)
     for y in range(length):
@@ -13,7 +19,7 @@ def show(ausgabe: list):
                     print("0", end =" ")
                     printed = True
                     break
-                if(ausgabe[x][y][color] == 250):
+                if(ausgabe[x][y][color] == 255):
                     print("1", end =" ")
                     printed = True
                     break
@@ -27,9 +33,11 @@ def movepixelleft(ausgabe,x,y):
         ausgabe[x][y][color] = 0;
 
 pixelArray = np.full((16 , 16, 3), 0)
-walllocation = [16,28,40,0]
-pixelArray[3][8][0] = 250
-
+global lastdir
+lastdir=0
+playerposition=[0,0]
+pixelArray[0][0][0]=255
+pixelArray[0][0][1]=255
 def createLevel():
     basePath = Path(__file__).parent
     filePath = (basePath / ("level.csv")).resolve()
@@ -43,7 +51,69 @@ def createLevel():
                 pixelArray[x][y][0] = 91
                 pixelArray[x][y][1] = 58
                 pixelArray[x][y][2] = 41
-pixelArray = np.full((16 , 16, 3), 0)
+def moveplayer(dira):
+    dirb = dira
+    moved = True
+    for x in range (2):
+        match dirb:
+            case 1:
+                if(playerposition[1]<15 and pixelArray[playerposition[0]][playerposition[1]+1][0]==0):
+                    pixelArray[playerposition[0]][playerposition[1]+1][0]=255
+                    pixelArray[playerposition[0]][playerposition[1]+1][1]=255
+                    pixelArray[playerposition[0]][playerposition[1]][0]=0
+                    pixelArray[playerposition[0]][playerposition[1]][1]=0
+                    playerposition[1]+=1
+                    dirb=0
+                else: 
+                    dirb=lastdir
+            case 2:
+                if(playerposition[1]>0 and pixelArray[playerposition[0]][playerposition[1]-1][0]==0):
+                    pixelArray[playerposition[0]][playerposition[1]-1][0]=255
+                    pixelArray[playerposition[0]][playerposition[1]-1][1]=255
+                    pixelArray[playerposition[0]][playerposition[1]][0]=0
+                    pixelArray[playerposition[0]][playerposition[1]][1]=0
+                    playerposition[1]-=1
+                    dirb=0
+                else: 
+                    dirb=lastdir
+            case 3:
+                if(playerposition[0]<15 and pixelArray[playerposition[0+1]][playerposition[1]][0]==0):
+                    pixelArray[playerposition[0+1]][playerposition[1]][0]=255
+                    pixelArray[playerposition[0+1]][playerposition[1]][1]=255
+                    pixelArray[playerposition[0]][playerposition[1]][0]=0
+                    pixelArray[playerposition[0]][playerposition[1]][1]=0
+                    playerposition[0]+=1
+                    dirb=0
+                else:
+                    dirb=lastdir
+            case 4:
+                if(playerposition[0]>0 and pixelArray[playerposition[0-1]][playerposition[1]][0]==0):
+                    pixelArray[playerposition[0-1]][playerposition[1]][0]=255
+                    pixelArray[playerposition[0-1]][playerposition[1]][1]=255
+                    pixelArray[playerposition[0]][playerposition[1]][0]=0
+                    pixelArray[playerposition[0]][playerposition[1]][1]=0
+                    playerposition[0]-=1
+                    dirb=0
+                else:
+                    dirb=lastdir
+            case _: 
+                dirb=lastdir
+
+
+
+
+
 show(pixelArray)
 createLevel()
 show(pixelArray)
+
+for x in range(100):
+    time.sleep(0.1)
+    moveplayer(random.randrange(4)+1)
+    time.sleep(0.1)
+    #os.system('cls')
+    #ctrl.check_triggers()
+    OutputFramework.setWindow(pixelArray)
+    #show(pixelArray)
+    
+
