@@ -105,17 +105,17 @@ def main():
     ctrl.register_trigger(playermovement, {'velocity' : 1 }, ctrl.mov_x, 0.35, ThresholdType.HIGHER)
     ctrl.register_trigger(playermovement, {'velocity' : -1 }, ctrl.mov_x, -0.35, ThresholdType.LOWER)
     pixelArray = np.full((16 , 16, 3), 0)
-walllocation = [16,28,40,0,0,0,0,0,0]
+    walllocation = [16,28,40,0,0,0,0,0,0]
 
-global playerposition 
-playerpostion =8
+    global playerposition
+    playerpostion =8
     pixelArray[3][8][0] = 250
     for u in range (240):
 
         movewall(pixelArray,walllocation)
         OutputFramework.setWindow(pixelArray)
         ctrl.check_triggers()
-    time.sleep(0.1/math.log(score+2,15)/8)
+        time.sleep(0.1/math.log(score+2,15)/8)
         if (checkalive(pixelArray)==False):
             break
         OutputFramework.setWindow(pixelArray)
@@ -124,7 +124,7 @@ playerpostion =8
             break
         OutputFramework.setWindow(pixelArray)
         ctrl.check_triggers()
-    time.sleep(0.1/math.log(score+2,15)/8)
+        time.sleep(0.1/math.log(score+2,15)/8)
         OutputFramework.setWindow(pixelArray)
         #show(pixelArray)
         if (checkalive(pixelArray)==False):
