@@ -12,7 +12,7 @@ class Player():
         self.colorG = rand.randrange(100, 255)
         self.colorB = rand.randrange(100, 255)
         self.posX = 0
-        self.poxY = 0
+        self.posY = 0
         add(pixelArray, self.dimensions(), False)
 
     def setPixelColor(self, pixelArray, x, y, r, g, b):
@@ -37,9 +37,7 @@ class Player():
                     else:
                         self.setPixelColorSelf(pixelArray, x, y)
         return pixelArray
-    
-    def getPosition(self, pixelArray):
-        for x in range(len(pixelArray)):
-            for y in range(len(pixelArray[0])):
-                if(pixelArray[x][y][3] == 2):
-                    self.position = x
+
+    def updatePosition(self, x, y):
+        self.posX = x
+        self.posY = y

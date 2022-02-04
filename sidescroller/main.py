@@ -19,10 +19,10 @@ pixelArray[0][0][0] = 255
 
 def main():
 
-    joe = Player(pixelArray)  # create Player
-    map = Map()     # create Map
-    
-    print(joe.posX, joe.poxY)
+    joe = Player(pixelArray)    # create Player
+    map = Map()                 # create Map
+
+    print(joe.posX, joe.posY)
 
     #add(pixelArray, dimensions(Sprites.mapStairs.value), True)
     running = True
