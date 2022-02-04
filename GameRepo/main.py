@@ -2,7 +2,7 @@ import subprocess
 from output_framework.output_framework import OutputFramework as oF
 from input_framework.imu_controller import IMUController
 from input_framework.interface import ThresholdType, TriggerMode
-
+import time
 
 class gameChooser:
 
@@ -11,7 +11,7 @@ class gameChooser:
         self.gamePathes = ["FLAPPA", "PACCA", "Pong", "sidescroller", "SnakeGameClaim"]
         self.gameNames = ["Flappy Dot", "Pacman", "Pong", "Sidescroller", "Snake"]
         self.check = 0
-        self.initializeInput()
+        #self.initializeInput()
         self.run()
 
     def inputToDirection(self, direc: int):
@@ -38,7 +38,8 @@ class gameChooser:
     def run(self):
         currentGame = 0
         while self.check == 0:
-            oF.showText(self.gameNames[currentGame], 255, 255, 255, 14, 50, 50)
+            oF.showText(self.gameNames[currentGame], 255, 255, 255, 14, 1, 0)
+            time.sleep(5)
 
 
 
