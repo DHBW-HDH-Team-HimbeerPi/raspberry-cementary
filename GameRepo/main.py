@@ -1,7 +1,7 @@
 from output_framework.output_framework import OutputFramework as oF
 from input_framework.imu_controller import IMUController
 from input_framework.interface import ThresholdType, TriggerMode
-#from Pong.files import main.
+from FLAPPA.main import main as flappy
 #from PACCA import main as pacman
 from Pong import main as pong
 from sidescroller import main as amogus
@@ -44,8 +44,8 @@ class gameChooser:
                 controller.check_triggers()
                 self.checkInput()
                 time.sleep(0.5)
-#            if self.currentGame == 0:
-#                flappy()
+            if self.currentGame == 0:
+                flappy()
 #            if self.currentGame == 1:
 #                pacman.main()
             if self.currentGame == 2:
