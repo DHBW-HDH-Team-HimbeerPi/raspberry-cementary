@@ -1,0 +1,1 @@
+pixelArray = np.full((16 , 16, 4), 0)

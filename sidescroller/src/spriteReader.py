@@ -2,6 +2,7 @@ from pathlib import Path
 import csv
 import numpy as np
 import random as rand
+import math
 
 def readSprite(fileName, readMap):
     basePath = Path(__file__).parent
@@ -27,11 +28,14 @@ def setRandomPixelColor(pixelArray, x, y):
     pixelArray[x][y][2] = rand.randrange(100, 255)
     pixelArray[x][y][3] = 2
 
-def dimensions(fileName):
+def dimensions(fileName, quadrant):
+    pixels = 16
+    x = math.floor(quadrant/4)
+    y = quadrant % 4
     sprite = readSprite(fileName, False)
-    pixelArray = np.full((16 , 16, 4), 0)
-    for x in range(0, len(pixelArray)):
-        for y in range(0, len(pixelArray[0])):
+    pixelArray = np.full((pixels, pixels, 4), 0)
+    for x in range(pixels):
+        for y in range(pixels):
             if(int(sprite[x][y]) != 0):
                 pixelArray[x][y] = int(sprite[x][y])
                 setRandomPixelColor(pixelArray, x, y)

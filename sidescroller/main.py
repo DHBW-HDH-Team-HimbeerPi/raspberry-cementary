@@ -22,8 +22,6 @@ def main():
     joe = Player(pixelArray)    # create Player
     map = Map()                 # create Map
 
-    print(joe.posX, joe.posY)
-
     #add(pixelArray, dimensions(Sprites.mapStairs.value), True)
     running = True
     try:
@@ -37,7 +35,7 @@ def main():
         print("No controller found!")
 
     while running:
-        #map.updateMap(pixelArray, joe.posX)
+        map.updateMap(pixelArray, joe.posY)
         try:
             OutputFramework.setWindow(sanatizeArray(pixelArray), 180)
             controller.check_triggers()
