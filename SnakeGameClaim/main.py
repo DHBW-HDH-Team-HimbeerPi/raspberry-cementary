@@ -70,8 +70,8 @@ def main():
         controller = IMUController(TriggerMode.CALL_CHECK)
         controller.register_trigger(inputToDirection, {'direc' : 4}, controller.mov_x, rotationTreshold, ThresholdType.HIGHER)
         controller.register_trigger(inputToDirection, {'direc' : 3}, controller.mov_x, -rotationTreshold, ThresholdType.LOWER)
-        controller.register_trigger(inputToDirection, {'direc' : 2}, controller.mov_y, -rotationTreshold, ThresholdType.LOWER)
-        controller.register_trigger(inputToDirection, {'direc' : 1}, controller.mov_y, rotationTreshold, ThresholdType.HIGHER)
+        controller.register_trigger(inputToDirection, {'direc' : 1}, controller.mov_y, -rotationTreshold, ThresholdType.LOWER)
+        controller.register_trigger(inputToDirection, {'direc' : 2}, controller.mov_y, rotationTreshold, ThresholdType.HIGHER)
         autopilotOn = False
     except NameError:
         print("could NOT find controller")
