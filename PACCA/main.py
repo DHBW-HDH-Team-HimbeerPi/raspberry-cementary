@@ -1,4 +1,4 @@
-debug = 0
+debug = 1
 import csv
 from pathlib import Path
 import numpy as np

@@ -5,7 +5,7 @@ import math
 import os
 from input_framework.imu_controller import IMUController
 from input_framework.interface import ThresholdType, TriggerMode
-
+global difficulty
 
 from output_framework.output_framework import OutputFramework 
 
@@ -29,8 +29,8 @@ def show(ausgabe: list):
         print("")
 def checkalive(pixelArray):
     for y in range (15):
-        if(pixelArray[3][y][0]!=0):
-            return True
+        if(pixelArray[3][y][1]!=255):
+            if(wallocation[4]>=y and walllocation[4]<=y+difficulty+1)
     # eigenlich false
     return False
 
@@ -44,9 +44,9 @@ def playermovement(velocity):
     pixelArray[3][walllocation[4]][0] = 0
     walllocation[4]+=velocity
     if (walllocation[4] > 15 ):
-        walllocation[4] =15
+        exit
     if (walllocation[4] < 0 ):
-        walllocation[4] = 0
+        exit
     pixelArray[3][walllocation[4]][0] = 250
 
 
@@ -69,7 +69,7 @@ def movewall(pixelArray,wallocation):
 def createwall(pixelArray):
     r = random.randrange(11)
     i=0
-    
+    global difficulty   
     if walllocation[3]>10:
         difficulty = 2
     else:
