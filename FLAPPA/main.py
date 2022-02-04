@@ -51,7 +51,7 @@ def playermovement(velocity):
     pixelArray[3][playerposition][0] = 250
 
 
-def movewall(pixelArray,wallocation):
+def movewall(pixelArray,walllocation):
     global score
     for walls in range (3):
         if (walllocation[walls] == 0):
@@ -105,7 +105,7 @@ def main():
     ctrl.register_trigger(playermovement, {'velocity' : 1 }, ctrl.mov_x, 0.35, ThresholdType.HIGHER)
     ctrl.register_trigger(playermovement, {'velocity' : -1 }, ctrl.mov_x, -0.35, ThresholdType.LOWER)
     pixelArray = np.full((16 , 16, 3), 0)
-    walllocation = [16,28,40,0,0,0,0,0,0]
+    global walllocation = [16,28,40,0,0,0,0,0,0]
 
     global playerposition
     playerpostion =8
