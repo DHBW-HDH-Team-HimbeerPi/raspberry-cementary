@@ -30,7 +30,7 @@ def show(ausgabe: list):
 def checkalive(pixelArray):
     for y in range (15):
         if(pixelArray[3][y][1]!=255):
-            if(wallocation[4]>=y and walllocation[4]<=y+difficulty+1):
+            if(walllocation[4]>=y and walllocation[4]<=y+difficulty+1):
                 return True
             else:
                 return False
