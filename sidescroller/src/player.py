@@ -6,7 +6,7 @@ from .sprites import Sprites
 class Player:
 
     def __init__(self):
-        self.amogus = readSprite(Sprites.amogus.value)
+        self.amogus = readSprite(Sprites.amogus.value, False)
         self.colorR = rand.randrange(100, 255)
         self.colorG = rand.randrange(100, 255)
         self.colorB = rand.randrange(100, 255)

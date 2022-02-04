@@ -1,6 +1,4 @@
-import time
 import numpy as np
-from src.shiftPixels import walkLeft, walkRight, shiftPixelsY
 from src.addObject import add
 from src.player import Player
 from src.unicornHead import showUH
@@ -9,6 +7,7 @@ from src.sprites import Sprites
 from src.directions import Directions
 from src.sanitizePixelArray import sanatizeArray
 from src.input import inputToDirection
+from src.map import Map
 try:
     from output_framework.output_framework import OutputFramework # type: ignore
     from input_framework.imu_controller import IMUController # type: ignore
@@ -22,10 +21,12 @@ pixelArray[0][0][0] = 255
 
 def main():
 
-    joe = Player()
+    joe = Player()  # create Player
+    map = Map()     # create Map
     add(pixelArray, joe.dimensions(), False)
-    add(pixelArray, dimensions(Sprites.mapStairs.value), True)
-    add(pixelArray, dimensions(Sprites.mapPlatform.value), True)
+
+    #add(pixelArray, dimensions(Sprites.mapStairs.value), True)
+    #add(pixelArray, dimensions(Sprites.mapPlatform.value), True)
     running = True
     try:
         rotationTreshold = 0.35
@@ -35,9 +36,10 @@ def main():
         controller.register_trigger(inputToDirection, {'dir' : Directions.left.value, 'pixelArray' : pixelArray}, controller.mov_y, -rotationTreshold, ThresholdType.LOWER)
         controller.register_trigger(inputToDirection, {'dir' : Directions.right.value, 'pixelArray' : pixelArray}, controller.mov_y, rotationTreshold, ThresholdType.HIGHER)
     except NameError:
-        print("no controller found!")
+        print("No controller found!")
 
     while running:
+        map.updateMap(pixelArray)
         try:
             OutputFramework.setWindow(sanatizeArray(pixelArray), 180)
             controller.check_triggers()

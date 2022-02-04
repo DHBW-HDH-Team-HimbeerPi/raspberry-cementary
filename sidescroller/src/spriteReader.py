@@ -3,9 +3,13 @@ import csv
 import numpy as np
 import random as rand
 
-def readSprite(fileName):
+def readSprite(fileName, readMap):
     basePath = Path(__file__).parent
-    filePath = (basePath / ("../sprites/"+fileName)).resolve()
+    if(readMap):
+        filePath = (basePath / ("../maps/"+fileName)).resolve()
+    else:
+        filePath = (basePath / ("../sprites/"+fileName)).resolve()
+    
 
     with open(filePath) as file:
         sprite = [line for line in csv.reader(file)]
@@ -24,7 +28,7 @@ def setRandomPixelColor(pixelArray, x, y):
     pixelArray[x][y][3] = 2
 
 def dimensions(fileName):
-    sprite = readSprite(fileName)
+    sprite = readSprite(fileName, False)
     pixelArray = np.full((16 , 16, 4), 0)
     for x in range(0, len(pixelArray)):
         for y in range(0, len(pixelArray[0])):
