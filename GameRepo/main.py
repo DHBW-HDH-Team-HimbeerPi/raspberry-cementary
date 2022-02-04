@@ -12,14 +12,13 @@ class gameChooser:
         self.gameNames = ["Flappy Dot", "Pacman", "Pong", "Sidescroller", "Snake"]
         self.check = 0
         self.currentGame = 0
-        self.initializeInput()
         self.run()
 
     def inputToDirection(self, direc: int):
         global direction
         direction = direc
 
-    def initializeInput(self):
+    def run(self):
         rotationTreshold = 0.2
         self.inputToDirection(0)
         try:
@@ -35,16 +34,15 @@ class gameChooser:
                                         ThresholdType.HIGHER)
         except NameError:
             print("could NOT find controller")
-
-    def run(self):
         while self.check == 0:
             oF.showText(self.gameNames[self.currentGame], 255, 255, 255, 12, 0.001, 0)
+            controller.check_triggers()
             self.checkInput()
             time.sleep(0.5)
 
     def checkInput(self):
         global direction
-        self.check_triggers()
+
         if direction == 1:
             self.check = 1
         elif direction == 2:
