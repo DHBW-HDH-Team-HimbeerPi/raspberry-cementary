@@ -76,12 +76,12 @@ class Pong:
             self.alive = False
         else:
             if int(self.gameBall.xPosition) == 1 or int(self.gameBall.xPosition) == 14:
-                if int(self.gameBall.xPosition) == 1 and self.gameBall.yPosition >= self.leftPanel.yPosition and self.gameBall.yPosition <= (
+                if int(self.gameBall.xPosition) == 1 and int(self.gameBall.yPosition) >= self.leftPanel.yPosition and int(self.gameBall.yPosition) <= (
                         self.leftPanel.yPosition + self.leftPanel.size - 1):
                     self.gameBall.panelBounce(self.leftPanel)
                     self.score = self.score + 1
                 else:
-                    if int(self.gameBall.xPosition) == 14 and self.gameBall.yPosition >= self.rightPanel.yPosition and self.gameBall.yPosition <= (
+                    if int(self.gameBall.xPosition) == 14 and int(self.gameBall.yPosition) >= self.rightPanel.yPosition and int(self.gameBall.yPosition) <= (
                             self.rightPanel.yPosition + self.rightPanel.size - 1):
                         self.gameBall.panelBounce(self.leftPanel)
                         self.score = self.score + 1
