@@ -114,7 +114,7 @@ def main():
     walllocation = [16,28,40,0,0,0,0,0,0]
     playerpostion = 8
     pixelArray[3][8][0] = 250
-    
+
     for u in range (240):
 
         movewall(pixelArray,walllocation)
