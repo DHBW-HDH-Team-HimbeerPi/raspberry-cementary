@@ -1,10 +1,10 @@
-import ball
-import comPlayer
-import panel
+from files.ball import Ball
+from files.panel import Panel
 from output_framework.output_framework import OutputFramework as oF
 from input_framework.imu_controller import IMUController
 from input_framework.interface import ThresholdType, TriggerMode
 # from unicornhatsimulator import unicornhathd as uni
+from files.comPlayer import aiPlayer
 import numpy as np
 import time
 
@@ -12,12 +12,13 @@ import time
 class Pong:
 
     def __init__(self):
-        self.leftPanel = panel.Panel(1, 0, 0, 255)
-        self.rightPanel = panel.Panel(14, 0, 255, 0)
-        self.gameBall = ball.Ball()
+        self.leftPanel = Panel(1, 0, 0, 255)
+        self.rightPanel = Panel(14, 0, 255, 0)
+        self.gameBall = Ball()
         self.scoreLeft = 0
         self.scoreRight = 0
-        self.com = comPlayer.aiPlayer()
+        self.com = aiPlayer()
+        self.com2 = aiPlayer()
 
         self.play()
 
