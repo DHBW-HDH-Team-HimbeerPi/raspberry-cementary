@@ -1,7 +1,7 @@
 from output_framework.output_framework import OutputFramework as oF
 from input_framework.imu_controller import IMUController
 from input_framework.interface import ThresholdType, TriggerMode
-import main as flappy
+import FLAPPA.main as flappy
 #from PACCA import main as pacman
 from Pong import main as pong
 from sidescroller import main as amogus
