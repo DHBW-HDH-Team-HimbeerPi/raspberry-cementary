@@ -20,7 +20,7 @@ class gameChooser:
         direction = direc
 
     def initializeInput(self):
-        rotationTreshold = 0.7
+        rotationTreshold = 0.2
         self.inputToDirection(0)
         try:
             controller = IMUController(TriggerMode.CALL_CHECK)
@@ -38,9 +38,9 @@ class gameChooser:
 
     def run(self):
         while self.check == 0:
-            oF.showText(self.gameNames[self.currentGame], 255, 255, 255, 14, 0.02, 0)
+            oF.showText(self.gameNames[self.currentGame], 255, 255, 255, 12, 0.001, 0)
             self.checkInput()
-            time.sleep(2)
+            time.sleep(0.5)
 
     def checkInput(self):
         global direction
