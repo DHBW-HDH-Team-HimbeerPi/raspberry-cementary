@@ -12,7 +12,7 @@ class gameChooser:
         self.gameNames = ["Flappy Dot", "Pacman", "Pong", "Sidescroller", "Snake"]
         self.check = 0
         self.currentGame = 0
-        #self.initializeInput()
+        self.initializeInput()
         self.run()
 
     def inputToDirection(self, direc: int):
@@ -38,10 +38,11 @@ class gameChooser:
 
     def run(self):
         while self.check == 0:
-            oF.showText(self.gameNames[self.currentGame], 255, 255, 255, 14, 0.075, 0)
+            oF.showText(self.gameNames[self.currentGame], 255, 255, 255, 14, 0.02, 0)
+            self.checkInput()
             time.sleep(2)
 
-    def check(self):
+    def checkInput(self):
         global direction
         if direction == 1:
             self.check = 1
