@@ -6,7 +6,7 @@ from FLAPPA import main as flappy
 from PACCA import main as pacman
 from Pong import main as pong
 from sidescroller import main as amogus
-from SnakeGameClaim import main as Snake
+from SnakeGameClaim import main as snake
 import time
 
 class gameChooser:
@@ -48,13 +48,13 @@ class gameChooser:
             if self.currentGame == 0:
                 flappy.main()
             elif self.currentGame == 1:
-
+                pacman.main()
             elif self.currentGame == 2:
-
+                pong.Pong()
             elif self.currentGame == 3:
-
+                amogus.main()
             elif self.currentGame == 4:
-
+                snake.main()
 
 
 
