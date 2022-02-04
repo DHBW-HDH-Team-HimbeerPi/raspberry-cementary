@@ -52,6 +52,7 @@ def playermovement(velocity):
 
 
 def movewall(pixelArray,wallocation):
+    global score
     for walls in range (3):
         if (walllocation[walls] == 0):
             walllocation[walls]= 36
