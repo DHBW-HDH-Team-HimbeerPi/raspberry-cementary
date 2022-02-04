@@ -72,6 +72,7 @@ def main():
         controller.register_trigger(inputToDirection, {'direc' : 2}, controller.mov_x, -rotationTreshold, ThresholdType.LOWER)
         controller.register_trigger(inputToDirection, {'direc' : 3}, controller.mov_y, -rotationTreshold, ThresholdType.LOWER)
         controller.register_trigger(inputToDirection, {'direc' : 4}, controller.mov_y, rotationTreshold, ThresholdType.HIGHER)
+        autopilotOn = False
     except NameError:
         print("could NOT find controller")
         autopilotOn = True

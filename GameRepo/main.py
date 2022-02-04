@@ -48,10 +48,10 @@ class gameChooser:
         elif direction == 2:
             self.check = 1
         elif direction == 3:
-            if self.currentGame > 0:
-                self.currentGame = self.currentGame - 1
-        elif direction == 4:
             if self.currentGame < 4:
+                self.currentGame = self.currentGame + 1
+        elif direction == 4:
+            if self.currentGame > 0:
                 self.currentGame = self.currentGame - 1
         print(direction)
         direction = 0

@@ -4,4 +4,3 @@ class Sprites(Enum):
     amogus = "amogus.csv"
     mapStairs = "stairs.csv"
     mapPlatform = "platform.csv"
-    
