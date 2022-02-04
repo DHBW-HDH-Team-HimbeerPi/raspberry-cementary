@@ -44,6 +44,7 @@ class gameChooser:
 
     def checkInput(self):
         global direction
+        self.check_triggers()
         if direction == 1:
             self.check = 1
         elif direction == 2:
