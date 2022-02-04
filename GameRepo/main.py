@@ -2,6 +2,11 @@ import subprocess
 from output_framework.output_framework import OutputFramework as oF
 from input_framework.imu_controller import IMUController
 from input_framework.interface import ThresholdType, TriggerMode
+from FLAPPA import main as flappy
+from PACCA import main as pacman
+from Pong import main as pong
+from sidescroller import main as amogus
+from SnakeGameClaim import main as Snake
 import time
 
 class gameChooser:
@@ -34,18 +39,29 @@ class gameChooser:
                                         ThresholdType.HIGHER)
         except NameError:
             print("could NOT find controller")
-        while self.check == 0:
-            oF.showText(self.gameNames[self.currentGame], 255, 255, 255, 12, 0.001, 0)
-            controller.check_triggers()
-            self.checkInput()
-            time.sleep(0.5)
+        while True:
+            while self.check == 0:
+                oF.showText(self.gameNames[self.currentGame], 255, 255, 255, 12, 0.001, 0)
+                controller.check_triggers()
+                self.checkInput()
+                time.sleep(0.5)
+            if self.currentGame == 0:
+                flappy.main()
+            elif self.currentGame == 1:
+
+            elif self.currentGame == 2:
+
+            elif self.currentGame == 3:
+
+            elif self.currentGame == 4:
+
+
+
 
     def checkInput(self):
         global direction
 
-        if direction == 1:
-            self.check = 1
-        elif direction == 2:
+        if direction == 2:
             self.check = 1
         elif direction == 3:
             if self.currentGame < 4:

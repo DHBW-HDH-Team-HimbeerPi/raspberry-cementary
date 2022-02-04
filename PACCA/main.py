@@ -110,27 +110,28 @@ def moveplayer(dira):
             case _:
                 dirb = lastdir
 
-createLevel()
-show(pixelArray)
-if debug == 1:
-    os.system('cls')
-
-ctrl = IMUController()
-threshold = 0.35
-ctrl.register_trigger(moveplayer, {'dira' : 1 }, ctrl.mov_x, threshold, ThresholdType.HIGHER)
-ctrl.register_trigger(moveplayer, {'dira' : 2 }, ctrl.mov_x, -threshold, ThresholdType.LOWER)
-ctrl.register_trigger(moveplayer, {'dira' : 3 }, ctrl.mov_y, threshold, ThresholdType.HIGHER)
-ctrl.register_trigger(moveplayer, {'dira' : 4 }, ctrl.mov_y, -threshold, ThresholdType.LOWER)
-has_been_triggered = 0
-
-for x in range(100):
-
-    has_been_triggered = 0
-    time.sleep(0.4)
-    ctrl.check_triggers()
+def main():
+    createLevel()
+    show(pixelArray)
     if debug == 1:
-        moveplayer(random.randrange(4) + 1)
         os.system('cls')
-        show(pixelArray)
-    else:
-        OutputFramework.setWindow(pixelArray)
+
+    ctrl = IMUController()
+    threshold = 0.35
+    ctrl.register_trigger(moveplayer, {'dira' : 1 }, ctrl.mov_x, threshold, ThresholdType.HIGHER)
+    ctrl.register_trigger(moveplayer, {'dira' : 2 }, ctrl.mov_x, -threshold, ThresholdType.LOWER)
+    ctrl.register_trigger(moveplayer, {'dira' : 3 }, ctrl.mov_y, threshold, ThresholdType.HIGHER)
+    ctrl.register_trigger(moveplayer, {'dira' : 4 }, ctrl.mov_y, -threshold, ThresholdType.LOWER)
+    has_been_triggered = 0
+
+    for x in range(100):
+
+        has_been_triggered = 0
+        time.sleep(0.4)
+        ctrl.check_triggers()
+        if debug == 1:
+            moveplayer(random.randrange(4) + 1)
+            os.system('cls')
+            show(pixelArray)
+        else:
+            OutputFramework.setWindow(pixelArray)
