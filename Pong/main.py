@@ -1,10 +1,10 @@
-from files.ball import Ball
-from files.panel import Panel
+from ball import Ball
+from panel import Panel
 from output_framework.output_framework import OutputFramework as oF
 from input_framework.imu_controller import IMUController
 from input_framework.interface import ThresholdType, TriggerMode
 # from unicornhatsimulator import unicornhathd as uni
-from files.comPlayer import aiPlayer
+from comPlayer import aiPlayer
 import numpy as np
 import time
 
