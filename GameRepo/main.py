@@ -38,7 +38,7 @@ class gameChooser:
     def run(self):
         currentGame = 0
         while self.check == 0:
-            oF.showText(self.gameNames[currentGame], 255, 255, 255, 14, 1, 0)
+            oF.showText(self.gameNames[currentGame], 255, 255, 255, 14, 0.05, 0)
             time.sleep(5)
 
 
