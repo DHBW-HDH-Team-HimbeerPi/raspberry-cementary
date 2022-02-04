@@ -2,8 +2,6 @@ import numpy as np
 from src.addObject import add
 from src.player import Player
 from src.unicornHead import showUH
-from src.spriteReader import dimensions
-from src.sprites import Sprites
 from src.directions import Directions
 from src.sanitizePixelArray import sanatizeArray
 from src.input import inputToDirection
@@ -21,12 +19,12 @@ pixelArray[0][0][0] = 255
 
 def main():
 
-    joe = Player()  # create Player
+    joe = Player(pixelArray)  # create Player
     map = Map()     # create Map
-    add(pixelArray, joe.dimensions(), False)
+    
+    print(joe.posX, joe.poxY)
 
     #add(pixelArray, dimensions(Sprites.mapStairs.value), True)
-    #add(pixelArray, dimensions(Sprites.mapPlatform.value), True)
     running = True
     try:
         rotationTreshold = 0.35
@@ -39,7 +37,7 @@ def main():
         print("No controller found!")
 
     while running:
-        map.updateMap(pixelArray)
+        #map.updateMap(pixelArray, joe.posX)
         try:
             OutputFramework.setWindow(sanatizeArray(pixelArray), 180)
             controller.check_triggers()

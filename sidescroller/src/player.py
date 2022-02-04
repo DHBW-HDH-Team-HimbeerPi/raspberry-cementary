@@ -2,14 +2,18 @@ import numpy as np
 import random as rand
 from .spriteReader import readSprite, setPixelColor
 from .sprites import Sprites
+from .addObject import add
 
-class Player:
+class Player():
 
-    def __init__(self):
+    def __init__(self, pixelArray):
         self.amogus = readSprite(Sprites.amogus.value, False)
         self.colorR = rand.randrange(100, 255)
         self.colorG = rand.randrange(100, 255)
         self.colorB = rand.randrange(100, 255)
+        self.posX = 0
+        self.poxY = 0
+        add(pixelArray, self.dimensions(), False)
 
     def setPixelColor(self, pixelArray, x, y, r, g, b):
         pixelArray[x][y][0] = r
@@ -22,12 +26,20 @@ class Player:
 
     def dimensions(self):
         pixelArray = np.full((16 , 16, 4), 0)
-        for x in range(0, len(pixelArray)):
-            for y in range(0, len(pixelArray[0])):
+        for x in range(len(pixelArray)):
+            for y in range(len(pixelArray[0])):
                 if(int(self.amogus[x][y]) != 0):
                     pixelArray[x][y] = int(self.amogus[x][y])
                     if(int(self.amogus[x][y]) == 2):
                         self.setPixelColor(pixelArray, x, y, 0, 100, 255)
+                        self.posX = x
+                        self.posY = y
                     else:
                         self.setPixelColorSelf(pixelArray, x, y)
         return pixelArray
+    
+    def getPosition(self, pixelArray):
+        for x in range(len(pixelArray)):
+            for y in range(len(pixelArray[0])):
+                if(pixelArray[x][y][3] == 2):
+                    self.position = x
