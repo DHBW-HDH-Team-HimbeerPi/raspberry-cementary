@@ -15,11 +15,9 @@ class Pong:
         self.leftPanel = Panel(1, 0, 0, 255)
         self.rightPanel = Panel(14, 0, 255, 0)
         self.gameBall = Ball()
-        self.scoreLeft = 0
-        self.scoreRight = 0
+        self.score = 0
         self.com = aiPlayer()
-        self.com2 = aiPlayer()
-
+        self.alive = True
         self.play()
 
     def setGameItems(self, gameField, gameObject):
@@ -42,10 +40,6 @@ class Pong:
         self.inputToDirection(0)
         try:
             controller = IMUController(TriggerMode.CALL_CHECK)
-            # controller.register_trigger(self.inputToDirection, {'direc': 1}, controller.mov_x, rotationTreshold,
-            #                            ThresholdType.HIGHER)
-            # controller.register_trigger(self.inputToDirection, {'direc': 2}, controller.mov_x, -rotationTreshold,
-            #                            ThresholdType.LOWER)
             controller.register_trigger(self.inputToDirection, {'direc': -1}, controller.mov_y, -rotationTreshold,
                                         ThresholdType.LOWER)
 
@@ -54,18 +48,14 @@ class Pong:
         except NameError:
             print("could NOT find controller")
 
-        count = 0
-
-        while True:
+        while self.alive:
             self.ballCheck()
-            if count == 3:
-                comMove = self.com.play(self.gameBall.yPosition, self.rightPanel.yPosition)
-                if comMove == -1:
-                    self.rightPanel.moveDown()
-                else:
-                    if comMove == 1:
-                        self.rightPanel.moveUp()
-                count = 0
+            comMove = self.com.play(self.gameBall.yPosition, self.rightPanel.yPosition)
+            if comMove == -1:
+                self.rightPanel.moveDown()
+            else:
+                if comMove == 1:
+                    self.rightPanel.moveUp()
             controller.check_triggers()
             self.check()
             gameField = np.full((16, 16, 3), 0)
@@ -78,27 +68,23 @@ class Pong:
             #    for y in range(len(gameField[x])):
             #        uni.set_pixel(x, y, gameField[x][y][0], gameField[x][y][1], gameField[x][y][2])
             # uni.show()
-            count = count + 1
             # time.sleep(self.speed)
+        oF.showText("Highscore" + str(self.score), 255, 255, 255, 12, 0.05, 0)
 
     def ballCheck(self):
         if int(self.gameBall.xPosition) < 1 or int(self.gameBall.xPosition) > 14:
-            if int(self.gameBall.xPosition) < 1:
-                self.scoreRight = self.scoreRight + 1
-            else:
-                self.scoreLeft = self.scoreLeft + 1
-            self.leftPanel = Panel(1, 0, 0, 255)
-            self.rightPanel = Panel(14, 0, 255, 0)
-            self.gameBall = Ball()
+            self.alive = False
         else:
             if int(self.gameBall.xPosition) == 1 or int(self.gameBall.xPosition) == 14:
                 if int(self.gameBall.xPosition) == 1 and self.gameBall.yPosition >= self.leftPanel.yPosition and self.gameBall.yPosition <= (
                         self.leftPanel.yPosition + self.leftPanel.size - 1):
                     self.gameBall.panelBounce(self.leftPanel)
+                    self.score = self.score + 1
                 else:
                     if int(self.gameBall.xPosition) == 14 and self.gameBall.yPosition >= self.rightPanel.yPosition and self.gameBall.yPosition <= (
                             self.rightPanel.yPosition + self.rightPanel.size - 1):
                         self.gameBall.panelBounce(self.leftPanel)
+                        self.score = self.score + 1
             if int(self.gameBall.yPosition) <= 0 or int(self.gameBall.yPosition) >= 15:
                 self.gameBall.bounce()
             self.gameBall.move()
