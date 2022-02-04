@@ -103,17 +103,18 @@ def movepixelleft(ausgabe,x,y):
         ausgabe[x][y][color] = 0;
 
 def main():
+    global pixelArray
+    global walllocation
+    global playerposition
     ctrl = IMUController(TriggerMode.CALL_CHECK)
     ctrl.register_trigger(playermovement, {'velocity' : 1 }, ctrl.mov_x, 0.35, ThresholdType.HIGHER)
     ctrl.register_trigger(playermovement, {'velocity' : -1 }, ctrl.mov_x, -0.35, ThresholdType.LOWER)
     pixelArray = np.full((16 , 16, 3), 0)
-    global walllocation
-    walllocation = [16,28,40,0,0,0,0,0,0]
 
-    global playerposition
-    playerpostion =8
-    global pixelArray
+    walllocation = [16,28,40,0,0,0,0,0,0]
+    playerpostion = 8
     pixelArray[3][8][0] = 250
+    
     for u in range (240):
 
         movewall(pixelArray,walllocation)
