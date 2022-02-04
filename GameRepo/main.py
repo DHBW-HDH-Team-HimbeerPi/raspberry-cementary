@@ -7,9 +7,9 @@ from input_framework.interface import ThresholdType, TriggerMode
 class gameChooser:
 
     def __init__(self):
-        mainPath = "./"
-        gamePathes = ["FLAPPA", "PACCA", "Pong", "sidescroller", "SnakeGameClaim"]
-        gameNames = ["Flappy Dot", "Pacman", "Pong", "Sidescroller", "Snake"]
+        self.mainPath = "./"
+        self.gamePathes = ["FLAPPA", "PACCA", "Pong", "sidescroller", "SnakeGameClaim"]
+        self.gameNames = ["Flappy Dot", "Pacman", "Pong", "Sidescroller", "Snake"]
         self.check = 0
         self.initializeInput()
         self.run()
