@@ -28,7 +28,7 @@ def show(ausgabe: list):
                 print("_", end =" ")
         print("")
 def checkalive(pixelArray):
-    if(walllocation[0]==4 or walllocation[1]==4 or walllocation[2]==4): 
+    if(walllocation[0]==3 or walllocation[1]==3 or walllocation[2]==3): 
         for y in range (15):
             if(pixelArray[3][y][0]==0):
                 if(walllocation[4]>=y and walllocation[4]<=y+difficulty+1):
