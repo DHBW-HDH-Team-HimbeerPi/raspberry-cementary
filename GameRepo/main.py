@@ -11,15 +11,15 @@ class gameChooser:
         self.gamePathes = ["FLAPPA", "PACCA", "Pong", "sidescroller", "SnakeGameClaim"]
         self.gameNames = ["Flappy Dot", "Pacman", "Pong", "Sidescroller", "Snake"]
         self.check = 0
-        #self.initializeInput()
+        self.currentGame = 0
         self.run()
 
     def inputToDirection(self, direc: int):
         global direction
         direction = direc
 
-    def initializeInput(self):
-        rotationTreshold = 1
+    def run(self):
+        rotationTreshold = 0.2
         self.inputToDirection(0)
         try:
             controller = IMUController(TriggerMode.CALL_CHECK)
@@ -34,14 +34,27 @@ class gameChooser:
                                         ThresholdType.HIGHER)
         except NameError:
             print("could NOT find controller")
-
-    def run(self):
-        currentGame = 0
         while self.check == 0:
-            oF.showText(self.gameNames[currentGame], 255, 255, 255, 14, 0.05, 0)
-            time.sleep(5)
+            oF.showText(self.gameNames[self.currentGame], 255, 255, 255, 12, 0.001, 0)
+            controller.check_triggers()
+            self.checkInput()
+            time.sleep(0.5)
 
+    def checkInput(self):
+        global direction
 
+        if direction == 1:
+            self.check = 1
+        elif direction == 2:
+            self.check = 1
+        elif direction == 3:
+            if self.currentGame < 4:
+                self.currentGame = self.currentGame + 1
+        elif direction == 4:
+            if self.currentGame > 0:
+                self.currentGame = self.currentGame - 1
+        print(direction)
+        direction = 0
 
 
 if __name__ == "__main__":

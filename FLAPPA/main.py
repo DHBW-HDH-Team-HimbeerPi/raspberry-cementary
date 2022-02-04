@@ -28,15 +28,14 @@ def show(ausgabe: list):
                 print("_", end =" ")
         print("")
 def checkalive(pixelArray):
-    if(walllocation[0]==4 or walllocation[1]==4 or walllocation[2]==4)   
+    if(walllocation[0]==3 or walllocation[1]==3 or walllocation[2]==3): 
         for y in range (15):
-            if(pixelArray[3][y][1]!=255):
+            if(pixelArray[3][y][0]==0):
                 if(walllocation[4]>=y and walllocation[4]<=y+difficulty+1):
                     return True
                 else:
                     return False
         return True
-
 
 def playermovementv(velocity):
     walllocation[5]=velocity
@@ -47,9 +46,9 @@ def playermovement(velocity):
     pixelArray[3][walllocation[4]][0] = 0
     walllocation[4]+=velocity
     if (walllocation[4] > 15 ):
-        exit
+        walllocation[4]=0
     if (walllocation[4] < 0 ):
-        exit
+        walllocation[4]=15;
     pixelArray[3][walllocation[4]][0] = 250
 
 
