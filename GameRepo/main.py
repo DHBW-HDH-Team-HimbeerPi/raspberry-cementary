@@ -20,7 +20,7 @@ class gameChooser:
         direction = direc
 
     def initializeInput(self):
-        rotationTreshold = 1
+        rotationTreshold = 0.7
         self.inputToDirection(0)
         try:
             controller = IMUController(TriggerMode.CALL_CHECK)
@@ -54,6 +54,7 @@ class gameChooser:
         elif direction == 4:
             if self.currentGame < 4:
                 self.currentGame = self.currentGame - 1
+        print(direction)
         direction = 0
 
 
