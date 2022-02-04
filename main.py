@@ -3,9 +3,9 @@ from input_framework.imu_controller import IMUController
 from input_framework.interface import ThresholdType, TriggerMode
 import FLAPPA.main as flappy
 #from PACCA import main as pacman
-from Pong import main as pong
-from sidescroller import main as amogus
-from SnakeGameClaim import main as snake
+import Pong.main as pong
+import sidescroller.main as amogus
+import SnakeGameClaim.main as snake
 import time
 
 class gameChooser:
