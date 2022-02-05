@@ -3,12 +3,12 @@ import time
 import random
 import math
 import os
-from input_framework.imu_controller import IMUController
-from input_framework.interface import ThresholdType, TriggerMode
+#from input_framework.imu_controller import IMUController
+#from input_framework.interface import ThresholdType, TriggerMode
 global difficulty
 global playerposition
 global score
-from output_framework.output_framework import OutputFramework 
+#from output_framework.output_framework import OutputFramework 
 
 
 def show(ausgabe: list):
@@ -103,31 +103,38 @@ def movepixelleft(ausgabe,x,y):
         ausgabe[x][y][color] = 0;
 
 def main():
-    ctrl = IMUController(TriggerMode.CALL_CHECK)
-    ctrl.register_trigger(playermovement, {'velocity' : 1 }, ctrl.mov_x, 0.35, ThresholdType.HIGHER)
-    ctrl.register_trigger(playermovement, {'velocity' : -1 }, ctrl.mov_x, -0.35, ThresholdType.LOWER)
+   # ctrl = IMUController(TriggerMode.CALL_CHECK)
+    #ctrl.register_trigger(playermovement, {'velocity' : 1 }, ctrl.mov_x, 0.35, ThresholdType.HIGHER)
+    #ctrl.register_trigger(playermovement, {'velocity' : -1 }, ctrl.mov_x, -0.35, ThresholdType.LOWER)
+    global pixelArray
     pixelArray = np.full((16 , 16, 3), 0)
-    global walllocation = [16,28,40,0,0,0,0,0,0]
+    global walllocation
+    walllocation = [16,28,40,0,0,0,0,0,0]
 
     global playerposition
-    global playerpostion =8
-    global pixelArray[3][8][0] = 250
+    global playerpostion 
+     playerpostion =8
+     pixelArray[3][8][0] = 250
     for u in range (240):
 
         movewall(pixelArray,walllocation)
-        OutputFramework.setWindow(pixelArray)
-        ctrl.check_triggers()
+    #    OutputFramework.setWindow(pixelArray)
+     #
+     # 
+     # 
+     # 
+     #    ctrl.check_triggers()
         time.sleep(0.1/math.log(score+2,15)/8)
         if (checkalive(pixelArray)==False):
             break
-        OutputFramework.setWindow(pixelArray)
-        ctrl.check_triggers()
+       # OutputFramework.setWindow(pixelArray)
+        #ctrl.check_triggers()
         if (checkalive(pixelArray)==False):
             break
-        OutputFramework.setWindow(pixelArray)
-        ctrl.check_triggers()
+        #OutputFramework.setWindow(pixelArray)
+        #ctrl.check_triggers()
         time.sleep(0.1/math.log(score+2,15)/8)
-        OutputFramework.setWindow(pixelArray)
+        #OutputFramework.setWindow(pixelArray)
         #show(pixelArray)
         if (checkalive(pixelArray)==False):
             break
