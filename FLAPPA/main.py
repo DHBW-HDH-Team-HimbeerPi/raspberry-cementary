@@ -71,6 +71,7 @@ def movewall(pixelArray,walllocation):
         else:
             walllocation[walls]-=1
 def createwall(pixelArray,walls):
+    global score
     r = random.randrange(11)
     i=0
     global difficulty   
@@ -113,8 +114,8 @@ def main():
 
     global playerposition
     global playerpostion 
-     playerpostion =8
-     pixelArray[3][8][0] = 250
+    playerpostion = 8
+    pixelArray[3][8][0] = 250
     for u in range (240):
 
         movewall(pixelArray,walllocation)
