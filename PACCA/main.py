@@ -56,10 +56,10 @@ def createLevel():
 def moveplayer(dira):
     global has_been_triggered
     global lastdir
-    if has_been_triggered != 0:
-        return
-    else:
-        has_been_triggered = 1
+   # if has_been_triggered != 0:
+    #    return
+    #else:
+     #   has_been_triggered = 1
     dirb = dira
     moved = True
     for x in range(2):
@@ -120,7 +120,7 @@ def main():
     
      
     #ctrl = IMUController()
-    #threshold = 0.35
+    #threshold  = 0.35
     #ctrl.register_trigger(moveplayer, {'dira' : 1 }, ctrl.mov_x, threshold, ThresholdType.HIGHER)
     #ctrl.register_trigger(moveplayer, {'dira' : 2 }, ctrl.mov_x, -threshold, ThresholdType.LOWER)
     #ctrl.register_trigger(moveplayer, {'dira' : 3 }, ctrl.mov_y, threshold, ThresholdType.HIGHER)
@@ -131,7 +131,7 @@ def main():
 
         has_been_triggered = 0
         time.sleep(0.4)
-        ctrl.check_triggers()
+        #ctrl.check_triggers()
         print ("test")
         if debug == 1:
             for event in pygame.event.get(): 

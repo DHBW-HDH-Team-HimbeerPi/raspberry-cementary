@@ -4,7 +4,7 @@ except ImportError:
     print("no uh sim!")
 
 def showUH(pixelArray: list, pixels):
-    uh.rotation(270)
+    uh.rotation(0)
     uh.clear()
     for i in range(0, pixels):
         for j in range(0, pixels):
