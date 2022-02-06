@@ -11,21 +11,10 @@ if debug != 1:
     from output_framework.output_framework import OutputFramework
 import os
 from pygame.locals import (
-
     K_UP,
-
     K_DOWN,
-
     K_LEFT,
-
     K_RIGHT,
-
-    K_ESCAPE,
-
-    KEYDOWN,
-
-    QUIT,
-
 )
 
 
@@ -111,7 +100,7 @@ def main():
     global lastdir 
     global moved
     global Joe
-    Joe = Player
+    Joe = Player(0,0)
     lastdir = 0
     for x in range(100):
 
@@ -134,7 +123,7 @@ def main():
             moveplayer(4)
             moved=True
         if moved==False:
-            moveplayer(lastdir,Joe)
+            moveplayer(lastdir)
 
         showUH(pixelArray, 16)
         #else:
