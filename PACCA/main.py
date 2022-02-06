@@ -4,7 +4,8 @@ from pathlib import Path
 import numpy as np
 import time
 import random
-
+import pygame
+from src.unicornHead import showUH
 if debug != 1:
     from output_framework.output_framework import OutputFramework
 import os
@@ -116,22 +117,40 @@ def main():
     if debug == 1:
         os.system('cls')
 
-    ctrl = IMUController()
-    threshold = 0.35
-    ctrl.register_trigger(moveplayer, {'dira' : 1 }, ctrl.mov_x, threshold, ThresholdType.HIGHER)
-    ctrl.register_trigger(moveplayer, {'dira' : 2 }, ctrl.mov_x, -threshold, ThresholdType.LOWER)
-    ctrl.register_trigger(moveplayer, {'dira' : 3 }, ctrl.mov_y, threshold, ThresholdType.HIGHER)
-    ctrl.register_trigger(moveplayer, {'dira' : 4 }, ctrl.mov_y, -threshold, ThresholdType.LOWER)
-    has_been_triggered = 0
+    
+     
+    #ctrl = IMUController()
+    #threshold = 0.35
+    #ctrl.register_trigger(moveplayer, {'dira' : 1 }, ctrl.mov_x, threshold, ThresholdType.HIGHER)
+    #ctrl.register_trigger(moveplayer, {'dira' : 2 }, ctrl.mov_x, -threshold, ThresholdType.LOWER)
+    #ctrl.register_trigger(moveplayer, {'dira' : 3 }, ctrl.mov_y, threshold, ThresholdType.HIGHER)
+    #ctrl.register_trigger(moveplayer, {'dira' : 4 }, ctrl.mov_y, -threshold, ThresholdType.LOWER)
+    #has_been_triggered = 0
 
     for x in range(100):
 
         has_been_triggered = 0
         time.sleep(0.4)
         ctrl.check_triggers()
+        print ("test")
         if debug == 1:
-            moveplayer(random.randrange(4) + 1)
-            os.system('cls')
-            show(pixelArray)
+            for event in pygame.event.get(): 
+                if event.type == pygame.KEYDOWN:
+
+    
+                    if event.key == pygame.K_UP:
+                        moveplayer(4)
+    
+                    if event.key == pygame.K_DOWN:
+                        moveplayer(3)
+    
+                    if event.key == pygame.K_RIGHT:
+                        moveplayer(1)
+    
+                    if event.key == pygame.K_LEFT:
+                        moveplayer(2)
+            showUH(pixelArray, 16)
         else:
             OutputFramework.setWindow(pixelArray)
+if __name__ == "__main__":
+    main()
