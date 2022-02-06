@@ -3,7 +3,7 @@ import time
 import random
 import math
 import os
-#from input_framework.imu_controller import IMUController
+ #from input_framework.imu_controller import IMUController
 #from input_framework.interface import ThresholdType, TriggerMode
 global difficulty
 global playerposition
@@ -106,7 +106,7 @@ def movepixelleft(ausgabe,x,y):
 def main():
    # ctrl = IMUController(TriggerMode.CALL_CHECK)
     #ctrl.register_trigger(playermovement, {'velocity' : 1 }, ctrl.mov_x, 0.35, ThresholdType.HIGHER)
-    #ctrl.register_trigger(playermovement, {'velocity' : -1 }, ctrl.mov_x, -0.35, ThresholdType.LOWER)
+     #ctrl.register_trigger(playermovement, {'velocity' : -1 }, ctrl.mov_x, -0.35, ThresholdType.LOWER)
     global pixelArray
     pixelArray = np.full((16 , 16, 3), 0)
     global walllocation
