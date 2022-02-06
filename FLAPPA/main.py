@@ -81,7 +81,7 @@ def createwall(pixelArray,walls):
         difficulty = 3
     print (difficulty)
     print(score)
-    walllocation[x*2+3]=-1
+    walllocation[walls*2+3]=-1
     while i <r :
         pixelArray[15][i][1]=255
         i+=1
@@ -91,7 +91,7 @@ def createwall(pixelArray,walls):
     while i>r+difficulty:
         pixelArray[15][i][1]=255
         i-=1
-        walllocation[x*2+4]=i
+        walllocation[walls*2+4]=i
 def movewallleft(pixelArray,wall):
     for y in range(16):
         if (pixelArray[wall][y][1]!=0):
@@ -113,8 +113,9 @@ def main():
     walllocation = [16,28,40,0,0,0,0,0,0]
 
     global playerposition
-    global playerpostion 
-    playerpostion = 8
+    global score
+    score =0;
+    playerposition = 8
     pixelArray[3][8][0] = 250
     for u in range (240):
 
