@@ -9,6 +9,28 @@ from src.unicornHead import showUH
 if debug != 1:
     from output_framework.output_framework import OutputFramework
 import os
+from pygame.locals import (
+
+    K_UP,
+
+    K_DOWN,
+
+    K_LEFT,
+
+    K_RIGHT,
+
+    K_ESCAPE,
+
+    KEYDOWN,
+
+    QUIT,
+
+)
+
+
+# Initialize pygame
+
+pygame.init()
 
 
 def show(ausgabe: list):
@@ -72,7 +94,8 @@ def moveplayer(dira):
                     pixelArray[playerposition[0]][playerposition[1]][1] = 0
                     playerposition[1] += 1
                     dirb = 0
-                    lastdir = dira
+                    if(x==1):
+                        lastdir = dira
                 else:
                     dirb = lastdir
             case 2:
@@ -83,7 +106,8 @@ def moveplayer(dira):
                     pixelArray[playerposition[0]][playerposition[1]][1] = 0
                     playerposition[1] -= 1
                     dirb = 0
-                    lastdir = dira
+                    if(x==1):
+                        lastdir = dira
                 else:
                     dirb = lastdir
             case 3:
@@ -94,7 +118,8 @@ def moveplayer(dira):
                     pixelArray[playerposition[0]][playerposition[1]][1] = 0
                     playerposition[0] += 1
                     dirb = 0
-                    lastdir = dira
+                    if(x==1):
+                        lastdir = dira
                 else:
                     dirb = lastdir
             case 4:
@@ -105,7 +130,8 @@ def moveplayer(dira):
                     pixelArray[playerposition[0]][playerposition[1]][1] = 0
                     playerposition[0] -= 1
                     dirb = 0
-                    lastdir = dira
+                    if(x==1):
+                        lastdir = dira
                 else:
                     dirb = lastdir
             case _:
@@ -113,12 +139,7 @@ def moveplayer(dira):
 
 def main():
     createLevel()
-    show(pixelArray)
-    if debug == 1:
-        os.system('cls')
-
-    
-     
+    show(pixelArray)     
     #ctrl = IMUController()
     #threshold  = 0.35
     #ctrl.register_trigger(moveplayer, {'dira' : 1 }, ctrl.mov_x, threshold, ThresholdType.HIGHER)
@@ -126,31 +147,33 @@ def main():
     #ctrl.register_trigger(moveplayer, {'dira' : 3 }, ctrl.mov_y, threshold, ThresholdType.HIGHER)
     #ctrl.register_trigger(moveplayer, {'dira' : 4 }, ctrl.mov_y, -threshold, ThresholdType.LOWER)
     #has_been_triggered = 0
-
+    global lastdir 
+    lastdir = 0
     for x in range(100):
 
         has_been_triggered = 0
-        time.sleep(0.4)
+        time.sleep(0.35)
         #ctrl.check_triggers()
-        print ("test")
-        if debug == 1:
-            for event in pygame.event.get(): 
-                if event.type == pygame.KEYDOWN:
+        print(x)
+        moved = False
+        pressed_keys = pygame.key.get_pressed()  
+        if pressed_keys[K_UP]:
+            moveplayer(2)
+            moved=True
+        if pressed_keys[K_DOWN] and moved==False:
+            moveplayer(1)
+            moved=True
+        if pressed_keys[K_RIGHT]and moved==False:
+            moveplayer(3)
+            moved=True
+        if pressed_keys[K_LEFT] and moved==False:
+            moveplayer(4)
+            moved=True
+        if moved==False:
+            moveplayer(lastdir)
 
-    
-                    if event.key == pygame.K_UP:
-                        moveplayer(4)
-    
-                    if event.key == pygame.K_DOWN:
-                        moveplayer(3)
-    
-                    if event.key == pygame.K_RIGHT:
-                        moveplayer(1)
-    
-                    if event.key == pygame.K_LEFT:
-                        moveplayer(2)
-            showUH(pixelArray, 16)
-        else:
-            OutputFramework.setWindow(pixelArray)
+        showUH(pixelArray, 16)
+        #else:
+         #   OutputFramework.setWindow(pixelArray)
 if __name__ == "__main__":
     main()
