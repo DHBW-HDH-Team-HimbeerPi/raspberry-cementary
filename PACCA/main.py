@@ -1,5 +1,6 @@
 debug = 1
 import csv
+from src.player import Player
 from pathlib import Path
 import numpy as np
 import time
@@ -77,65 +78,25 @@ def createLevel():
 
 def moveplayer(dira):
     global has_been_triggered
-    global lastdir
+    global Joe
    # if has_been_triggered != 0:
     #    return
     #else:
      #   has_been_triggered = 1
-    dirb = dira
+   
     moved = True
-    for x in range(2):
-        match dirb:
-            case 1:
-                if (playerposition[1] < 15 and pixelArray[playerposition[0]][playerposition[1] + 1][0] == 0):
-                    pixelArray[playerposition[0]][playerposition[1] + 1][0] = 255
-                    pixelArray[playerposition[0]][playerposition[1] + 1][1] = 255
-                    pixelArray[playerposition[0]][playerposition[1]][0] = 0
-                    pixelArray[playerposition[0]][playerposition[1]][1] = 0
-                    playerposition[1] += 1
-                    dirb = 0
-                    if(x==1):
-                        lastdir = dira
-                else:
-                    dirb = lastdir
-            case 2:
-                if (playerposition[1] > 0 and pixelArray[playerposition[0]][playerposition[1] - 1][0] == 0):
-                    pixelArray[playerposition[0]][playerposition[1] - 1][0] = 255
-                    pixelArray[playerposition[0]][playerposition[1] - 1][1] = 255
-                    pixelArray[playerposition[0]][playerposition[1]][0] = 0
-                    pixelArray[playerposition[0]][playerposition[1]][1] = 0
-                    playerposition[1] -= 1
-                    dirb = 0
-                    if(x==1):
-                        lastdir = dira
-                else:
-                    dirb = lastdir
-            case 3:
-                if (playerposition[0] < 15 and pixelArray[playerposition[0] + 1][playerposition[1]][0] == 0):
-                    pixelArray[playerposition[0] + 1][playerposition[1]][0] = 255
-                    pixelArray[playerposition[0] + 1][playerposition[1]][1] = 255
-                    pixelArray[playerposition[0]][playerposition[1]][0] = 0
-                    pixelArray[playerposition[0]][playerposition[1]][1] = 0
-                    playerposition[0] += 1
-                    dirb = 0
-                    if(x==1):
-                        lastdir = dira
-                else:
-                    dirb = lastdir
-            case 4:
-                if (playerposition[0] > 0 and pixelArray[playerposition[0] - 1][playerposition[1]][0] == 0):
-                    pixelArray[playerposition[0] - 1][playerposition[1]][0] = 255
-                    pixelArray[playerposition[0] - 1][playerposition[1]][1] = 255
-                    pixelArray[playerposition[0]][playerposition[1]][0] = 0
-                    pixelArray[playerposition[0]][playerposition[1]][1] = 0
-                    playerposition[0] -= 1
-                    dirb = 0
-                    if(x==1):
-                        lastdir = dira
-                else:
-                    dirb = lastdir
-            case _:
-                dirb = lastdir
+    
+    match dira:
+        case 1:
+            Joe.move(1,pixelArray)
+        case 2:
+            Joe.move(2,pixelArray)
+        case 3:
+            Joe.move(3,pixelArray)
+        case 4:
+            Joe.move(4,pixelArray)
+        case _:
+            Joe.move(0,pixelArray)
 
 def main():
     createLevel()
@@ -148,6 +109,9 @@ def main():
     #ctrl.register_trigger(moveplayer, {'dira' : 4 }, ctrl.mov_y, -threshold, ThresholdType.LOWER)
     #has_been_triggered = 0
     global lastdir 
+    global moved
+    global Joe
+    Joe = Player
     lastdir = 0
     for x in range(100):
 
@@ -170,7 +134,7 @@ def main():
             moveplayer(4)
             moved=True
         if moved==False:
-            moveplayer(lastdir)
+            moveplayer(lastdir,Joe)
 
         showUH(pixelArray, 16)
         #else:
