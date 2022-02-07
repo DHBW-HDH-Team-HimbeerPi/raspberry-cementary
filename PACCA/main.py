@@ -1,6 +1,7 @@
 debug = 1
 import csv
 from src.player import Player
+from src.ghost import Enemy
 from pathlib import Path
 import numpy as np
 import time
@@ -45,10 +46,10 @@ def show(ausgabe: list):
 pixelArray = np.full((16, 16, 3), 0)
 global lastdir
 lastdir = 0
-playerposition = [0, 0]
 pixelArray[0][0][0] = 255
 pixelArray[0][0][1] = 255
-
+pixelArray[15][15][2] = 255
+pixelArray[15][15][1] = 255
 
 def createLevel():
     basePath = Path(__file__).parent
@@ -100,12 +101,13 @@ def main():
     global lastdir 
     global moved
     global Joe
+    mama = Enemy(15,15)
     Joe = Player(0,0)
     lastdir = 0
     for x in range(100):
 
         has_been_triggered = 0
-        time.sleep(0.35)
+        time.sleep(0.2)
         #ctrl.check_triggers()
         print(x)
         moved = False
@@ -124,7 +126,7 @@ def main():
             moved=True
         if moved==False:
             moveplayer(lastdir)
-
+        mama.move(Joe.posxy,pixelArray)
         showUH(pixelArray, 16)
         #else:
          #   OutputFramework.setWindow(pixelArray)
