@@ -11,7 +11,6 @@ def readSprite(fileName, readMap):
     else:
         filePath = (basePath / ("../sprites/"+fileName)).resolve()
     
-
     with open(filePath) as file:
         sprite = [line for line in csv.reader(file)]
         return sprite
@@ -28,10 +27,8 @@ def setRandomPixelColor(pixelArray, x, y):
     pixelArray[x][y][2] = rand.randrange(100, 255)
     pixelArray[x][y][3] = 2
 
-def dimensions(fileName, quadrant):
-    pixels = 16
-    x = math.floor(quadrant/4)
-    y = quadrant % 4
+def dimensions(fileName):
+    pixels = 4
     sprite = readSprite(fileName, False)
     pixelArray = np.full((pixels, pixels, 4), 0)
     for x in range(pixels):
