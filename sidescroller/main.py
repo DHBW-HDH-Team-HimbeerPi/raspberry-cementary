@@ -6,6 +6,9 @@ from src.directions import Directions
 from src.sanitizePixelArray import sanatizeArray
 from src.input import inputToDirection
 from src.map import Map
+from src.shiftPixels import shiftPixelsY, walkRight
+import time
+
 try:
     from output_framework.output_framework import OutputFramework # type: ignore
     from input_framework.imu_controller import IMUController # type: ignore
@@ -16,11 +19,13 @@ except ImportError:
 PIXELS = 16
 pixelArray = np.full((PIXELS, PIXELS*2, 4), 0)
 pixelArray[0][0][0] = 255
+pixelArray[0][1][0] = 255
+pixelArray[0][2][0] = 255
 
 def main():
 
     joe = Player(pixelArray)    # create Player
-    map = Map()                 # create Map
+    map = Map(pixelArray)                 # create Map
 
     #add(pixelArray, dimensions(Sprites.mapStairs.value), True)
     running = True
@@ -41,6 +46,8 @@ def main():
             controller.check_triggers()
         except NameError:
             showUH(pixelArray, PIXELS)
+            time.sleep(0.5)
+            shiftPixelsY(pixelArray)
 
 if __name__ == "__main__":
     main()

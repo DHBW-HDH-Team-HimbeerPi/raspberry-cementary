@@ -7,13 +7,13 @@ from .addObject import add
 class Player():
 
     def __init__(self, pixelArray):
-        self.amogus = readSprite(Sprites.amogus.value, False)
+        self.amogus = readSprite(Sprites.player.value, False)
         self.colorR = rand.randrange(100, 255)
         self.colorG = rand.randrange(100, 255)
         self.colorB = rand.randrange(100, 255)
         self.posX = 0
         self.posY = 0
-        add(pixelArray, self.dimensions(), False)
+        add(pixelArray, self.dimensions(), 3, 0)
 
     def setPixelColor(self, pixelArray, x, y, r, g, b):
         pixelArray[x][y][0] = r
@@ -25,7 +25,7 @@ class Player():
         self.setPixelColor(pixelArray, x, y, self.colorR, self.colorG, self.colorB)
 
     def dimensions(self):
-        pixelArray = np.full((16 , 16, 4), 0)
+        pixelArray = np.full((len(self.amogus), len(self.amogus[0]), 4), 0)
         for x in range(len(pixelArray)):
             for y in range(len(pixelArray[0])):
                 if(int(self.amogus[x][y]) != 0):
