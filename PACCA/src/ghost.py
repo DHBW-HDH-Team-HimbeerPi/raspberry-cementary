@@ -37,7 +37,7 @@ class Enemy():
         for x in range(2):
             match dirb:
                 case 1:
-                    if (self.posxy[1] < 15 and pixelArray[self.posxy[0]][self.posxy[1] + 1][0] == 0):
+                    if (self.posxy[1] < 15 and pixelArray[self.posxy[0]][self.posxy[1] + 1][0] != 91):
                         pixelArray[self.posxy[0]][self.posxy[1] + 1][1] = 255
                         pixelArray[self.posxy[0]][self.posxy[1] + 1][2] = 255
                         pixelArray[self.posxy[0]][self.posxy[1]][2] = 0
@@ -50,7 +50,7 @@ class Enemy():
                     else:
                         dirb = self.lastdir
                 case 2:
-                    if (self.posxy[1] > 0 and pixelArray[self.posxy[0]][self.posxy[1] - 1][0] == 0):
+                    if (self.posxy[1] > 0 and pixelArray[self.posxy[0]][self.posxy[1] - 1][0] != 91):
                         pixelArray[self.posxy[0]][self.posxy[1] - 1][2] = 255
                         pixelArray[self.posxy[0]][self.posxy[1] - 1][1] = 255
                         pixelArray[self.posxy[0]][self.posxy[1]][2] = 0
@@ -63,7 +63,7 @@ class Enemy():
                     else:
                         dirb = self.lastdir
                 case 3:
-                    if (self.posxy[0] < 15 and pixelArray[self.posxy[0] + 1][self.posxy[1]][0] == 0):
+                    if (self.posxy[0] < 15 and pixelArray[self.posxy[0] + 1][self.posxy[1]][0] != 91):
                         pixelArray[self.posxy[0] + 1][self.posxy[1]][2] = 255
                         pixelArray[self.posxy[0] + 1][self.posxy[1]][1] = 255
                         pixelArray[self.posxy[0]][self.posxy[1]][2] = 0
@@ -76,7 +76,7 @@ class Enemy():
                     else:
                         dirb = self.lastdir
                 case 4:
-                    if (self.posxy[0] > 0 and pixelArray[self.posxy[0] - 1][self.posxy[1]][0] == 0):
+                    if (self.posxy[0] > 0 and pixelArray[self.posxy[0] - 1][self.posxy[1]][0] != 91):
                         pixelArray[self.posxy[0] - 1][self.posxy[1]][2] = 255
                         pixelArray[self.posxy[0] - 1][self.posxy[1]][1] = 255
                         pixelArray[self.posxy[0]][self.posxy[1]][2] = 0

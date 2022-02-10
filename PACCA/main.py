@@ -2,6 +2,7 @@ debug = 1
 import csv
 from src.player import Player
 from src.ghost import Enemy
+import src.levelcreator as lc
 from pathlib import Path
 import numpy as np
 import time
@@ -89,7 +90,8 @@ def moveplayer(dira):
             Joe.move(0,pixelArray)
 
 def main():
-    createLevel()
+    global pixelArray
+    pixelArray = lc.createLevel(pixelArray,1)
     show(pixelArray)     
     #ctrl = IMUController()
     #threshold  = 0.35
@@ -101,7 +103,14 @@ def main():
     global lastdir 
     global moved
     global Joe
+    global EMEMIES
+    ENEMIES = []
     mama = Enemy(15,15)
+    dada = Enemy(15,0)
+    papa = Enemy(0,15)
+    ENEMIES.append(mama)
+    ENEMIES.append(papa)
+    ENEMIES.append(dada)
     Joe = Player(0,0)
     lastdir = 0
     for x in range(100):
@@ -126,7 +135,9 @@ def main():
             moved=True
         if moved==False:
             moveplayer(lastdir)
-        mama.move(Joe.posxy,pixelArray)
+        if (x%3!=0):
+            for obj in ENEMIES:
+                obj.move(Joe.posxy,pixelArray)
         showUH(pixelArray, 16)
         #else:
          #   OutputFramework.setWindow(pixelArray)
