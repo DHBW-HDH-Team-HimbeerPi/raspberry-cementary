@@ -2,36 +2,54 @@ from .spriteReader import dimensions, readSprite
 from .sprites import numberToSprite
 from .maps import Maps
 from .addObject import add
-import math
-import numpy as np
 
 class Map:
 
     def __init__(self, pixelArray):
         self.map = readSprite(Maps.mario.value, True)
-        self.length = int((len(self.map[0])/4)*16) #length in pixels
+        self.length = int(len(self.map[0])/4)*16
+        self.movedPixels = 16
         self.initialMap(pixelArray)
 
-    def initialMap(self, pixelArray):
-        pixels = 4
-        for x in range(pixels):
-            for y in range(pixels+4):
+    def addMapToPixelArray(self, pixelArray, start, end):
+        grids = 4
+        for x in range(grids): 
+            for y in range(start, end):
+                if(end > len(self.map[0])):
+                    break
+                yPos = y
                 spriteNumber = int(self.map[x][y])
                 if spriteNumber != 0:
                     sprite = numberToSprite(spriteNumber)
-                    add(pixelArray, dimensions(sprite), x, y)
+                    if(start > 4):
+                        yPos -= 4
+                    add(pixelArray, dimensions(sprite), x, yPos)
 
+    def initialMap(self, pixelArray):
+        self.addMapToPixelArray(pixelArray, 0, 4)
 
-    def mapToArray(self, position):
-        pixels = 4
-        pos = math.floor(position/16)
-        print(pos)
-        pixelArray = np.full((pixels, pixels, 4), 0)
+    def updateMap(self, pixelArray):
+        grid = 4
+        pixel = 16
+        if self.movedPixels % pixel == 0 and self.movedPixels > 0:
+            pos = int(self.movedPixels/pixel)*grid
+            self.addMapToPixelArray(pixelArray, pos, pos+grid)
 
-    def updateMap(self, pixelArray, position):
-        if position<=self.length-1 and position > 2:
-            print("test")
-            #add(pixelArray, self.mapToArray(position), 3, 1, True)
+    def moveCameraY(self, pixelArray):
+        if self.movedPixels < self.length:
+            self.updateMap(pixelArray)
+            self.movedPixels += 1
+            for y in range(1, len(pixelArray[0])):
+                for x in range(len(pixelArray)):
+                    if pixelArray[x][y-1][3] != 1 and pixelArray[x][y][3] != 1:
+                        pixelArray[x][y-1] = pixelArray[x][y]
+                    if y == len(pixelArray[0])-1:
+                        pixelArray[x][y][0] = 0  
+                        pixelArray[x][y][1] = 0  
+                        pixelArray[x][y][2] = 0  
+                        pixelArray[x][y][3] = 0 
+
+    
 
 
 

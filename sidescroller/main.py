@@ -6,7 +6,6 @@ from src.directions import Directions
 from src.sanitizePixelArray import sanatizeArray
 from src.input import inputToDirection
 from src.map import Map
-from src.shiftPixels import shiftPixelsY, walkRight
 import time
 
 try:
@@ -40,14 +39,13 @@ def main():
         print("No controller found!")
 
     while running:
-        map.updateMap(pixelArray, joe.posY)
         try:
             OutputFramework.setWindow(sanatizeArray(pixelArray), 180)
             controller.check_triggers()
         except NameError:
             showUH(pixelArray, PIXELS)
-            time.sleep(0.5)
-            shiftPixelsY(pixelArray)
+        time.sleep(1/10)
+        map.moveCameraY(pixelArray)
 
 if __name__ == "__main__":
     main()
