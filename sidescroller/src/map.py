@@ -2,6 +2,7 @@ from .spriteReader import dimensions, readSprite
 from .sprites import numberToSprite
 from .maps import Maps
 from .addObject import add
+from .pixel import setClearPixel
 
 class Map:
 
@@ -9,11 +10,12 @@ class Map:
         self.map = readSprite(Maps.mario.value, True)
         self.length = int(len(self.map[0])/4)*16
         self.movedPixels = 16
-        self.initialMap(pixelArray)
+        self.pixelArray = pixelArray
+        self.initialMap()
 
     def addMapToPixelArray(self, pixelArray, start, end):
-        grids = 4
-        for x in range(grids): 
+        grid = 4 #4x4 grid
+        for x in range(grid): 
             for y in range(start, end):
                 if(end > len(self.map[0])):
                     break
@@ -21,33 +23,30 @@ class Map:
                 spriteNumber = int(self.map[x][y])
                 if spriteNumber != 0:
                     sprite = numberToSprite(spriteNumber)
-                    if(start > 4):
-                        yPos -= 4
+                    if(start > grid):
+                        yPos -= grid
                     add(pixelArray, dimensions(sprite), x, yPos)
 
-    def initialMap(self, pixelArray):
-        self.addMapToPixelArray(pixelArray, 0, 4)
+    def initialMap(self):
+        self.addMapToPixelArray(self.pixelArray, 0, 4)
 
-    def updateMap(self, pixelArray):
+    def updateMap(self):
         grid = 4
         pixel = 16
         if self.movedPixels % pixel == 0 and self.movedPixels > 0:
             pos = int(self.movedPixels/pixel)*grid
-            self.addMapToPixelArray(pixelArray, pos, pos+grid)
+            self.addMapToPixelArray(self.pixelArray, pos, pos+grid)
 
-    def moveCameraY(self, pixelArray):
+    def moveCameraY(self):
         if self.movedPixels < self.length:
-            self.updateMap(pixelArray)
+            self.updateMap()
             self.movedPixels += 1
-            for y in range(1, len(pixelArray[0])):
-                for x in range(len(pixelArray)):
-                    if pixelArray[x][y-1][3] != 1 and pixelArray[x][y][3] != 1:
-                        pixelArray[x][y-1] = pixelArray[x][y]
-                    if y == len(pixelArray[0])-1:
-                        pixelArray[x][y][0] = 0  
-                        pixelArray[x][y][1] = 0  
-                        pixelArray[x][y][2] = 0  
-                        pixelArray[x][y][3] = 0 
+            for y in range(1, len(self.pixelArray[0])):
+                for x in range(len(self.pixelArray)):
+                    if self.pixelArray[x][y-1][3] != 1 and self.pixelArray[x][y][3] != 1:
+                        self.pixelArray[x][y-1] = self.pixelArray[x][y]
+                    if y == len(self.pixelArray[0])-1:
+                        setClearPixel(self.pixelArray, x, y) 
 
     
 
