@@ -1,12 +1,18 @@
-from .directions import Directions
-from src.shiftPixels import shiftPlayerDown, shiftPlayerUp, walkRight, walkLeft
+from enum import Enum
+from .player import Player
 
-def inputToDirection(dir, pixelArray):
-    if(dir == Directions.up.value):
-        shiftPlayerUp(pixelArray)
-    elif(dir == Directions.down.value):
-        shiftPlayerDown(pixelArray)
-    elif(dir == Directions.left.value):
-        walkLeft(pixelArray)
+class Directions(Enum):
+    up = 1
+    down = 2
+    left = 3
+    right = 4
+
+def inputToDirection(dir, pixelArray, player: Player):
+    if dir == Directions.right.value:
+        player.walkRight()
+    elif dir == Directions.left.value:
+        player.walkLeft()
+    elif dir == Directions.up.value:
+        player.jump()
     else:
-        walkRight(pixelArray)
+        print("down")

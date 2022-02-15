@@ -1,12 +1,11 @@
 import numpy as np
-from src.addObject import add
+from src.frameBuffer import FrameBuffer
 from src.player import Player
 from src.unicornHead import showUH
-from src.directions import Directions
-from src.sanitizePixelArray import sanatizeArray
+from src.input import Directions
+from src.pixel import sanatizeArray
 from src.input import inputToDirection
 from src.map import Map
-from src.shiftPixels import shiftPixelsY, walkRight
 import time
 
 try:
@@ -18,17 +17,16 @@ except ImportError:
 
 PIXELS = 16
 pixelArray = np.full((PIXELS, PIXELS*2, 4), 0)
-pixelArray[0][0][0] = 255
-pixelArray[0][1][0] = 255
-pixelArray[0][2][0] = 255
 
 def main():
 
-    joe = Player(pixelArray)    # create Player
-    map = Map(pixelArray)                 # create Map
+    player = Player(pixelArray)    # create Player
+    map = Map(pixelArray)          # create Map
+    frameBuffer = FrameBuffer()
 
     #add(pixelArray, dimensions(Sprites.mapStairs.value), True)
     running = True
+    test = 0
     try:
         rotationTreshold = 0.35
         controller = IMUController(TriggerMode.CALL_CHECK)
@@ -40,14 +38,24 @@ def main():
         print("No controller found!")
 
     while running:
-        map.updateMap(pixelArray, joe.posY)
+        test += 1
+
+        if frameBuffer.length() > 0:
+            frameBuffer.nextFrame(pixelArray)
+
+        #print(player.posX, player.posY)
         try:
             OutputFramework.setWindow(sanatizeArray(pixelArray), 180)
             controller.check_triggers()
         except NameError:
             showUH(pixelArray, PIXELS)
-            time.sleep(0.5)
-            shiftPixelsY(pixelArray)
+                
+        if test < 2:
+            player.jump(pixelArray, frameBuffer)
+        time.sleep(1/2)
+        #player.walkRight()
+        #map.moveCameraY()
+                
 
 if __name__ == "__main__":
     main()
