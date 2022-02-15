@@ -2,7 +2,8 @@ debug = 1
 import csv
 from src.player import Player
 from src.ghost import Enemy
-import src.levelcreator as lc
+from src.coin import Coin
+import src.levelmanager as lm
 from pathlib import Path
 import numpy as np
 import time
@@ -91,7 +92,7 @@ def moveplayer(dira):
 
 def main():
     global pixelArray
-    pixelArray = lc.createLevel(pixelArray,1)
+    pixelArray = lm.createLevel(pixelArray,3)
     show(pixelArray)     
     #ctrl = IMUController()
     #threshold  = 0.35
@@ -107,6 +108,7 @@ def main():
     ENEMIES = []
     mama = Enemy(15,15)
     dada = Enemy(15,0)
+    coin = Coin(pixelArray)
     papa = Enemy(0,15)
     ENEMIES.append(mama)
     ENEMIES.append(papa)
@@ -114,7 +116,6 @@ def main():
     Joe = Player(0,0)
     lastdir = 0
     for x in range(100):
-
         has_been_triggered = 0
         time.sleep(0.2)
         #ctrl.check_triggers()
@@ -135,10 +136,16 @@ def main():
             moved=True
         if moved==False:
             moveplayer(lastdir)
+        if(lm.checkCoin(coin)==True):
+            pixelArray[coin.posxy[0]][coin.posxy[1]][2]=0
+            coin = Coin(pixelArray)
+        coin.showCoin(pixelArray)
         if (x%3!=0):
             for obj in ENEMIES:
                 obj.move(Joe.posxy,pixelArray)
         showUH(pixelArray, 16)
+        if(lm.checkalive(Joe,ENEMIES) == False):
+            break
         #else:
          #   OutputFramework.setWindow(pixelArray)
 if __name__ == "__main__":

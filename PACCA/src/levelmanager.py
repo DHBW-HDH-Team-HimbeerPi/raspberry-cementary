@@ -20,3 +20,16 @@ def createLevel(pixelArray,number):
                 pixelArray[x][y][1] = 58
                 pixelArray[x][y][2] = 41
     return pixelArray
+
+def checkalive(Joe,ENEMIES):
+    for obj in ENEMIES:
+        if(obj.posxy[0]==Joe.posxy[0] and obj.posxy[1]==Joe.posxy[1]):
+            return False
+        print(obj.posxy[0] + Joe.posxy[0] + obj.posxy[1] +Joe.posxy[1])
+    return True
+def checkcoin(Joe,Coin,score):
+    if (Joe.posxy[0]==Coin.posxy[0] and Joe.posxy[1]==Coin.posxy[1]):
+        score+=1
+        return True
+    return False
+        
