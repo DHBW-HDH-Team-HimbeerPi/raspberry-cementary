@@ -26,25 +26,6 @@ from pygame.locals import (
 pygame.init()
 
 
-def show(ausgabe: list):
-    length = len(ausgabe)
-    for y in range(length):
-        for x in range(length):
-            printed = False
-            for color in range(3):
-                if (ausgabe[x][y][color] == 91):
-                    print("X", end=" ")
-                    printed = True
-                    break
-                if (ausgabe[x][y][color] == 255):
-                    print("1", end=" ")
-                    printed = True
-                    break
-            if (not printed):
-                print(" ", end=" ")
-        print()
-
-
 pixelArray = np.full((16, 16, 3), 0)
 global lastdir
 lastdir = 0
@@ -92,7 +73,7 @@ def moveplayer(dira):
 
 def main():
     global pixelArray
-    pixelArray = lm.createLevel(pixelArray,3)
+    pixelArray = lm.createLevel(pixelArray,0)
     show(pixelArray)     
     #ctrl = IMUController()
     #threshold  = 0.35
@@ -107,6 +88,7 @@ def main():
     global EMEMIES
     ENEMIES = []
     mama = Enemy(15,15)
+    score =0
     dada = Enemy(15,0)
     coin = Coin(pixelArray)
     papa = Enemy(0,15)
@@ -119,7 +101,7 @@ def main():
         has_been_triggered = 0
         time.sleep(0.2)
         #ctrl.check_triggers()
-        print(x)
+        print(score)
         moved = False
         pressed_keys = pygame.key.get_pressed()  
         if pressed_keys[K_UP]:
@@ -136,11 +118,12 @@ def main():
             moved=True
         if moved==False:
             moveplayer(lastdir)
-        if(lm.checkCoin(coin)==True):
+        if(lm.checkcoin(Joe,coin)==True):
+            score+=1
             pixelArray[coin.posxy[0]][coin.posxy[1]][2]=0
             coin = Coin(pixelArray)
-        coin.showCoin(pixelArray)
-        if (x%3!=0):
+        coin.showcoin(pixelArray)
+        if (x%8!=0):
             for obj in ENEMIES:
                 obj.move(Joe.posxy,pixelArray)
         showUH(pixelArray, 16)
