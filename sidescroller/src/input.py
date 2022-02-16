@@ -3,7 +3,7 @@ from enum import Enum
 from .frameBuffer import FrameBuffer
 from .player import Player
 
-#ebjekbjf
+#ebjewgw
 class Directions(Enum):
     up = 1
     down = 2
