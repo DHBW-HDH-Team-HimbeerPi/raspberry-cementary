@@ -8,16 +8,10 @@ from pathlib import Path
 import numpy as np
 import time
 import random
-import pygame
-from src.unicornHead import showUH
+#from src.unicornHead import showUH
 from output_framework.output_framework import OutputFramework
 import os
-from pygame.locals import (
-    K_UP,
-    K_DOWN,
-    K_LEFT,
-    K_RIGHT,
-)
+
 
 
 # Initialize pygame
