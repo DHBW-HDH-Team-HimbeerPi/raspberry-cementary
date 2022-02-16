@@ -57,7 +57,7 @@ def moveplayer(dira):
                 if(dira==4):    
                     Joe.move(4,pixelArray)
                 else:
-                    Joe.move(0,picelArray)
+                    Joe.move(0,pixelArray)
 def main():
     #pygame.init()
     global has_been_triggered
