@@ -21,75 +21,74 @@ class Enemy():
             b=45
 
         
-        match self.lastdir[0]:
-            case 1:
-                b=0
-            case 2:
-                a=0
-            case 3:
-                d=0
-            case 4:
-                c=0
+
+        if(self.lastdir[0] ==1):
+            b=0
+        elif(self.lastdir[0] ==2):
+            a=0
+        elif(self.lastdir[0] ==3):
+            d=0
+        elif(self.lastdir[0] ==4):
+            c=0
         dirList = [1, 2, 3, 4]
         moved=False
         dira = random.choices(dirList, weights=(a, b, c, d), k=1)
         dirb = dira[0]
         for x in range(2):
-            match dirb:
-                case 1:
-                    if (self.posxy[1] < 15 and pixelArray[self.posxy[0]][self.posxy[1] + 1][0] != 91):
-                        pixelArray[self.posxy[0]][self.posxy[1] + 1][1] = 255
-                        pixelArray[self.posxy[0]][self.posxy[1] + 1][2] = 255
-                        pixelArray[self.posxy[0]][self.posxy[1]][2] = 0
-                        pixelArray[self.posxy[0]][self.posxy[1]][1] = 0
-                        self.posxy[1] += 1
-                        dirb = 0
-                        if(x==0):
-                            self.lastdir = dira
-                            moved=True
-                    else:
-                        dirb = self.lastdir
-                case 2:
-                    if (self.posxy[1] > 0 and pixelArray[self.posxy[0]][self.posxy[1] - 1][0] != 91):
-                        pixelArray[self.posxy[0]][self.posxy[1] - 1][2] = 255
-                        pixelArray[self.posxy[0]][self.posxy[1] - 1][1] = 255
-                        pixelArray[self.posxy[0]][self.posxy[1]][2] = 0
-                        pixelArray[self.posxy[0]][self.posxy[1]][1] = 0
-                        self.posxy[1] -= 1
-                        dirb = 0
-                        if(x==0):
-                            self.lastdir = dira
-                            moved=True
-                    else:
-                        dirb = self.lastdir
-                case 3:
-                    if (self.posxy[0] < 15 and pixelArray[self.posxy[0] + 1][self.posxy[1]][0] != 91):
-                        pixelArray[self.posxy[0] + 1][self.posxy[1]][2] = 255
-                        pixelArray[self.posxy[0] + 1][self.posxy[1]][1] = 255
-                        pixelArray[self.posxy[0]][self.posxy[1]][2] = 0
-                        pixelArray[self.posxy[0]][self.posxy[1]][1] = 0
-                        self.posxy[0] += 1
-                        dirb = 0
-                        if(x==0):
-                            self.lastdir = dira
-                            moved=True
-                    else:
-                        dirb = self.lastdir
-                case 4:
-                    if (self.posxy[0] > 0 and pixelArray[self.posxy[0] - 1][self.posxy[1]][0] != 91):
-                        pixelArray[self.posxy[0] - 1][self.posxy[1]][2] = 255
-                        pixelArray[self.posxy[0] - 1][self.posxy[1]][1] = 255
-                        pixelArray[self.posxy[0]][self.posxy[1]][2] = 0
-                        pixelArray[self.posxy[0]][self.posxy[1]][1] = 0
-                        self.posxy[0] -= 1
-                        dirb = 0
-                        if(x==0):
-                            self.lastdir = dira
-                            moved=True
-                    else:
-                        dirb = self.lastdir
-                case _:
+            if( dirb==1):
+                if (self.posxy[1] < 15 and pixelArray[self.posxy[0]][self.posxy[1] + 1][0] != 91):
+                    pixelArray[self.posxy[0]][self.posxy[1] + 1][1] = 255
+                    pixelArray[self.posxy[0]][self.posxy[1] + 1][2] = 255
+                    pixelArray[self.posxy[0]][self.posxy[1]][2] = 0
+                    pixelArray[self.posxy[0]][self.posxy[1]][1] = 0
+                    self.posxy[1] += 1
+                    dirb = 0
+                    if(x==0):
+                        self.lastdir = dira
+                        moved=True
+                else:
                     dirb = self.lastdir
+            elif( dirb==2):
+                if (self.posxy[1] > 0 and pixelArray[self.posxy[0]][self.posxy[1] - 1][0] != 91):
+                    pixelArray[self.posxy[0]][self.posxy[1] - 1][2] = 255
+                    pixelArray[self.posxy[0]][self.posxy[1] - 1][1] = 255
+                    pixelArray[self.posxy[0]][self.posxy[1]][2] = 0
+                    pixelArray[self.posxy[0]][self.posxy[1]][1] = 0
+                    self.posxy[1] -= 1
+                    dirb = 0
+                    if(x==0):
+                        self.lastdir = dira
+                        moved=True
+                else:
+                    dirb = self.lastdir
+            elif( dirb==3):
+                if (self.posxy[0] < 15 and pixelArray[self.posxy[0] + 1][self.posxy[1]][0] != 91):
+                    pixelArray[self.posxy[0] + 1][self.posxy[1]][2] = 255
+                    pixelArray[self.posxy[0] + 1][self.posxy[1]][1] = 255
+                    pixelArray[self.posxy[0]][self.posxy[1]][2] = 0
+                    pixelArray[self.posxy[0]][self.posxy[1]][1] = 0
+                    self.posxy[0] += 1
+                    dirb = 0
+                    if(x==0):
+                        self.lastdir = dira
+                        moved=True
+                else:
+                    dirb = self.lastdir
+            elif( dirb==4):
+                if (self.posxy[0] > 0 and pixelArray[self.posxy[0] - 1][self.posxy[1]][0] != 91):
+                    pixelArray[self.posxy[0] - 1][self.posxy[1]][2] = 255
+                    pixelArray[self.posxy[0] - 1][self.posxy[1]][1] = 255
+                    pixelArray[self.posxy[0]][self.posxy[1]][2] = 0
+                    pixelArray[self.posxy[0]][self.posxy[1]][1] = 0
+                    self.posxy[0] -= 1
+                    dirb = 0
+                    if(x==0):
+                        self.lastdir = dira
+                        moved=True
+                else:
+                    dirb = self.lastdir
+            else:
+                dirb = self.lastdir
         if (moved==False):
             self.move(xy,pixelArray)
         
