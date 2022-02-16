@@ -117,7 +117,7 @@ def main():
     score =0;
     playerposition = 8
     pixelArray[3][8][0] = 250
-    for u in range checkalive(pixelArray):
+    while checkalive(pixelArray):
         movewall(pixelArray,walllocation)
         OutputFramework.setWindow(pixelArray)    
         ctrl.check_triggers()
