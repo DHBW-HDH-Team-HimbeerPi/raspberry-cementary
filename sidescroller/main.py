@@ -46,7 +46,7 @@ def main():
         #print(player.posX, player.posY)
         try:
             OutputFramework.setWindow(sanatizeArray(pixelArray), 180)
-            if not bufferRunning:
+            if not bufferRunning and not player.isJumping:
                 controller.check_triggers()
         except NameError:
             showUH(pixelArray, PIXELS)
