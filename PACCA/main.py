@@ -23,16 +23,7 @@ from pygame.locals import (
 
 # Initialize pygame
 
-pygame.init()
 
-
-pixelArray = np.full((16, 16, 3), 0)
-global lastdir
-lastdir = 0
-pixelArray[0][0][0] = 255
-pixelArray[0][0][1] = 255
-pixelArray[15][15][2] = 255
-pixelArray[15][15][1] = 255
 
 def createLevel():
     basePath = Path(__file__).parent
@@ -52,10 +43,10 @@ def createLevel():
 def moveplayer(dira):
     global has_been_triggered
     global Joe
-   # if has_been_triggered != 0:
-    #    return
-    #else:
-     #   has_been_triggered = 1
+    if has_been_triggered != 0:
+        return
+    else:
+       has_been_triggered = 1
    
     moved = True
     
@@ -72,20 +63,27 @@ def moveplayer(dira):
             Joe.move(0,pixelArray)
 
 def main():
+    #pygame.init()
+
     global pixelArray
-    pixelArray = lm.createLevel(pixelArray,0)
-    show(pixelArray)     
-    #ctrl = IMUController()
-    #threshold  = 0.35
-    #ctrl.register_trigger(moveplayer, {'dira' : 1 }, ctrl.mov_x, threshold, ThresholdType.HIGHER)
-    #ctrl.register_trigger(moveplayer, {'dira' : 2 }, ctrl.mov_x, -threshold, ThresholdType.LOWER)
-    #ctrl.register_trigger(moveplayer, {'dira' : 3 }, ctrl.mov_y, threshold, ThresholdType.HIGHER)
-    #ctrl.register_trigger(moveplayer, {'dira' : 4 }, ctrl.mov_y, -threshold, ThresholdType.LOWER)
-    #has_been_triggered = 0
-    global lastdir 
+    pixelArray = np.full((16, 16, 3), 0)
+    lastdir = 0
+    pixelArray[0][0][0] = 255
+    pixelArray[0][0][1] = 255
+    pixelArray[15][15][2] = 255
+    pixelArray[15][15][1] = 255
+    pixelArray = lm.createLevel(pixelArray,1)
+    ctrl = IMUController()
+    threshold  = 0.35
+    ctrl.register_trigger(moveplayer, {'dira' : 1 }, ctrl.mov_x, threshold, ThresholdType.HIGHER)
+    ctrl.register_trigger(moveplayer, {'dira' : 2 }, ctrl.mov_x, -threshold, ThresholdType.LOWER)
+    ctrl.register_trigger(moveplayer, {'dira' : 3 }, ctrl.mov_y, threshold, ThresholdType.HIGHER)
+    ctrl.register_trigger(moveplayer, {'dira' : 4 }, ctrl.mov_y, -threshold, ThresholdType.LOWER)
+    has_been_triggered = 0 
     global moved
     global Joe
     global EMEMIES
+
     ENEMIES = []
     mama = Enemy(15,15)
     score =0
@@ -97,39 +95,42 @@ def main():
     ENEMIES.append(dada)
     Joe = Player(0,0)
     lastdir = 0
-    for x in range(100):
-        has_been_triggered = 0
-        time.sleep(0.2)
-        #ctrl.check_triggers()
-        print(score)
-        moved = False
-        pressed_keys = pygame.key.get_pressed()  
-        if pressed_keys[K_UP]:
-            moveplayer(2)
-            moved=True
-        if pressed_keys[K_DOWN] and moved==False:
-            moveplayer(1)
-            moved=True
-        if pressed_keys[K_RIGHT]and moved==False:
-            moveplayer(3)
-            moved=True
-        if pressed_keys[K_LEFT] and moved==False:
-            moveplayer(4)
-            moved=True
-        if moved==False:
-            moveplayer(lastdir)
-        if(lm.checkcoin(Joe,coin)==True):
-            score+=1
-            pixelArray[coin.posxy[0]][coin.posxy[1]][2]=0
-            coin = Coin(pixelArray)
-        coin.showcoin(pixelArray)
-        if (x%8!=0):
-            for obj in ENEMIES:
-                obj.move(Joe.posxy,pixelArray)
-        showUH(pixelArray, 16)
-        if(lm.checkalive(Joe,ENEMIES) == False):
-            break
-        #else:
-         #   OutputFramework.setWindow(pixelArray)
+    x = 0
+    while (lm.checkalive(Joe,ENEMIES)==True):
+
+        if ( debug==1):         
+            has_been_triggered = 0
+            time.sleep(0.4)
+            ctrl.check_triggers()
+            moveplayer(0)
+            print(score)
+            moved = False
+            """pressed_keys = pygame.key.get_pressed()  
+            if pressed_keys[K_UP]:
+                moveplayer(2)
+                moved=True
+            if pressed_keys[K_DOWN] and moved==False:
+                moveplayer(1)
+                moved=True
+            if pressed_keys[K_RIGHT]and moved==False:
+                moveplayer(3)
+                moved=True
+            if pressed_keys[K_LEFT] and moved==False:
+                moveplayer(4)
+                moved=True
+            if moved==False:
+                moveplayer(lastdir) """
+            if(lm.checkcoin(Joe,coin)==True):
+                score+=1
+                pixelArray[coin.posxy[0]][coin.posxy[1]][2]=0
+                coin = Coin(pixelArray)
+            coin.showcoin(pixelArray)
+            if (x%8!=0):
+                for obj in ENEMIES:
+                    obj.move(Joe.posxy,pixelArray)
+            showUH(pixelArray, 16)
+            x+=1
+            else:
+               OutputFramework.setWindow(pixelArray)
 if __name__ == "__main__":
     main()
