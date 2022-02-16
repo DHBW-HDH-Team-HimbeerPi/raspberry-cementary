@@ -68,7 +68,7 @@ def main():
     pixelArray[0][0][1] = 255
     pixelArray[15][15][2] = 255
     pixelArray[15][15][1] = 255
-    pixelArray = lm.createLevel(pixelArray,1)
+    pixelArray = lm.createLevel(pixelArray,3)
     ctrl = IMUController()
     threshold  = 0.35
     ctrl.register_trigger(moveplayer, {'dira' : 3 }, ctrl.mov_x, threshold, ThresholdType.HIGHER)
