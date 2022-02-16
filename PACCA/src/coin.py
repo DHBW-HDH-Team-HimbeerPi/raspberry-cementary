@@ -1,7 +1,7 @@
 import random
 
 class Coin():
-    test
+    
     def __init__(self,pixelArray):
         while(True):
             x = random.randrange(16)
