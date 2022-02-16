@@ -37,15 +37,16 @@ def main():
         print("No controller found!")
 
     while running:
-        test += 1
+        bufferRunning = False
 
         if frameBuffer.length() > 0:
+            bufferRunning = True
             frameBuffer.nextFrame(pixelArray)
 
         #print(player.posX, player.posY)
         try:
             OutputFramework.setWindow(sanatizeArray(pixelArray), 180)
-            if not player.isJumping:
+            if not bufferRunning:
                 controller.check_triggers()
         except NameError:
             showUH(pixelArray, PIXELS)
