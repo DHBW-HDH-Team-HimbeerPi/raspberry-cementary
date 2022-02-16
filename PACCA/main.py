@@ -72,9 +72,9 @@ def main():
     ctrl = IMUController()
     threshold  = 0.35
     ctrl.register_trigger(moveplayer, {'dira' : 3 }, ctrl.mov_x, threshold, ThresholdType.HIGHER)
-    ctrl.register_trigger(moveplayer, {'dira' : 1 }, ctrl.mov_x, -threshold, ThresholdType.LOWER)
-    ctrl.register_trigger(moveplayer, {'dira' : 2 }, ctrl.mov_y, threshold, ThresholdType.HIGHER)
-    ctrl.register_trigger(moveplayer, {'dira' : 4 }, ctrl.mov_y, -threshold, ThresholdType.LOWER)
+    ctrl.register_trigger(moveplayer, {'dira' : 4 }, ctrl.mov_x, -threshold, ThresholdType.LOWER)
+    ctrl.register_trigger(moveplayer, {'dira' : 0 }, ctrl.mov_y, threshold, ThresholdType.HIGHER)
+    ctrl.register_trigger(moveplayer, {'dira' : 0 }, ctrl.mov_y, -threshold, ThresholdType.LOWER)
     has_been_triggered = False
     global moved
     global Joe
