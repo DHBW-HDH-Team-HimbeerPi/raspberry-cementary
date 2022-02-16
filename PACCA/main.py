@@ -11,6 +11,8 @@ import random
 #from src.unicornHead import showUH
 from output_framework.output_framework import OutputFramework
 import os
+from input_framework.imu_controller import IMUController
+from input_framework.interface import ThresholdType, TriggerMode
 
 
 
@@ -55,10 +57,10 @@ def moveplayer(dira):
                 if(dira==4):    
                     Joe.move(4,pixelArray)
                 else:
-                    Joe.move(0,picelArray)
+                    Joe.move(0,pixelArray)
 def main():
     #pygame.init()
-
+    global has_been_triggered
     global pixelArray
     pixelArray = np.full((16, 16, 3), 0)
     lastdir = 0
@@ -69,11 +71,11 @@ def main():
     pixelArray = lm.createLevel(pixelArray,1)
     ctrl = IMUController()
     threshold  = 0.35
-    ctrl.register_trigger(moveplayer, {'dira' : 1 }, ctrl.mov_x, threshold, ThresholdType.HIGHER)
-    ctrl.register_trigger(moveplayer, {'dira' : 2 }, ctrl.mov_x, -threshold, ThresholdType.LOWER)
-    ctrl.register_trigger(moveplayer, {'dira' : 3 }, ctrl.mov_y, threshold, ThresholdType.HIGHER)
-    ctrl.register_trigger(moveplayer, {'dira' : 4 }, ctrl.mov_y, -threshold, ThresholdType.LOWER)
-    has_been_triggered = 0 
+    ctrl.register_trigger(moveplayer, {'dira' : 3 }, ctrl.mov_x, threshold, ThresholdType.HIGHER)
+    ctrl.register_trigger(moveplayer, {'dira' : 4 }, ctrl.mov_x, -threshold, ThresholdType.LOWER)
+    ctrl.register_trigger(moveplayer, {'dira' : 1 }, ctrl.mov_y, threshold, ThresholdType.HIGHER)
+    ctrl.register_trigger(moveplayer, {'dira' : 2 }, ctrl.mov_y, -threshold, ThresholdType.LOWER)
+    has_been_triggered = False
     global moved
     global Joe
     global EMEMIES
@@ -122,7 +124,7 @@ def main():
             if (x%8!=0):
                 for obj in ENEMIES:
                     obj.move(Joe.posxy,pixelArray)
-            showUH(pixelArray, 16)
+            #showUH(pixelArray, 16)
             x+=1
             OutputFramework.setWindow(pixelArray)
 if __name__ == "__main__":
