@@ -133,7 +133,7 @@ def main():
         time.sleep(0.1/math.log(score+2,15)/8)
         OutputFramework.setWindow(pixelArray)
         show(pixelArray)
-    OutputFramework.showText("Highscore: " + str(self.score), 255, 255, 255, 12, 0.05, 0) 
+    OutputFramework.showText("Highscore: " + str(score), 255, 255, 255, 12, 0.05, 0) 
 
 if __name__ == "__main__":
     main()
