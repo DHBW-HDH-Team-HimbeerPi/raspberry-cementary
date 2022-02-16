@@ -17,7 +17,7 @@ class Player():
         self.colorB = random.randrange(100, 255)
         self.posX = 0
         self.posY = 0
-        self.jumpHeight = 4
+        self.jumpHeight = 3
         self.velocity = 1
         self.lastWalkDirection = 0
         self.isJumping = False
