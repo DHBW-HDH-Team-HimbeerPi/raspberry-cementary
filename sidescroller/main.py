@@ -22,9 +22,8 @@ def main():
 
     player = Player(pixelArray)    # create Player
     map = Map(pixelArray)          # create Map
-    frameBuffer = FrameBuffer()
+    frameBuffer = FrameBuffer()    # create Frame Buffer
 
-    #add(pixelArray, dimensions(Sprites.mapStairs.value), True)
     running = True
     test = 0
     try:
@@ -50,11 +49,12 @@ def main():
         except NameError:
             showUH(pixelArray, PIXELS)
                 
-        if test < 2:
-            player.jump(pixelArray, frameBuffer)
-        time.sleep(1/2)
+        #if test < 2:
+        #    player.jump(pixelArray, frameBuffer)
+        #time.sleep(1/2)
         #player.walkRight()
-        #map.moveCameraY()
+        if player.posY > 10:
+            map.moveCameraY()
                 
 
 if __name__ == "__main__":
