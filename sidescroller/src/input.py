@@ -4,12 +4,13 @@ from .frameBuffer import FrameBuffer
 from .player import Player
 
 class Directions(Enum):
-    up = 1
-    down = 2
+    up = 2
+    down = 1
     left = 3
     right = 4
 
 def inputToDirection(dir, pixelArray, player: Player, frameBuffer: FrameBuffer):
+    print(dir)
     if dir == Directions.right.value:
         player.walkRight(pixelArray)
         print("right")
