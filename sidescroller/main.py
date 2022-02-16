@@ -29,10 +29,10 @@ def main():
     try:
         rotationTreshold = 0.35
         controller = IMUController(TriggerMode.CALL_CHECK)
-        controller.register_trigger(inputToDirection, {'dir' : Directions.left.value, 'pixelArray': pixelArray,'player' : player, 'frameBuffer': frameBuffer}, controller.mov_x, rotationTreshold, ThresholdType.HIGHER)
-        controller.register_trigger(inputToDirection, {'dir' : Directions.up.value, 'pixelArray': pixelArray,'player' : player, 'frameBuffer': frameBuffer}, controller.mov_x, -rotationTreshold, ThresholdType.LOWER)
-        controller.register_trigger(inputToDirection, {'dir' : Directions.right.value, 'pixelArray': pixelArray,'player' : player, 'frameBuffer': frameBuffer}, controller.mov_y, -rotationTreshold, ThresholdType.LOWER)
-        controller.register_trigger(inputToDirection, {'dir' : Directions.down.value, 'pixelArray': pixelArray,'player' : player, 'frameBuffer': frameBuffer}, controller.mov_y, rotationTreshold, ThresholdType.HIGHER)
+        controller.register_trigger(inputToDirection, { 'dir' : Directions.left.value, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer }, controller.mov_x, rotationTreshold, ThresholdType.HIGHER)
+        controller.register_trigger(inputToDirection, { 'dir' : Directions.right.value, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer }, controller.mov_x, -rotationTreshold, ThresholdType.LOWER)
+        controller.register_trigger(inputToDirection, { 'dir' : Directions.up.value, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer }, controller.mov_y, -rotationTreshold, ThresholdType.LOWER)
+        controller.register_trigger(inputToDirection, { 'dir' : Directions.down.value, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer }, controller.mov_y, rotationTreshold, ThresholdType.HIGHER)
     except NameError:
         print("No controller found!")
 
@@ -45,7 +45,8 @@ def main():
         #print(player.posX, player.posY)
         try:
             OutputFramework.setWindow(sanatizeArray(pixelArray), 180)
-            controller.check_triggers()
+            if not player.isJumping:
+                controller.check_triggers()
         except NameError:
             showUH(pixelArray, PIXELS)
                 
