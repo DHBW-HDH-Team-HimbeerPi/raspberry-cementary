@@ -117,14 +117,9 @@ def main():
     score =0;
     playerposition = 8
     pixelArray[3][8][0] = 250
-    for u in range (checkalive(pixelArray)==False):
-
+    for u in range (checkalive(pixelArray)==True):
         movewall(pixelArray,walllocation)
-        OutputFramework.setWindow(pixelArray)
-    
-      
-      
-      
+        OutputFramework.setWindow(pixelArray)    
         ctrl.check_triggers()
         time.sleep(0.1/math.log(score+2,15)/8)
         if (checkalive(pixelArray)==False):
@@ -138,7 +133,7 @@ def main():
         time.sleep(0.1/math.log(score+2,15)/8)
         OutputFramework.setWindow(pixelArray)
         show(pixelArray)
-        
+    OutputFramework.showText("Highscore: " + str(self.score), 255, 255, 255, 12, 0.05, 0) 
 
 if __name__ == "__main__":
     main()

@@ -127,5 +127,6 @@ def main():
             #showUH(pixelArray, 16)
             x+=1
             OutputFramework.setWindow(pixelArray)
+    OutputFramework.showText("Highscore: " + str(score), 255, 255, 255, 12, 0.05, 0)
 if __name__ == "__main__":
     main()
