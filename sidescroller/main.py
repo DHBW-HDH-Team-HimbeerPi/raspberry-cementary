@@ -29,23 +29,24 @@ def main():
     try:
         rotationTreshold = 0.35
         controller = IMUController(TriggerMode.CALL_CHECK)
-        controller.register_trigger(inputToDirection, { 'dir' : Directions.left.value, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer }, controller.mov_x, rotationTreshold, ThresholdType.HIGHER)
-        controller.register_trigger(inputToDirection, { 'dir' : Directions.right.value, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer }, controller.mov_x, -rotationTreshold, ThresholdType.LOWER)
-        controller.register_trigger(inputToDirection, { 'dir' : Directions.up.value, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer }, controller.mov_y, -rotationTreshold, ThresholdType.LOWER)
-        controller.register_trigger(inputToDirection, { 'dir' : Directions.down.value, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer }, controller.mov_y, rotationTreshold, ThresholdType.HIGHER)
+        controller.register_trigger(inputToDirection, { 'dir' : 1, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer }, controller.mov_x, rotationTreshold, ThresholdType.HIGHER)
+        controller.register_trigger(inputToDirection, { 'dir' : 2, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer }, controller.mov_x, -rotationTreshold, ThresholdType.LOWER)
+        controller.register_trigger(inputToDirection, { 'dir' : 3, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer }, controller.mov_y, -rotationTreshold, ThresholdType.LOWER)
+        controller.register_trigger(inputToDirection, { 'dir' : 4, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer }, controller.mov_y, rotationTreshold, ThresholdType.HIGHER)
     except NameError:
         print("No controller found!")
 
     while running:
-        test += 1
+        bufferRunning = False
 
         if frameBuffer.length() > 0:
+            bufferRunning = True
             frameBuffer.nextFrame(pixelArray)
 
         #print(player.posX, player.posY)
         try:
             OutputFramework.setWindow(sanatizeArray(pixelArray), 180)
-            if not player.isJumping:
+            if not bufferRunning and not player.isJumping:
                 controller.check_triggers()
         except NameError:
             showUH(pixelArray, PIXELS)

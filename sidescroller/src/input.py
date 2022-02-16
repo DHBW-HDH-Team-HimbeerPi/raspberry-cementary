@@ -1,13 +1,12 @@
 from enum import Enum
-
 from .frameBuffer import FrameBuffer
 from .player import Player
 
 class Directions(Enum):
-    up = 2
-    down = 1
-    left = 3
-    right = 4
+    left = 1
+    right = 2
+    down = 3
+    up = 4
 
 def inputToDirection(dir, pixelArray, player: Player, frameBuffer: FrameBuffer):
     print(dir)
