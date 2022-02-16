@@ -25,7 +25,7 @@ def main():
     frameBuffer = FrameBuffer()    # create Frame Buffer erer
 
     running = True
-    test = 0
+
     try:
         rotationTreshold = 0.35
         controller = IMUController(TriggerMode.CALL_CHECK)
@@ -36,7 +36,10 @@ def main():
     except NameError:
         print("No controller found!")
 
+    frames = 0
+
     while running:
+        frames += 1
         bufferRunning = False
 
         if frameBuffer.length() > 0:
@@ -51,12 +54,13 @@ def main():
         except NameError:
             showUH(pixelArray, PIXELS)
                 
-        #if test < 2:
-        #    player.jump(pixelArray, frameBuffer)
-        #time.sleep(1/2)
-        #player.walkRight()
-        if player.posY > 10:
-            map.moveCameraY()
+        inputToDirection(2, pixelArray, player, frameBuffer, map)
+        
+        #if(frames == 5):
+            #player.jump(pixelArray, frameBuffer)
+        #player.shiftPlayerDown(pixelArray)
+
+        time.sleep(1)
                 
 
 if __name__ == "__main__":
