@@ -73,8 +73,8 @@ def main():
     threshold  = 0.35
     ctrl.register_trigger(moveplayer, {'dira' : 3 }, ctrl.mov_x, threshold, ThresholdType.HIGHER)
     ctrl.register_trigger(moveplayer, {'dira' : 4 }, ctrl.mov_x, -threshold, ThresholdType.LOWER)
-    ctrl.register_trigger(moveplayer, {'dira' : 1 }, ctrl.mov_y, threshold, ThresholdType.HIGHER)
-    ctrl.register_trigger(moveplayer, {'dira' : 2 }, ctrl.mov_y, -threshold, ThresholdType.LOWER)
+    ctrl.register_trigger(moveplayer, {'dira' : 2 }, ctrl.mov_y, threshold, ThresholdType.HIGHER)
+    ctrl.register_trigger(moveplayer, {'dira' : 1 }, ctrl.mov_y, -threshold, ThresholdType.LOWER)
     has_been_triggered = False
     global moved
     global Joe
@@ -96,7 +96,7 @@ def main():
 
         if ( debug==1):         
             has_been_triggered = 0
-            #time.sleep(0.4)
+            time.sleep(0.35)
             ctrl.check_triggers()
             moveplayer(0)
             print(score)
