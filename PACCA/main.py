@@ -10,8 +10,7 @@ import time
 import random
 import pygame
 from src.unicornHead import showUH
-if debug != 1:
-    from output_framework.output_framework import OutputFramework
+from output_framework.output_framework import OutputFramework
 import os
 from pygame.locals import (
     K_UP,
@@ -63,7 +62,6 @@ def moveplayer(dira):
                     Joe.move(4,pixelArray)
                 else:
                     Joe.move(0,picelArray)
-
 def main():
     #pygame.init()
 
@@ -133,6 +131,6 @@ def main():
             showUH(pixelArray, 16)
             x+=1
             else:
-               OutputFramework.setWindow(pixelArray)
+                OutputFramework.setWindow(pixelArray)
 if __name__ == "__main__":
     main()

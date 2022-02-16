@@ -3,12 +3,12 @@ import time
 import random
 import math
 import os
- #from input_framework.imu_controller import IMUController
-#from input_framework.interface import ThresholdType, TriggerMode
+from input_framework.imu_controller import IMUController
+from input_framework.interface import ThresholdType, TriggerMode
 global difficulty
 global playerposition
 global score
-#from output_framework.output_framework import OutputFramework 
+from output_framework.output_framework import OutputFramework 
 
 
 def show(ausgabe: list):
