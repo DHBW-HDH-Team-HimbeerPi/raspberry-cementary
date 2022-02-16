@@ -22,18 +22,17 @@ def main():
 
     player = Player(pixelArray)    # create Player
     map = Map(pixelArray)          # create Map
-    frameBuffer = FrameBuffer()
+    frameBuffer = FrameBuffer()    # create Frame Buffer
 
-    #add(pixelArray, dimensions(Sprites.mapStairs.value), True)
     running = True
     test = 0
     try:
         rotationTreshold = 0.35
         controller = IMUController(TriggerMode.CALL_CHECK)
-        controller.register_trigger(inputToDirection, {'dir' : Directions.up.value, 'player' : player}, controller.mov_x, rotationTreshold, ThresholdType.HIGHER)
-        controller.register_trigger(inputToDirection, {'dir' : Directions.down.value, 'player' : player}, controller.mov_x, -rotationTreshold, ThresholdType.LOWER)
-        controller.register_trigger(inputToDirection, {'dir' : Directions.left.value, 'player' : player}, controller.mov_y, -rotationTreshold, ThresholdType.LOWER)
-        controller.register_trigger(inputToDirection, {'dir' : Directions.right.value, 'player' : player}, controller.mov_y, rotationTreshold, ThresholdType.HIGHER)
+        controller.register_trigger(inputToDirection, {'dir' : Directions.up.value, 'pixelArray': pixelArray,'player' : player}, controller.mov_x, rotationTreshold, ThresholdType.HIGHER)
+        controller.register_trigger(inputToDirection, {'dir' : Directions.down.value, 'pixelArray': pixelArray,'player' : player}, controller.mov_x, -rotationTreshold, ThresholdType.LOWER)
+        controller.register_trigger(inputToDirection, {'dir' : Directions.left.value, 'pixelArray': pixelArray,'player' : player}, controller.mov_y, -rotationTreshold, ThresholdType.LOWER)
+        controller.register_trigger(inputToDirection, {'dir' : Directions.right.value, 'pixelArray': pixelArray,'player' : player}, controller.mov_y, rotationTreshold, ThresholdType.HIGHER)
     except NameError:
         print("No controller found!")
 
@@ -50,11 +49,12 @@ def main():
         except NameError:
             showUH(pixelArray, PIXELS)
                 
-        if test < 2:
-            player.jump(pixelArray, frameBuffer)
-        time.sleep(1/2)
+        #if test < 2:
+        #    player.jump(pixelArray, frameBuffer)
+        #time.sleep(1/2)
         #player.walkRight()
-        #map.moveCameraY()
+        if player.posY > 10:
+            map.moveCameraY()
                 
 
 if __name__ == "__main__":
