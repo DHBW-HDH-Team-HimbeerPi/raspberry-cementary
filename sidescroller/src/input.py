@@ -7,15 +7,15 @@ class Directions(Enum):
     left = 3
     right = 4
 
-def inputToDirection(dir, player: Player):
+def inputToDirection(dir, pixelArray, player: Player):
     if dir == Directions.right.value:
-        player.walkRight()
+        player.walkRight(pixelArray)
         print("right")
     elif dir == Directions.left.value:
-        player.walkLeft()
+        player.walkLeft(pixelArray)
         print("left")
     elif dir == Directions.up.value:
-        player.jump()
+        player.jump(pixelArray)
         print("up")
     else:
         print("down")
