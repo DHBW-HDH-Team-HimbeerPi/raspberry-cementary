@@ -50,17 +50,19 @@ def moveplayer(dira):
    
     moved = True
     
-    match dira:
-        case 1:
-            Joe.move(1,pixelArray)
-        case 2:
+    if(dira==1):
+        Joe.move(1,pixelArray)
+    else:
+        if(dira==2):
             Joe.move(2,pixelArray)
-        case 3:
-            Joe.move(3,pixelArray)
-        case 4:
-            Joe.move(4,pixelArray)
-        case _:
-            Joe.move(0,pixelArray)
+        else:
+            if(dira==3):
+                Joe.move(3,pixelArray)
+            else:
+                if(dira==4):    
+                    Joe.move(4,pixelArray)
+                else:
+                    Joe.move(0,picelArray)
 
 def main():
     #pygame.init()
