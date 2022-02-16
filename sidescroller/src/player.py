@@ -18,7 +18,7 @@ class Player():
         self.posX = 0
         self.posY = 0
         self.jumpHeight = 4
-        self.velocity = 5
+        self.velocity = 1
         self.lastWalkDirection = 0
         self.isJumping = False
         add(pixelArray, self.dimensions(), 3, 0)
@@ -139,4 +139,3 @@ class Player():
             x += 1
 
         self.isJumping = False
-        
