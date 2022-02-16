@@ -60,7 +60,7 @@ def moveplayer(dira):
                     Joe.move(0,picelArray)
 def main():
     #pygame.init()
-
+    global has_been_triggered
     global pixelArray
     pixelArray = np.full((16, 16, 3), 0)
     lastdir = 0
@@ -75,7 +75,7 @@ def main():
     ctrl.register_trigger(moveplayer, {'dira' : 2 }, ctrl.mov_x, -threshold, ThresholdType.LOWER)
     ctrl.register_trigger(moveplayer, {'dira' : 3 }, ctrl.mov_y, threshold, ThresholdType.HIGHER)
     ctrl.register_trigger(moveplayer, {'dira' : 4 }, ctrl.mov_y, -threshold, ThresholdType.LOWER)
-    has_been_triggered = 0 
+    has_been_triggered = False
     global moved
     global Joe
     global EMEMIES
