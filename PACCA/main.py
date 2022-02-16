@@ -124,7 +124,7 @@ def main():
             if (x%8!=0):
                 for obj in ENEMIES:
                     obj.move(Joe.posxy,pixelArray)
-            showUH(pixelArray, 16)
+            #showUH(pixelArray, 16)
             x+=1
             OutputFramework.setWindow(pixelArray)
 if __name__ == "__main__":
