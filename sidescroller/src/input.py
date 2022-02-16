@@ -10,6 +10,7 @@ class Directions(Enum):
     right = 4
 
 def inputToDirection(dir, pixelArray, player: Player, frameBuffer: FrameBuffer):
+    print(dir)
     if dir == Directions.right.value:
         player.walkRight(pixelArray)
         print("right")
