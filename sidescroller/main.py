@@ -22,7 +22,7 @@ def main():
 
     player = Player(pixelArray)    # create Player
     map = Map(pixelArray)          # create Map
-    frameBuffer = FrameBuffer()    # create Frame Buffer
+    frameBuffer = FrameBuffer()    # create Frame Buffer erer
 
     running = True
     test = 0
@@ -30,8 +30,8 @@ def main():
         rotationTreshold = 0.35
         controller = IMUController(TriggerMode.CALL_CHECK)
         controller.register_trigger(inputToDirection, {'dir' : Directions.left.value, 'pixelArray': pixelArray,'player' : player, 'frameBuffer': frameBuffer}, controller.mov_x, rotationTreshold, ThresholdType.HIGHER)
-        controller.register_trigger(inputToDirection, {'dir' : Directions.right.value, 'pixelArray': pixelArray,'player' : player, 'frameBuffer': frameBuffer}, controller.mov_x, -rotationTreshold, ThresholdType.LOWER)
-        controller.register_trigger(inputToDirection, {'dir' : Directions.up.value, 'pixelArray': pixelArray,'player' : player, 'frameBuffer': frameBuffer}, controller.mov_y, -rotationTreshold, ThresholdType.LOWER)
+        controller.register_trigger(inputToDirection, {'dir' : Directions.up.value, 'pixelArray': pixelArray,'player' : player, 'frameBuffer': frameBuffer}, controller.mov_x, -rotationTreshold, ThresholdType.LOWER)
+        controller.register_trigger(inputToDirection, {'dir' : Directions.right.value, 'pixelArray': pixelArray,'player' : player, 'frameBuffer': frameBuffer}, controller.mov_y, -rotationTreshold, ThresholdType.LOWER)
         controller.register_trigger(inputToDirection, {'dir' : Directions.down.value, 'pixelArray': pixelArray,'player' : player, 'frameBuffer': frameBuffer}, controller.mov_y, rotationTreshold, ThresholdType.HIGHER)
     except NameError:
         print("No controller found!")
