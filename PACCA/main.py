@@ -130,7 +130,6 @@ def main():
                     obj.move(Joe.posxy,pixelArray)
             showUH(pixelArray, 16)
             x+=1
-            else:
-                OutputFramework.setWindow(pixelArray)
+            OutputFramework.setWindow(pixelArray)
 if __name__ == "__main__":
     main()
