@@ -5,10 +5,10 @@ from .player import Player
 
 #ebjewgw
 class Directions(Enum):
-    up = 1
-    down = 2
-    left = 3
-    right = 4
+    up = 4
+    down = 3
+    left = 1
+    right = 2
 
 def inputToDirection(dir, pixelArray, player: Player, frameBuffer: FrameBuffer):
     print(dir)
