@@ -88,7 +88,7 @@ def main():
         print("could NOT find unicorn")
             
 
-    while sc.SnakeIsAlive():
+    while sc.SnakeIsAlive() and not sc.SnakeCrashed():
         pixelArray[sc.posXPrev][sc.posYPrev][1] = 0
 
         if (sc.posX[0] == apple.posX and sc.posY[0] == apple.posY):
