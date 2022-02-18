@@ -40,7 +40,7 @@ class Map:
             self.addMapToPixelArray(self.pixelArray, pos, pos+grid)
 
     def moveCameraY(self):
-        print(self.movedPixels, self.length)
+        #print(self.movedPixels, self.length)
         if self.movedPixels < self.length:
             self.updateMap()
             self.movedPixels += 1

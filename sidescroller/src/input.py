@@ -10,15 +10,22 @@ class Directions(Enum):
     up = 4
 
 def inputToDirection(dir, pixelArray, player: Player, frameBuffer: FrameBuffer, map: Map):
-    print(dir)
-    if dir == Directions.right.value:
-        if player.posY < 7:
-            player.walkRight(pixelArray)
-        else:
-            map.moveCameraY()
+        
+    if player.goingDownPossible(pixelArray):
+        player.shiftPlayerDown(pixelArray)
+        player.shiftPlayerDown(pixelArray)
 
-    elif dir == Directions.left.value:
-        player.walkLeft(pixelArray)
+    if player.posX < 13:
 
-    elif dir == Directions.up.value:
-        player.jump(pixelArray, frameBuffer)
+        if dir == Directions.right.value:
+            if player.posY < 7:
+                    player.walkRight(pixelArray)
+            else:
+                if player.walkingRightPossible(pixelArray) and player.posX < 10:
+                    map.moveCameraY()
+
+        elif dir == Directions.left.value:
+            player.walkLeft(pixelArray)
+
+        elif dir == Directions.up.value:
+            player.jump(pixelArray, frameBuffer)

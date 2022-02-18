@@ -13,7 +13,7 @@ try:
     from input_framework.imu_controller import IMUController # type: ignore
     from input_framework.interface import ThresholdType, TriggerMode # type: ignore
 except ImportError:
-    print("no imports found")
+    print("No imports found!")
 
 PIXELS = 16
 pixelArray = np.full((PIXELS, PIXELS*2, 4), 0)
@@ -36,17 +36,13 @@ def main():
     except NameError:
         print("No controller found!")
 
-    frames = 0
-
     while running:
-        frames += 1
         bufferRunning = False
 
         if frameBuffer.length() > 0:
             bufferRunning = True
             frameBuffer.nextFrame(pixelArray)
 
-        #print(player.posX, player.posY)
         try:
             OutputFramework.setWindow(sanatizeArray(pixelArray), 180)
             if not bufferRunning and not player.isJumping:
@@ -55,13 +51,7 @@ def main():
             showUH(pixelArray, PIXELS)
                 
         inputToDirection(2, pixelArray, player, frameBuffer, map)
-        
-        #if(frames == 5):
-            #player.jump(pixelArray, frameBuffer)
-        #player.shiftPlayerDown(pixelArray)
-
-        time.sleep(1)
-                
+        time.sleep(1/2)
 
 if __name__ == "__main__":
     main()
