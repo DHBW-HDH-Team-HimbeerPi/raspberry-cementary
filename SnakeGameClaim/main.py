@@ -13,7 +13,7 @@ from SnakeController import SnakeController
 from AppleController import Apple
 
 
-sc = SnakeController(3, 6)
+sc = SnakeController(7, 7)
 apple = Apple()
 pixelAmount = 16
 pixelArray = np.full((pixelAmount , pixelAmount, 3), 0)
@@ -114,7 +114,12 @@ def main():
         
         time.sleep(sleepTime)
 
-    OutputFramework.showText("Highscore: " + str(len(sc.posY) - 1), 255, 255, 255, 12, 0.05, 0)
+    try:
+        OutputFramework.showText("Highscore: " + str(len(sc.posY) - 1), 255, 255, 255, 12, 0.05, 0)
+    except NameError:
+        print("could not find Outputframework")
+
+    
         
 
     
