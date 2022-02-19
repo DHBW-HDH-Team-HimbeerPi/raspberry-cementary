@@ -114,7 +114,7 @@ def main():
         
         time.sleep(sleepTime)
 
-    OutputFramework.showText("Highscore: " + str(len(sc.posY)), 255, 255, 255, 12, 0.05, 0)
+    OutputFramework.showText("Highscore: " + str(len(sc.posY) - 1), 255, 255, 255, 12, 0.05, 0)
         
 
     
