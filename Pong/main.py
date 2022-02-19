@@ -69,7 +69,7 @@ class Pong:
             #        uni.set_pixel(x, y, gameField[x][y][0], gameField[x][y][1], gameField[x][y][2])
             # uni.show()
             # time.sleep(self.speed)
-        oF.showText("Highscore: " + str(self.score), 255, 255, 255, 12, 0.05, 0)
+        oF.showText("Highscore: " + str(self.score), 255, 255, 255, 12, 0.02, 0)
 
     def ballCheck(self):
         if int(self.gameBall.xPosition) < 1 or int(self.gameBall.xPosition) > 14:
