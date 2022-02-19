@@ -32,24 +32,24 @@ class Map:
     def initialMap(self):
         self.addMapToPixelArray(self.pixelArray, 0, 4)
 
-    def updateMap(self):
+    def updateMap(self, pixelArray):
         grid = 4
         pixel = 16
         if self.movedPixels % pixel == 0 and self.movedPixels > 0:
             pos = int(self.movedPixels/pixel)*grid
-            self.addMapToPixelArray(self.pixelArray, pos, pos+grid)
+            self.addMapToPixelArray(pixelArray, pos, pos+grid)
 
-    def moveCameraY(self):
+    def moveCameraY(self, pixelArray):
         #print(self.movedPixels, self.length)
         if self.movedPixels < self.length:
             self.updateMap()
             self.movedPixels += 1
-            for y in range(1, len(self.pixelArray[0])):
-                for x in range(len(self.pixelArray)):
-                    if self.pixelArray[x][y-1][3] != 1 and self.pixelArray[x][y][3] != 1:
-                        self.pixelArray[x][y-1] = self.pixelArray[x][y]
-                    if y == len(self.pixelArray[0])-1:
-                        setClearPixel(self.pixelArray, x, y) 
+            for y in range(1, len(pixelArray[0])):
+                for x in range(len(pixelArray)):
+                    if pixelArray[x][y-1][3] != 1 and pixelArray[x][y][3] != 1:
+                        pixelArray[x][y-1] = pixelArray[x][y]
+                    if y == len(pixelArray[0])-1:
+                        setClearPixel(pixelArray, x, y) 
 
     
 

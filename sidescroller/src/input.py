@@ -22,7 +22,7 @@ def inputToDirection(dir, pixelArray, player: Player, frameBuffer: FrameBuffer, 
                     player.walkRight(pixelArray)
             else:
                 if player.walkingRightPossible(pixelArray) and player.posX < 10:
-                    map.moveCameraY()
+                    map.moveCameraY(pixelArray)
 
         elif dir == Directions.left.value:
             player.walkLeft(pixelArray)
