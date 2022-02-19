@@ -23,11 +23,14 @@ class Map:
                 spriteNumber = int(self.map[x][y])
                 if spriteNumber != 0:
                     sprite = numberToSprite(spriteNumber)
-                    if(start > grid):
+                    if start > grid:
                         yPos -= grid
-                    if(yPos > 8):
+                    
+                    if yPos > 7:
+                        print("lost")
                         yPos = y-int(8*(self.movedPixels-32)/16)
-                    print(x, yPos)
+
+                    print("add: ", x, yPos, " moved pixels: ", self.movedPixels)
                     add(pixelArray, dimensions(sprite), x, yPos)
 
     def initialMap(self):
@@ -38,8 +41,7 @@ class Map:
         pixel = 16
         if self.movedPixels % pixel == 0 and self.movedPixels > 0:
             pos = int(self.movedPixels/pixel)*grid
-            print("add: ", pos, pos+grid)
-            self.addMapToPixelArray(pixelArray, pos, pos+grid)
+            self.addMapToPixelArray(pixelArray, pos, pos+4)
 
     def moveCameraY(self, pixelArray):
         #print(self.movedPixels, self.length)

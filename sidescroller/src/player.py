@@ -52,7 +52,7 @@ class Player():
                 self.velocity = 1
 
     def walkingRightPossible(self, pixelArray):
-        print("walk right check: ", pixelArray[self.posX+2][self.posY+2][3], self.posX, self.posY)
+        #print("walk right check: ", pixelArray[self.posX+2][self.posY+2][3], self.posX, self.posY)
         if pixelArray[self.posX+2][self.posY+2][3] == 0 and pixelArray[self.posX+1][self.posY+2][3] == 0 and pixelArray[self.posX][self.posY+2][3] == 0 and pixelArray[self.posX-1][self.posY+1][3] == 0:
             return True
         else:
