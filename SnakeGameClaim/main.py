@@ -116,7 +116,7 @@ def main():
         time.sleep(sleepTime)
 
     try:
-        OutputFramework.showText("Highscore: " + str(len(sc.posY) - 1), 255, 255, 255, 12, 0.05, 0)
+        OutputFramework.showText("Highscore: " + str(len(sc.posY) - 1), 255, 255, 255, 12, 0.02, 0)
     except NameError:
         print("could not find Outputframework")
 
