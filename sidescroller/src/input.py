@@ -28,4 +28,4 @@ def inputToDirection(dir, pixelArray, player: Player, frameBuffer: FrameBuffer, 
             player.walkLeft(pixelArray)
 
         elif dir == Directions.up.value:
-            player.jump(pixelArray, frameBuffer)
+            player.jump(pixelArray, frameBuffer, map)

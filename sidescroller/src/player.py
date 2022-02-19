@@ -3,6 +3,7 @@ import random
 import math
 
 from .frameBuffer import FrameBuffer
+from .map import Map
 from .spriteReader import readSprite, setPixelColor
 from .sprites import Sprites
 from .addObject import add
@@ -137,7 +138,7 @@ class Player():
             velocity = 3
         return round((-((x*velocity)-math.sqrt(self.jumpHeight))**2)+self.jumpHeight)
 
-    def jump(self, pixelArray: list, frameBuffer: FrameBuffer):
+    def jump(self, pixelArray: list, frameBuffer: FrameBuffer, map: Map):
         self.isJumping = True
         jumpPosX = 0
         jumpPosY = 0
@@ -157,7 +158,10 @@ class Player():
             jumpPosY = y
 
             if oldJumpPosX != jumpPosX:
-                self.walkRight(pixelArrayCopy)
+                if self.posX < 7:
+                    self.walkRight(pixelArrayCopy)
+                else:
+                    map.moveCameraY()
                 changed = True
 
             if oldJumpPosY < jumpPosY:
