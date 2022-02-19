@@ -37,6 +37,9 @@ def main():
         print("No controller found!")
 
     while running:
+        if player.posX == 13:
+            running = False
+
         bufferRunning = False
 
         if frameBuffer.length() > 0:
