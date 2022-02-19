@@ -4,6 +4,7 @@ class FrameBuffer:
 
     def __init__(self):
         self.buffer = list()
+        self.running = False
 
     def addFrame(self, pixelArray: list):
         self.buffer.append(pixelArray.copy())
