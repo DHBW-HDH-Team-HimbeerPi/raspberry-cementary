@@ -157,7 +157,10 @@ class Player():
             jumpPosY = y
 
             if oldJumpPosX != jumpPosX:
-                self.walkRight(pixelArrayCopy)
+                if self.walkingRightPossible(pixelArray):
+                    self.walkRight(pixelArrayCopy)
+                else:
+                    self.shiftPlayerUp(pixelArray)
                 changed = True
             if oldJumpPosY < jumpPosY:
                 for jmps in range(jumpPosY-oldJumpPosY):
