@@ -135,7 +135,7 @@ def main():
         show(pixelArray)
         if (checkalive(pixelArray)==False):
             break
-    OutputFramework.showText("Highscore: " + str(score), 255, 255, 255, 12, 0.02, 0)
+    OutputFramework.showText("Score " + str(score), 255, 255, 255, 12, 0.02, 0)
 
 if __name__ == "__main__":
     main()
