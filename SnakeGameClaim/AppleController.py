@@ -27,9 +27,9 @@ class Apple():
 
         self.pixelArray[self.posX][self.posY][0] = 255
 
-        if (self.posXPrev == 0):
-            self.posX = 3
-            self.posY = 10
+        # if (self.posXPrev == 0):
+        #     self.posX = 3
+        #     self.posY = 10 
 
         applePosition = [self.posX, self.posY, self.posXPrev, self.posYPrev]
         return applePosition
