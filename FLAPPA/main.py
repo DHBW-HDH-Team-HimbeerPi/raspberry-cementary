@@ -33,7 +33,7 @@ def checkalive(pixelArray):
     for x in range (3):
         if(walllocation[x]==3 ): 
             for y in range (15):
-                    if(playerposition>walllocation[x*2+3] and playerposition<walllocation[x*2+4]):
+                    if(playerposition>=walllocation[x*2+3] and playerposition<=walllocation[x*2+4]):
                         return True
                     else:
                         return False
