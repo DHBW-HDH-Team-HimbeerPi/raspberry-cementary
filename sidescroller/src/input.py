@@ -12,6 +12,7 @@ class Directions(Enum):
 def inputToDirection(dir, pixelArray, player: Player, frameBuffer: FrameBuffer, map: Map):
         
     if player.goingDownPossible(pixelArray) and not player.isJumping and not frameBuffer.running:
+        print("sheeeesh")
         #player.shiftPlayerDown(pixelArray)
         #player.shiftPlayerDown(pixelArray)
 
