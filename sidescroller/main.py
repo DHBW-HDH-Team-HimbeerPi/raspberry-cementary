@@ -54,7 +54,6 @@ def main():
             showUH(pixelArray, PIXELS)
                 
         #inputToDirection(2, pixelArray, player, frameBuffer, map)
-        time.sleep(1/24)
 
 if __name__ == "__main__":
     main()
