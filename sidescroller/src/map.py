@@ -27,7 +27,6 @@ class Map:
                         yPos -= grid
                     
                     if yPos > 7:
-                        yPos = yPos-8
                         if self.movedPixels % 32 == 0:
                             yPos = int(yPos-4*(self.movedPixels/32))
                         else:
