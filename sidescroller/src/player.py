@@ -59,7 +59,7 @@ class Player():
 
     def walkRight(self, pixelArray):
         #check if walking right is possible
-        if self.posY < 7:
+        if self.posY < 8:
             if self.walkingRightPossible(pixelArray): 
                 self.posY += 1
                 self.updateVelocity(1)
