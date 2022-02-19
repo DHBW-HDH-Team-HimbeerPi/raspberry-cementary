@@ -161,7 +161,8 @@ class Player():
                 if self.posX < 7:
                     self.walkRight(pixelArrayCopy)
                 else:
-                    map.moveCameraY(pixelArrayCopy)
+                    if self.walkingRightPossible(pixelArrayCopy):
+                        map.moveCameraY(pixelArrayCopy)
                 changed = True
 
             if oldJumpPosY < jumpPosY:
