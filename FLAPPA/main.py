@@ -33,7 +33,7 @@ def checkalive(pixelArray):
     for x in range (3):
         if(walllocation[x]==3 ): 
             for y in range (15):
-                    if(playerposition>walllocation[x*2+3] and playerposition<walllocation[x*2+4]):
+                    if(playerposition>=walllocation[x*2+3] and playerposition<=walllocation[x*2+4]):
                         return True
                     else:
                         return False
@@ -135,7 +135,7 @@ def main():
         show(pixelArray)
         if (checkalive(pixelArray)==False):
             break
-    OutputFramework.showText("Highscore: " + str(score), 255, 255, 255, 12, 0.02, 0)
+    OutputFramework.showText("Score " + str(score), 255, 255, 255, 12, 0.02, 0)
 
 if __name__ == "__main__":
     main()
