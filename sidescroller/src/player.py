@@ -156,7 +156,6 @@ class Player():
             jumpPosX = x
             jumpPosY = y
 
-
             if oldJumpPosX != jumpPosX:
                 self.walkRight(pixelArrayCopy)
                 changed = True
