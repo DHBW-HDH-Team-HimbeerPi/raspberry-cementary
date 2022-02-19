@@ -37,7 +37,7 @@ def checkalive(pixelArray):
                         return True
                     else:
                         return False
-            return True
+        return True
 
 
 
