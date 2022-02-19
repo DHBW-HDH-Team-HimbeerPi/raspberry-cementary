@@ -27,7 +27,7 @@ def main():
     running = True
 
     try:
-        rotationTreshold = 0.4
+        rotationTreshold = 0.2
         controller = IMUController(TriggerMode.CALL_CHECK)
         controller.register_trigger(inputToDirection, { 'dir' : 1, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer, 'map': map }, controller.mov_x, rotationTreshold, ThresholdType.HIGHER)
         controller.register_trigger(inputToDirection, { 'dir' : 2, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer, 'map': map }, controller.mov_x, -rotationTreshold, ThresholdType.LOWER)
