@@ -161,7 +161,7 @@ class Player():
                     self.walkRight(pixelArrayCopy)
                     changed = True
                 else:
-                    if pixelArray[self.posX+3][self.posY][3] != 0: 
+                    if pixelArray[self.posX+3][self.posY+1][3] != 0: 
                         self.shiftPlayerUp(pixelArray)
                         changed = True
             if oldJumpPosY < jumpPosY:
