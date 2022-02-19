@@ -52,6 +52,8 @@ def main():
                 controller.check_triggers()
         except NameError:
             showUH(pixelArray, PIXELS)
+
+        time.sleep(1/24)
                 
         #inputToDirection(2, pixelArray, player, frameBuffer, map)
 
