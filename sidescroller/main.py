@@ -40,15 +40,15 @@ def main():
         if player.posX == 13:
             running = False
 
-        bufferRunning = False
+        frameBuffer.running = False
 
         if frameBuffer.length() > 0:
-            bufferRunning = True
+            frameBuffer.running = True
             frameBuffer.nextFrame(pixelArray)
 
         try:
             OutputFramework.setWindow(sanatizeArray(pixelArray), 180)
-            if not bufferRunning and not player.isJumping:
+            if not frameBuffer.running and not player.isJumping:
                 controller.check_triggers()
         except NameError:
             showUH(pixelArray, PIXELS)
