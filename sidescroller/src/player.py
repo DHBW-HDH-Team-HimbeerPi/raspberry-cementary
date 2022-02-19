@@ -18,7 +18,7 @@ class Player():
         self.posX = 0
         self.posY = 0
         self.jumpHeight = 4
-        self.velocity = 1
+        self.velocity = 3
         self.lastWalkDirection = 0
         self.isJumping = False
         self.positioningX = 2
@@ -133,8 +133,8 @@ class Player():
 
     def jumpFunc(self, x):
         velocity = (self.velocity**-1)+0.3
-        if self.velocity == 1:
-            velocity = 1
+        if self.velocity == 3:
+            velocity = 3
         return round((-((x*velocity)-math.sqrt(self.jumpHeight))**2)+self.jumpHeight)
 
     def jump(self, pixelArray: list, frameBuffer: FrameBuffer):

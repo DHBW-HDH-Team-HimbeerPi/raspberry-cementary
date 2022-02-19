@@ -58,6 +58,14 @@ class SnakeController:
         else:
             return True
 
+    def SnakeCrashed(self):
+        if (len(self.posY) > 2):
+            for i in range(1, len(self.posY)):
+                if (self.posX[0] == self.posX[i] and self.posY[0] == self.posY[i]):
+                    return True
+            
+        return False
+
     def EatApple(self):
         self.posX.append(self.posXPrev)
         self.posY.append(self.posYPrev)
