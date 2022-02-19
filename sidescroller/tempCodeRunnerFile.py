@@ -1,2 +1,1 @@
-
-if __name__ == "__main__":
+nputToDirection(2, pixelArray, player, frameBuffer, map)

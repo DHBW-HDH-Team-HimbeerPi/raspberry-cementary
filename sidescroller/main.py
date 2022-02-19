@@ -13,7 +13,7 @@ try:
     from input_framework.imu_controller import IMUController # type: ignore
     from input_framework.interface import ThresholdType, TriggerMode # type: ignore
 except ImportError:
-    print("no imports found")
+    print("No imports found!")
 
 PIXELS = 16
 pixelArray = np.full((PIXELS, PIXELS*2, 4), 0)
@@ -25,25 +25,27 @@ def main():
     frameBuffer = FrameBuffer()    # create Frame Buffer erer
 
     running = True
-    test = 0
+
     try:
-        rotationTreshold = 0.35
+        rotationTreshold = 0.4
         controller = IMUController(TriggerMode.CALL_CHECK)
-        controller.register_trigger(inputToDirection, { 'dir' : 1, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer }, controller.mov_x, rotationTreshold, ThresholdType.HIGHER)
-        controller.register_trigger(inputToDirection, { 'dir' : 2, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer }, controller.mov_x, -rotationTreshold, ThresholdType.LOWER)
-        controller.register_trigger(inputToDirection, { 'dir' : 3, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer }, controller.mov_y, -rotationTreshold, ThresholdType.LOWER)
-        controller.register_trigger(inputToDirection, { 'dir' : 4, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer }, controller.mov_y, rotationTreshold, ThresholdType.HIGHER)
+        controller.register_trigger(inputToDirection, { 'dir' : 1, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer, 'map': map }, controller.mov_x, rotationTreshold, ThresholdType.HIGHER)
+        controller.register_trigger(inputToDirection, { 'dir' : 2, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer, 'map': map }, controller.mov_x, -rotationTreshold, ThresholdType.LOWER)
+        controller.register_trigger(inputToDirection, { 'dir' : 3, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer, 'map': map }, controller.mov_y, -rotationTreshold, ThresholdType.LOWER)
+        controller.register_trigger(inputToDirection, { 'dir' : 4, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer, 'map': map }, controller.mov_y, rotationTreshold, ThresholdType.HIGHER)
     except NameError:
         print("No controller found!")
 
     while running:
+        if player.posX == 13:
+            running = False
+
         bufferRunning = False
 
         if frameBuffer.length() > 0:
             bufferRunning = True
             frameBuffer.nextFrame(pixelArray)
 
-        #print(player.posX, player.posY)
         try:
             OutputFramework.setWindow(sanatizeArray(pixelArray), 180)
             if not bufferRunning and not player.isJumping:
@@ -51,13 +53,8 @@ def main():
         except NameError:
             showUH(pixelArray, PIXELS)
                 
-        #if test < 2:
-        #    player.jump(pixelArray, frameBuffer)
-        #time.sleep(1/2)
-        #player.walkRight()
-        if player.posY > 10:
-            map.moveCameraY()
-                
+        #inputToDirection(2, pixelArray, player, frameBuffer, map)
+        time.sleep(1/24)
 
 if __name__ == "__main__":
     main()

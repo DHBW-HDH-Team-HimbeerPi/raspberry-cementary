@@ -25,6 +25,8 @@ class Map:
                     sprite = numberToSprite(spriteNumber)
                     if(start > grid):
                         yPos -= grid
+                    if(yPos > 8):
+                        yPos = y-int(8*(self.movedPixels-32)/16)
                     add(pixelArray, dimensions(sprite), x, yPos)
 
     def initialMap(self):
@@ -38,6 +40,7 @@ class Map:
             self.addMapToPixelArray(self.pixelArray, pos, pos+grid)
 
     def moveCameraY(self):
+        #print(self.movedPixels, self.length)
         if self.movedPixels < self.length:
             self.updateMap()
             self.movedPixels += 1

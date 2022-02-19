@@ -4,7 +4,7 @@ def setPixelColor(pixelArray, x, y, r, g, b, pixelValue):
     pixelArray[x][y][0] = r
     pixelArray[x][y][1] = g
     pixelArray[x][y][2] = b
-    pixelArray[x][y][3] = 1
+    pixelArray[x][y][3] = pixelValue
 
 def setClearPixel(pixelArray, x, y):
     setPixelColor(pixelArray, x, y, 0, 0, 0, 0)
