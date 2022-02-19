@@ -42,7 +42,7 @@ class Map:
     def moveCameraY(self, pixelArray):
         #print(self.movedPixels, self.length)
         if self.movedPixels < self.length:
-            self.updateMap()
+            self.updateMap(pixelArray)
             self.movedPixels += 1
             for y in range(1, len(pixelArray[0])):
                 for x in range(len(pixelArray)):
