@@ -37,7 +37,7 @@ def checkalive(pixelArray):
                         return True
                     else:
                         return False
-            return True
+        return True
 
 
 
@@ -117,7 +117,7 @@ def main():
     score =0;
     playerposition = 8
     pixelArray[3][8][0] = 250
-    while checkalive(pixelArray):
+    while True:
         movewall(pixelArray,walllocation)
         OutputFramework.setWindow(pixelArray)    
         ctrl.check_triggers()
@@ -133,6 +133,8 @@ def main():
         time.sleep(0.1/math.log(score+2,15)/8)
         OutputFramework.setWindow(pixelArray)
         show(pixelArray)
+        if (checkalive(pixelArray)==False):
+            break
     OutputFramework.showText("Highscore: " + str(score), 255, 255, 255, 12, 0.05, 0) 
 
 if __name__ == "__main__":
