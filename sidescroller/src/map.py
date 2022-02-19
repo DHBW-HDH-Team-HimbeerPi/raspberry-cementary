@@ -27,13 +27,15 @@ class Map:
                         yPos -= grid
                     
                     if yPos > 7:
+                        print(yPos)
                         if self.movedPixels % 32 == 0:
                             yPos = int(yPos-4*(self.movedPixels/32))
                         else:
-                            yPos = int(yPos-4*(self.movedPixels+16)/32)
+                            yPos = int(yPos-4*(self.movedPixels-16)/32)
                         #yPos = y-int(8*(self.movedPixels-32)/16)
                         #if yPos == 0:
                         #    yPos += grid
+                        print("yPos after: ", yPos)
 
                     print("add: ", x, yPos, " moved pixels: ", self.movedPixels)
                     add(pixelArray, dimensions(sprite), x, yPos)
