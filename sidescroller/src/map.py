@@ -31,7 +31,7 @@ class Map:
                             yPos = int(yPos-4*(self.movedPixels/32))
                         else:
                             yPos = int(yPos-4*(self.movedPixels-16)/32)
-                            if yPos == 8:
+                            if yPos > 7:
                                 yPos -= 4
                         #yPos = y-int(8*(self.movedPixels-32)/16)
                         #if yPos == 0:
