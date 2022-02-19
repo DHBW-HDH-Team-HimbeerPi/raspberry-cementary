@@ -113,6 +113,8 @@ def main():
             DisplaySimulation()
         
         time.sleep(sleepTime)
+
+    OutputFramework.showText("Highscore: " + str(len(sc.posY)), 255, 255, 255, 12, 0.05, 0)
         
 
     
