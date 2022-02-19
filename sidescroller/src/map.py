@@ -28,8 +28,8 @@ class Map:
                     
                     if yPos > 7:
                         yPos = y-int(8*(self.movedPixels-32)/16)
-                        if yPos == 0:
-                            yPos += grid
+                        #if yPos == 0:
+                        #    yPos += grid
 
                     print("add: ", x, yPos, " moved pixels: ", self.movedPixels)
                     add(pixelArray, dimensions(sprite), x, yPos)
