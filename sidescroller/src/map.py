@@ -27,7 +27,11 @@ class Map:
                         yPos -= grid
                     
                     if yPos > 7:
-                        yPos = y-int(8*(self.movedPixels-32)/16)
+                        if self.movedPixels % 32 == 0:
+                            yPos = int(yPos-4*(self.movedPixels/32))
+                        else:
+                            yPos = int(yPos-4*(self.movedPixels-16)/32)
+                        #yPos = y-int(8*(self.movedPixels-32)/16)
                         #if yPos == 0:
                         #    yPos += grid
 
@@ -46,7 +50,7 @@ class Map:
 
     def moveCameraY(self, pixelArray):
         #print(self.movedPixels, self.length)
-        if self.movedPixels < self.length:
+        if self.movedPixels < self.length+8:
             self.updateMap(pixelArray)
             self.movedPixels += 1
             for y in range(1, len(pixelArray[0])):

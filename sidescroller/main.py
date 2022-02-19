@@ -53,7 +53,7 @@ def main():
         except NameError:
             showUH(pixelArray, PIXELS)
 
-        inputToDirection(2, pixelArray, player, frameBuffer, map)
+        #inputToDirection(2, pixelArray, player, frameBuffer, map)
 
         time.sleep(1/24)
 
