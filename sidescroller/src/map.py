@@ -38,6 +38,7 @@ class Map:
         pixel = 16
         if self.movedPixels % pixel == 0 and self.movedPixels > 0:
             pos = int(self.movedPixels/pixel)*grid
+            print("add: ", pos, pos+grid)
             self.addMapToPixelArray(pixelArray, pos, pos+grid)
 
     def moveCameraY(self, pixelArray):
