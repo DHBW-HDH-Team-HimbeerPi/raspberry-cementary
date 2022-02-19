@@ -13,7 +13,7 @@ def inputToDirection(dir, pixelArray, player: Player, frameBuffer: FrameBuffer, 
         
     if player.goingDownPossible(pixelArray) and not player.isJumping and not frameBuffer.running:
         player.shiftPlayerDown(pixelArray)
-        player.shiftPlayerDown(pixelArray)
+        #player.shiftPlayerDown(pixelArray)
 
     if player.posX < 13:
 
