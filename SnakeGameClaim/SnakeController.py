@@ -59,7 +59,7 @@ class SnakeController:
             return True
 
     def SnakeCrashed(self):
-        if (len(self.posY) > 1):
+        if (len(self.posY) > 2):
             for i in range(1, len(self.posY)):
                 if (self.posX[0] == self.posX[i] and self.posY[0] == self.posY[i]):
                     return True
