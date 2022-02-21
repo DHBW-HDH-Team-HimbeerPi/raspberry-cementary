@@ -1,6 +1,5 @@
 import time
 import numpy as np
-import random
 try:
     from output_framework.output_framework import OutputFramework 
     from input_framework.imu_controller import IMUController
@@ -17,7 +16,6 @@ sc = SnakeController(7, 7)
 apple = Apple()
 pixelAmount = 16
 pixelArray = np.full((pixelAmount , pixelAmount, 3), 0)
-gameRunning = True
 sleepTime = 0.5
 direction = 1
 
@@ -77,7 +75,6 @@ def main():
         print("could NOT find controller")
         autopilotOn = True
 
-    gameRunning = True
     sleepTime = 0.5
     CreateGamefield()
     DisplayApple(0)
@@ -116,7 +113,7 @@ def main():
         time.sleep(sleepTime)
 
     try:
-        OutputFramework.showText("Highscore: " + str(len(sc.posY) - 1), 255, 255, 255, 12, 0.02, 0)
+        OutputFramework.showText("Score: " + str(len(sc.posY) - 1), 255, 255, 255, 12, 0.02, 0)
     except NameError:
         print("could not find Outputframework")
 
@@ -129,6 +126,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-
-
-    
