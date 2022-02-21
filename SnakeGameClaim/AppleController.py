@@ -21,7 +21,7 @@ class Apple():
         self.posX = random.randrange(1, 15)
         self.posY = random.randrange(1, 15)
 
-        while(self.AppleNotInSnake(snakeController)):
+        while(self.AppleInSnake(snakeController)):
             self.posX = random.randrange(1, 15)
             self.posY = random.randrange(1, 15)
 
@@ -35,7 +35,7 @@ class Apple():
         return applePosition
 
 
-    def AppleNotInSnake(self, sc):
+    def AppleInSnake(self, sc):
         for i in range(0, len(sc.posX)):
             if (sc.posX[i] == self.posX and sc.posY[i] == self.posY):
                 return True
