@@ -12,7 +12,9 @@ try:
     from input_framework.imu_controller import IMUController            # type: ignore
     from input_framework.interface import ThresholdType, TriggerMode    # type: ignore
 except ImportError:
-    print("No import/output framework found!") # shows error if input/output framework was not found
+    # shows error if input/output framework was not found
+    print("No import/output framework found!") 
+
 
 PIXELS = 16
 pixelArray = np.full((PIXELS, PIXELS*2, 4), 0)
@@ -27,32 +29,43 @@ def main():
     running = True
 
     try:
+        # registers the controller and the movements
         controller = IMUController(TriggerMode.CALL_CHECK)
         controller.register_trigger(inputToDirection, { 'dir' : 1, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer, 'map': map }, controller.mov_x, ROTATION_THRESHOLD, ThresholdType.HIGHER)
         controller.register_trigger(inputToDirection, { 'dir' : 2, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer, 'map': map }, controller.mov_x, -ROTATION_THRESHOLD, ThresholdType.LOWER)
         controller.register_trigger(inputToDirection, { 'dir' : 3, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer, 'map': map }, controller.mov_y, -ROTATION_THRESHOLD, ThresholdType.LOWER)
         controller.register_trigger(inputToDirection, { 'dir' : 4, 'pixelArray': pixelArray, 'player' : player, 'frameBuffer': frameBuffer, 'map': map }, controller.mov_y, ROTATION_THRESHOLD, ThresholdType.HIGHER)
     except NameError:
-        print("No controller found!") # shows error if no controller was found
+        # shows error if no controller was found
+        print("No controller found!") 
 
     while running:
-        if player.posX == 13: # if posX is 13, the player fell out of the map in x direction
+
+        # if posX is 13, the player fell out of the map (in x direction)
+        if player.posX == 13:
             running = False   # stop running
 
-        frameBuffer.running = False # frameBuffer inital state
+        # frameBuffer inital state
+        frameBuffer.running = False 
 
-        if frameBuffer.length() > 0: # check for frames in frameBuffer
-            frameBuffer.running = True 
-            frameBuffer.nextFrame(pixelArray) # show next frame in pixelArray
+        # check for frames in frameBuffer
+        if frameBuffer.length() > 0: 
+            frameBuffer.running = True
+            # show next frame in pixelArray
+            frameBuffer.nextFrame(pixelArray) 
 
         try:
-            OutputFramework.setWindow(sanatizeArray(pixelArray), 180) # sets the window
+            # sets the window
+            OutputFramework.setWindow(sanatizeArray(pixelArray), 180) 
             if not frameBuffer.running and not player.isJumping:
-                controller.check_triggers() # check for player movement
+                # check for player movement
+                controller.check_triggers() 
         except NameError:
-            showUH(pixelArray, PIXELS) # shows gui on pc for local development
-            
-        time.sleep(1/24) # 24 frames per second
+            # shows gui on pc for local development
+            showUH(pixelArray, PIXELS)
+        
+        # 24 frames per second
+        time.sleep(1/24) 
 
 if __name__ == "__main__":
     main()
