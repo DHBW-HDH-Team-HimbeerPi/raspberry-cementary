@@ -4,8 +4,8 @@
 
 - FLAPPA
 
-- descroller
+- Sidescroller
 
-- ong
+- Pong
 
-- nake
+- Snake
