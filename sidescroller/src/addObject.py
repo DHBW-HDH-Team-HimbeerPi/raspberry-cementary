@@ -1,4 +1,4 @@
-import math
+# adds a object to the pixelArray at the specified grid position
 
 def add(pixelArray: list, addArray: list, gridPosX, gridPosY):
     posX = gridPosX*4+4
