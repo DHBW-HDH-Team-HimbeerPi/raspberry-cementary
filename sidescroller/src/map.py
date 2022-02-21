@@ -4,6 +4,8 @@ from .maps import Maps
 from .addObject import add
 from .pixel import setClearPixel
 
+# map class
+
 class Map:
 
     def __init__(self, pixelArray):
@@ -12,6 +14,9 @@ class Map:
         self.movedPixels = 16
         self.pixelArray = pixelArray
         self.initialMap()
+
+
+    # adds the map to the pixel array
 
     def addMapToPixelArray(self, pixelArray, start, end):
         grid = 4 #4x4 grid
@@ -25,26 +30,21 @@ class Map:
                     sprite = numberToSprite(spriteNumber)
                     if start > grid:
                         yPos -= grid
-                    
+
                     if yPos > 7:
                         while yPos > 7:
                             yPos = yPos-4
-                        #if self.movedPixels % 32 == 0:
-                        #    yPos = int(yPos-4*(self.movedPixels/32))
-                        #else:
-                        #    yPos = int(yPos-4*(self.movedPixels-16)/32)
-                        #    if yPos > 7:
-                        #        yPos -= 4
-                        #yPos = y-int(8*(self.movedPixels-32)/16)
-                        #if yPos == 0:
-                        #    yPos += grid
-                        print("yPos after: ", yPos)
 
-                    print("add: ", x, yPos, " moved pixels: ", self.movedPixels)
                     add(pixelArray, dimensions(sprite), x, yPos)
+
+
+    # initialises the map
 
     def initialMap(self):
         self.addMapToPixelArray(self.pixelArray, 0, 4)
+
+    # loads the map in (outside of the players view)
+
 
     def updateMap(self, pixelArray):
         grid = 4
@@ -53,8 +53,10 @@ class Map:
             pos = int(self.movedPixels/pixel)*grid
             self.addMapToPixelArray(pixelArray, pos, pos+4)
 
+
+    # moves the camera in negative y direction
+
     def moveCameraY(self, pixelArray):
-        #print(self.movedPixels, self.length)
         if self.movedPixels < self.length+8:
             self.updateMap(pixelArray)
             self.movedPixels += 1

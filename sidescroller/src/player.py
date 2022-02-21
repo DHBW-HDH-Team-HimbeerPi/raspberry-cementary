@@ -9,6 +9,8 @@ from .sprites import Sprites
 from .addObject import add
 from .pixel import setPixelColor, setClearPixel
 
+# the player class
+
 class Player():
 
     def __init__(self, pixelArray):
@@ -19,15 +21,22 @@ class Player():
         self.posX = 0
         self.posY = 0
         self.jumpHeight = 4
-        self.velocity = 3
+        self.velocity = 1
         self.lastWalkDirection = 0
         self.isJumping = False
         self.positioningX = 2
         self.positioningY = 0
         add(pixelArray, self.dimensions(), self.positioningX, self.positioningY)
 
+
+    # sets the color of the player (randomly choosen in init)
+
     def setPixelColorSelf(self, pixelArray, x, y):
         setPixelColor(pixelArray, x, y, self.colorR, self.colorG, self.colorB, 1)
+
+
+    # returns the dimensions of the player in a pixel array
+    # (and sets the "eye" of the player)
 
     def dimensions(self):
         pixelArray = np.full((len(self.amogus), len(self.amogus[0]), 4), 0)
@@ -43,23 +52,30 @@ class Player():
                         self.setPixelColorSelf(pixelArray, x, y)
         return pixelArray
 
+
+    # updates the player velocity according to the last walk direction
+
     def updateVelocity(self, walkDirection):
-        lwd = self.lastWalkDirection
-        if self.velocity < 5 and not self.isJumping:
+        lwd = self.lastWalkDirection # 1=right/2=left
+        if self.velocity < 4 and not self.isJumping:
             if lwd == walkDirection or lwd == 0:
                 self.velocity +=1
             else:
                 self.velocity = 1
 
+
+    # checks if walking right is possible
+
     def walkingRightPossible(self, pixelArray):
-        #print("walk right check: ", pixelArray[self.posX+2][self.posY+2][3], self.posX, self.posY)
         if pixelArray[self.posX+2][self.posY+2][3] == 0 and pixelArray[self.posX+1][self.posY+2][3] == 0 and pixelArray[self.posX][self.posY+2][3] == 0 and pixelArray[self.posX-1][self.posY+1][3] == 0:
             return True
         else:
             return False
 
+
+    # walk right 1 pixel
+
     def walkRight(self, pixelArray):
-        #check if walking right is possible
         if self.posY < 8:
             if self.walkingRightPossible(pixelArray): 
                 self.posY += 1
@@ -73,15 +89,20 @@ class Player():
                             pixelArray[x][y16+1] = pixelArray[x][y16]
                             setClearPixel(pixelArray, x, y16)
 
+
+    # checks if walking left is possible
+
     def walkingLeftPossible(self, pixelArray):
         if pixelArray[self.posX+2][self.posY-2][3] == 0 and pixelArray[self.posX+1][self.posY-2][3] == 0 and pixelArray[self.posX][self.posY-2][3] == 0 and pixelArray[self.posX-1][self.posY-1][3] == 0:
             return True
         else:
             return False
 
+
+    # walk left 1 pixel
+
     def walkLeft(self, pixelArray):
         print(self.posX, self.posY)
-        #check if walking left is possible
         if self.posY > 2:
             if self.walkingLeftPossible(pixelArray):
                 self.posY -= 1
@@ -94,6 +115,9 @@ class Player():
                             pixelArray[x][y-1] = pixelArray[x][y]
                             setClearPixel(pixelArray, x, y)
 
+
+    # checks if going up is possible
+
     def goingUpPossible(self, pixelArray):
         if self.posX-2 > 0:
             if pixelArray[self.posX-2][self.posY][3] == 0 and pixelArray[self.posX-2][self.posY-1][3] == 0 and pixelArray[self.posX-2][self.posY+1][3] == 0:
@@ -101,8 +125,10 @@ class Player():
         else:
             return False
 
+
+    # shifts the player up 1 pixel
+
     def shiftPlayerUp(self, pixelArray):
-        #check if going up is possible
         if self.goingUpPossible(pixelArray):
             rng = len(pixelArray)
             self.posX -= 1
@@ -112,16 +138,18 @@ class Player():
                         pixelArray[x-1][y] = pixelArray[x][y]
                         setClearPixel(pixelArray, x, y)  
 
+
+    # checks if going down is possible
+
     def goingDownPossible(self, pixelArray):
         if self.posX+3<16:
             if pixelArray[self.posX+3][self.posY][3] == 0 and pixelArray[self.posX+3][self.posY-1][3] == 0 and pixelArray[self.posX+3][self.posY+1][3] == 0:
                 return True
-        else:
-            print("down false")
-            return False
+
+
+    # shifts the player down 1 pixel    
 
     def shiftPlayerDown(self, pixelArray):
-        #check if going down is possible
         if self.goingDownPossible(pixelArray):
             rng = len(pixelArray)
             self.posX += 1
@@ -132,11 +160,17 @@ class Player():
                         pixelArray[x16+1][y] = pixelArray[x16][y]
                         setClearPixel(pixelArray, x16, y)
 
+
+    # function that returns the jump x/y values
+
     def jumpFunc(self, x):
         velocity = (self.velocity**-1)+0.3
         if self.velocity == 3:
             velocity = 3
         return round((-((x*velocity)-math.sqrt(self.jumpHeight))**2)+self.jumpHeight)
+
+
+    # makes the player jump according to the velocity
 
     def jump(self, pixelArray: list, frameBuffer: FrameBuffer, map: Map):
         self.isJumping = True

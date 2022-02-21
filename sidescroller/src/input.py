@@ -3,20 +3,23 @@ from .map import Map
 from .frameBuffer import FrameBuffer
 from .player import Player
 
+# enum for the directions
+
 class Directions(Enum):
     left = 1
     right = 2
     down = 3
     up = 4
 
+
+# maps the input to the direction
+
 def inputToDirection(dir, pixelArray, player: Player, frameBuffer: FrameBuffer, map: Map):
         
     if player.goingDownPossible(pixelArray) and not player.isJumping and not frameBuffer.running:
-        print("down")
-        player.shiftPlayerDown(pixelArray)
-        #player.shiftPlayerDown(pixelArray)
+        player.shiftPlayerDown(pixelArray) # gravity
 
-    if player.posX < 13:
+    if player.posX < 13: # dont walk out of frame
 
         if dir == Directions.right.value:
             if player.posY < 7:

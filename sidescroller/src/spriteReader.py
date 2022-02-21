@@ -1,8 +1,11 @@
 from pathlib import Path
+from .pixel import setPixelColor
+
 import csv
 import numpy as np
 import random as rand
-import math
+
+# reads a sprite and returns a array of the values
 
 def readSprite(fileName, readMap):
     basePath = Path(__file__).parent
@@ -15,17 +18,13 @@ def readSprite(fileName, readMap):
         sprite = [line for line in csv.reader(file)]
         return sprite
 
-def setPixelColor(pixelArray, x, y, colorR, colorG, colorB):
-    pixelArray[x][y][0] = colorR
-    pixelArray[x][y][1] = colorG
-    pixelArray[x][y][2] = colorB
-    pixelArray[x][y][3] = 2
+# sets a random pixel color for the sprite
 
 def setRandomPixelColor(pixelArray, x, y):
-    pixelArray[x][y][0] = rand.randrange(100, 255)
-    pixelArray[x][y][1] = rand.randrange(100, 255)
-    pixelArray[x][y][2] = rand.randrange(100, 255)
-    pixelArray[x][y][3] = 2
+    setPixelColor(pixelArray, x, y,  rand.randrange(100, 255),  rand.randrange(100, 255),  rand.randrange(100, 255), 2)
+
+
+# returns a array of the dimensions of the sprite
 
 def dimensions(fileName):
     pixels = 4

@@ -2,7 +2,6 @@ import numpy as np
 from src.frameBuffer import FrameBuffer
 from src.player import Player
 from src.unicornHead import showUH
-from src.input import Directions
 from src.pixel import sanatizeArray
 from src.input import inputToDirection
 from src.map import Map

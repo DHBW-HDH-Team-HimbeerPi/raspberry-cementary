@@ -1,1 +1,0 @@
-nputToDirection(2, pixelArray, player, frameBuffer, map)

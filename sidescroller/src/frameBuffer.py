@@ -1,4 +1,4 @@
-import numpy as np
+# frame buffer for jumping
 
 class FrameBuffer:
 
