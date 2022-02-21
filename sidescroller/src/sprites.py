@@ -1,7 +1,7 @@
 from enum import Enum
 
 class Sprites(Enum):
-    player = "amogus.csv"
+    player = "player.csv"
     mapStairs = "stairs.csv"
     mapPlatformHigh = "platformHigh.csv"
     mapPlatformLow = "platformLow.csv"
